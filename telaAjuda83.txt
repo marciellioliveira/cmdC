@@ -1,0 +1,125 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+83 - CONCEITOS FUNDAMENTAIS: Tabelas de dispersão
+
+
+No capítulo anterior, discutimos diferentes estruturas e 
+algoritmos para buscar um determinado elemento num conjunto
+de dados. 
+
+Para obtermos algoritmos eficientes, armazenamos os elementos
+ ordenados e tiramos proveito dessa ordenação para alcançar 
+eficientemente o elemento procurado.
+
+Chegamos a conclusão qque os algoritmos eficientes de busca 
+demandam um esforço computacional de O(log n). 
+
+Neste capítulo, vamos estudar as estruturas de dados conhecidas
+como tabelas de dispersão (hash tables), que, se bem projetadas,
+podem ser usadas para buscar um elemento da tabela em ordem 
+constante: O(1). 
+
+O preço pago por essa eficiência será um uso maior de memória,
+mas, como veremos, esse uso excedente não precisa ser tão grande,
+e é proporcional ao número de elementos armazenados.
+
+Para apresentar a idéia das tabelas de dispersão, vamos
+considerar um exemplo onde desejamos armazenar os dados
+referentes aos alunos de uma disciplina. 
+
+Cada aluno é individualmente identificado pelo seu número
+de matrícula.
+
+Podemos então usar o número de matrícula como chave de 
+busca do conjunto de alunos armazenados. 
+
+Na PUC-Rio, o número de matrícula dos alunos é dado por uma
+seqüência de oito dígitos, sendo que o último representa um 
+dígito de controle, não sendo portanto parte efetiva do número 
+de matrícula. Por exemplo, na matricula 9711234-4, o ultimo
+dígito 4, após o hífen, representa o dígito de controle.
+O número de matrícula efetivo nesse caso é composto pelos
+primeiros sete dígitos: 9711234.
+
+Para permitir um acesso a qualquer aluno em ordem constante,
+podemos usar o número de matrícula do aluno como índice de 
+um vetor – vet. Se isso for possível, acessamos os dados do 
+aluno cuja matrícula é dado por mat indexando o 
+vetor – vet[mat]. 
+
+Dessa forma, o acesso ao elemento se dá em ordem constante,
+imediata. 
+
+O problema que encontramos é que, nesse caso, o preço pago 
+para se ter esse acesso rápido é muito grande.
+
+Vamos considerar que a informação associada a cada aluno 
+seja representada pela estrutura abaixo:
+
+struct aluno {
+
+ int mat;
+
+ char nome[81];
+
+ char email[41];
+
+ char turma;
+
+};
+
+typedef struct aluno Aluno;
+
+Como a matrícula é composta por sete dígitos, o número 
+inteiro que conceitualmente representa uma matrícula 
+varia de 0000000 a 9999999.
+
+Portanto, precisamos dimensionar nosso vetor com dez 
+milhões (10.000.000) de elementos. Isso pode ser 
+feito por:
+
+#define MAX 10000000
+
+Aluno vet[MAX];
+
+Dessa forma, o nome do aluno com matrícula mat é 
+acessado simplesmente por:
+
+vet[mat].nome. 
+
+Temos um acesso rápido, mas pagamos um preço em uso 
+de memória proibitivo. Como a estrutura de cada aluno,
+no nosso exemplo, ocupa pelo menos 127 bytes, estamos
+falando num gasto de 1.270.000.000 bytes, ou seja, 
+acima de 1 Gbyte de memória. 
+
+Como na prática teremos, digamos, em torno de 50 
+alunos cadastrados, precisaríamos apenas de algo em 
+torno de 6.350 (=127*50) bytes.
+
+Para amenizar o problema, já vimos que podemos ter um 
+vetor de ponteiros, em vez de um vetor de estruturas. 
+Desta forma, as posições do vetor que não correspondem
+a alunos cadastrados teriam valores NULL. 
+
+Para cada aluno cadastrado, alocaríamos dinamicamente 
+a estrutura de aluno e armazenaríamos um ponteiro para
+essa estrutura no vetor. 
+
+Neste caso, acessaríamos o nome do aluno de matrícula mat
+por vet[mat]->nome. Assim, considerando que cada ponteiro
+ocupe 4 bytes, o gasto excedente de memória seria, no máximo,
+aproximadamente 40 Mbytes. 
+
+Apesar de menor, esse gasto de memória ainda é proibitivo.
+A forma de resolver o problema de gasto excessivo de 
+memória, mas ainda garantindo um acesso rápido, é 
+através do uso de tabelas de dispersão (hash table) 
+
+	-W. Celes e J. L. Rangel
+

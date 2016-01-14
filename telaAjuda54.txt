@@ -1,0 +1,164 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+54 - CONCEITOS FUNDAMENTAIS: Pilhas
+
+Apresentada a forma básica para a definição de funções, 
+discutiremos agora, em detalhe, como funciona a comunicação
+entre a função que chama e a função que é chamada. 
+
+Já mencionamos na introdução deste curso que as funções são
+independentes entre si. As variáveis locais definidas 
+dentro  do corpo de uma função (e isto inclui os parâmetros
+das funções) não existem fora da função. Cada vez que a 
+função é executada, as variáveis locais são criadas, e, 
+quando a execução da função termina, estas variáveis deixam
+de existir.
+
+A transferência de dados entre funções é feita através dos
+parâmetros e do valor de retorno da função chamada. 
+Conforme mencionado, uma função pode retornar um valor 
+para a função que a chamou e isto é feito através do 
+comando  return. 
+
+Quando uma função tem um valor de retorno, a chamada da 
+função é uma expressão cujo valor resultante é o valor
+retornado pela função. Por isso, foi válido escrevermos 
+na função main acima a expressão 
+
+r = fat(n); 
+
+que chama a função fat armazenando seu valor de retorno 
+na variável r.
+
+A comunicação através dos parâmetros requer uma análise 
+mais detalhada. 
+
+Para ilustrar a discussão, vamos considerar o exemplo 
+abaixo, no qual a implementação da função fat foi 
+ligeiramente alterada: 
+
+/* programa que le um numero e imprime seu fatorial 
+
+(versão 3) */
+
+#include <stdio.h>
+
+int fat (int n);
+
+int main (void)
+{
+
+ int n = 5;
+
+ int r;
+
+ r = fat ( n );
+
+ printf("Fatorial de %d = %d \n", n, r);
+
+ return 0;
+
+}
+
+int fat (int n)
+{
+
+ int f = 1.0;
+
+ while (n != 0)
+ {
+
+ f *= n;
+
+ n--;
+
+ }
+
+ return f;
+
+}
+
+Neste exemplo, podemos verificar que, no final da função fat,
+o parâmetro n tem valor igual a zero (esta é a condição de 
+encerramento do laço while). 
+
+No entanto, a saída do programa será:
+
+Fatorial de 5 = 120
+
+pois o valor da variável n não mudou no programa principal. 
+
+
+Isto porque a linguagem C trabalha com o conceito de 
+passagem por valor.
+
+Na chamada de uma função, o valor passado é atribuído ao 
+parâmetro da função chamada. Cada parâmetro  funciona 
+como uma variável local inicializada com o valor  passado
+na chamada. 
+
+Assim, a variável n (parâmetro da função fat) é local e
+não representa a variável n da função main (o fato de as
+duas variáveis terem o mesmo nome é indiferente; poderíamos
+chamar o parâmetro de v, por exemplo). 
+
+Alterar o valor de n dentro de fat não afeta o valor da 
+variável n de main.
+
+A execução do programa funciona com o modelo de pilha. 
+
+De forma simplificada, o modelo de pilha funciona da 
+seguinte maneira: cada variável local de uma função é
+colocada na pilha de execução. 
+
+Quando se faz uma chamada a uma função, os parâmetros são
+copiados para a pilha e são tratados como se fossem variáveis
+locais da função chamada.
+
+Quando a função termina, a parte da pilha correspondente 
+àquela função é liberada, e por isso não podemos acessar
+as variáveis locais de fora da função em que elas foram 
+definidas.
+
+Para exemplificar, vamos considerar um esquema 
+representativo da memória do computador. 
+
+Salientamos que este esquema é apenas uma maneira didática
+de explicar o que ocorre na memória do computador. 
+
+Suponhamos que as variáveis são armazenadas na memória como
+ilustrado abaixo.
+
+Os números à direita representam endereços (posições) 
+fictícios de memória e os nomes à esquerda indicam os 
+nomes das variáveis. 
+
+Isto ilustra por que o valor da variável passada nunca será 
+alterado dentro da função. 
+
+A seguir, discutiremos uma forma para podermos alterar 
+valores por passagem de parâmetros, o que será realizado 
+passando o endereço de memória onde a variável está 
+armazenada.
+
+Vale salientar que existe outra forma de fazermos 
+comunicação entre funções, que consiste no uso de variáveis
+globais. 
+
+Se uma determinada variável global é visível em duas funções, 
+ambas as funções podem acessar e/ou alterar o valor desta 
+variável diretamente. 
+
+No entanto, conforme já mencionamos, o uso de variáveis
+globais em um programa deve ser feito com critério, pois
+podemos criar códigos com um alto grau de interdependência
+entre as funções, o que dificulta a manutenção e o reuso do
+código. 
+
+		- W. Celes e J. L. Rangel
+

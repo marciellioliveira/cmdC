@@ -1,0 +1,49 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+3 - CONCEITOS FUNDAMENTAIS: Compilação de Programas
+
+
+Para desenvolvermos programas em uma linguagem como C, 
+precisamos de, no mínimo, um editor e um compilador. 
+
+Estes programas têm finalidades bem definidas: com o editor
+de textos, escrevemos os programas fontes, que são salvos 
+em arquivos1; com o compilador, transformamos os programas 
+fontes em programas objetos, em linguagem de máquina, para
+poderem ser executados. Os programas fontes são, em geral,
+armazenados em arquivos cujo nome tem a extensão “.c”. 
+
+Os programas executáveis possuem extensões que variam com o
+sistema operacional: no Windows, têm extensão “.exe”; no Unix
+(Linux), em geral, não têm extensão. 
+
+Para exemplificar o ciclo de desenvolvimento de um programa 
+simples, consideremos que o código apresentado na seção 
+anterior tenha sido salvo num arquivo com o nome prog.c.  
+Devemos então compilar o programa para gerarmos um 
+executável. Para ilustrar este processo, usaremos o 
+compilador gcc. Na linha de comando do sistema 
+operacional, fazemos:
+
+	> gcc –o prog prog.c
+
+Se não houver erro de compilação no nosso código, este 
+comando gera o executável com o nome prog (prog.exe, no 
+Windows). Podemos então executar o programa:
+
+	> prog
+
+	Digite a temperatura em Celsius: 10
+	A temperatura em Fahrenheit vale: 50.000000
+	>
+
+Representamos as mensagens do programa acima, o valor 
+10 é um exemplo de dado fornecido pelo usuário via 
+teclado.
+
+		- W. Celes e J. L. Rangel

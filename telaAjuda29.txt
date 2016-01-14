@@ -1,0 +1,21 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+29 - CONCEITOS FUNDAMENTAIS: Matrizes Dinâmicas
+
+As matrizes declaradas estaticamente sofrem das mesmas 
+limitações dos vetores: precisamos saber de antemão suas 
+dimensões. 
+
+O problema que encontramos é que a linguagem C só permite 
+alocarmos dinamicamente conjuntos unidimensionais. 
+
+Para trabalharmos com matrizes alocadas dinamicamente,
+temos que criar abstrações conceituais com vetores para 
+representar conjuntos bidimensionais. 
+
+		- W. Celes e J. L. Rangel

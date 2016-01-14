@@ -1,0 +1,66 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+39 - CONCEITOS FUNDAMENTAIS: Aninhamento de Estruturas
+
+A estrutura de dados array é usada para conter dados do mesmo
+tipo junto. 
+
+Dados de tipos diferentes também podem ser agregados em tipos
+chamados de estruturas ou registros (tipo struct em linguagem 
+C). 
+
+Primeiro, o tipo estrutura é declarado (precisamos especificar
+que tipos de variáveis serão combinados na estrutura), e então
+variáveis deste novo tipo podem ser definidas (de maneira 
+similar que usamos para definir variáveis do tipo int ou char).
+
+Uma declaração de estrutura declara um tipo struct. 
+
+Cada tipo struct recebe um nome (ou tag). Refere-se àquele tipo
+
+pelo nome precedido pela palavra struct. Cada unidade de dados na
+estrutura é chamada membro e possui um nome de membro. Os membros 
+de uma estrutura podem ser de qualquer tipo. Declarações de 
+estrutura não são definições. 
+
+Não é alocada memória, simplesmente é introduzida um novo tipo de
+estrutura.
+
+Geralmente declarações de estruturas são globais. 
+
+Elas são colocadas próximas ao topo do arquivo com o código fonte
+do programa, assim elas são visíveis por todas as funções (embora
+isto dependa de como a estrutura está sendo usada).
+
+A forma padrão de declaração de uma estrutura é:
+
+struct nome-estrutura {
+
+declaração dos membros
+
+} definição de variáveis (optional);
+
+
+
+Abaixo se apresenta um exemplo de um tipo estrutura que contém um
+membro do tipo int e um outro membro do tipo char.
+
+          struct facil {
+
+              int num;
+
+              char ch;
+
+          };
+
+Esta declaracao cria um novo tipo chamado struct facil que
+contém um inteiro chamado num e um caracter chamado ch.
+
+	Veja mais no site ufpr
+
+	-Site, http://www.inf.ufpr.br/

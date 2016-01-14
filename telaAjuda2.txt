@@ -1,0 +1,42 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+2 - CONCEITOS FUNDAMENTAIS: 
+
+Existem diversos tipos de computadores. Embora não seja 
+nosso objetivo estudar hardware, identificamos, nesta 
+seção, os elementos essenciais de um computador. O 
+conhecimento da existência destes elementos nos ajudará a 
+compreender como um programa de computador funciona.
+
+O canal de comunicação (conhecido como BUS) representa o 
+meio  para a transferência de dados entre os diversos 
+componentes. Na memória principal são armazenados os 
+programas e os dados no computador. Ela tem acesso 
+randômico, o que significa que podemos endereçar (isto é, 
+acessar) diretamente qualquer posição da memória. 
+
+Esta memória não é permanente e, para um programa, os dados 
+são armazenados enquanto o programa está sendo executado. 
+Em geral, após o término do programa, a área ocupada na 
+memória fica disponível para ser usada por outras 
+aplicações. A área de armazenamento secundário é, em geral,
+ representada por um disco (disco rígido, disquete, etc.). 
+
+Esta memória secundária tem a vantagem de ser permanente. 
+Os dados armazenados em disco permanecem válidos após o 
+término dos programas. Esta memória tem um custo mais 
+baixo do que a memória principal, porém o acesso aos dados 
+é bem mais lento. Por fim, encontram-se os dispositivos 
+de entrada e saída. Os dispositivos de entrada (por 
+exemplo, teclado, mouse) permitem passarmos dados
+para um programa, enquanto os dispositivos de saída 
+permitem que um programa exporte seus resultados, por 
+exemplo em forma textual ou gráfica usando monitores 
+ou impressoras.
+
+		- W. Celes e J. L. Rangel

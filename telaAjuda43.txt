@@ -1,0 +1,78 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+43 - CONCEITOS FUNDAMENTAIS: Tipo enumeração
+
+Uma enumeração é um conjunto de constantes inteiras com 
+nomes que especifica os valores legais que uma variável 
+daquele tipo pode ter. 
+
+É uma forma mais elegante de organizar valores constantes. 
+
+Como exemplo, consideremos a criação de um tipo booleano.
+
+Variáveis deste tipo podem receber os valores 0 (FALSE) ou
+1 (TRUE).
+
+Poderíamos definir duas constantes simbólicas dissociadas e
+usar um inteiro para representar o tipo booleano:
+
+#define FALSE 0
+
+#define TRUE 1
+
+typedef int Bool;
+
+Desta forma, as definições de FALSE e TRUE permitem a 
+utilização destes símbolos no código, dando maior clareza, 
+mas o tipo booleano criado, como é equivalente a um inteiro
+qualquer, pode armazenar qualquer valor inteiro, não apenas
+FALSE e TRUE, que seria mais adequado. 
+
+Para validarmos os valores atribuídos, podemos enumerar os
+valores constantes que um determinado tipo pode assumir,
+usando enum:
+
+enum bool {
+
+ FALSE,
+
+ TRUE
+
+};
+
+typedef enum bool Bool; 
+
+Com isto, definimos as constantes FALSE e TRUE. 
+
+Por default, o primeiro símbolo representa o valor 0,
+o seguinte o valor 1, e assim por diante. Poderíamos 
+explicitar os valores dos símbolos numa enumeração, 
+como por exemplo:
+
+enum bool {
+
+ TRUE = 1,
+
+ FALSE = 0,
+
+};
+
+No exemplo do tipo booleano, a numeração default coincide 
+com a desejada (desde que o símbolo FALSE preceda o símbolo
+TRUE dentro da lista da enumeração).
+
+A declaração de uma variável do tipo criado pode ser dada 
+por:
+
+Bool resultado;
+
+onde resultado representa uma variável que pode receber 
+apenas os valores FALSE (0) ou TRUE (1). 
+
+		- W. Celes e J. L. Rangel
+

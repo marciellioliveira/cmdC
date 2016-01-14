@@ -1,0 +1,112 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+76 - CONCEITOS FUNDAMENTAIS: Arquivos em modo binario
+
+
+Arquivos em modo binário servem para salvarmos (e depois 
+recuperarmos) o conteúdo da memória principal diretamente 
+no disco. 
+
+A memória é escrita copiando-se o conteúdo de cada byte 
+da memória para o arquivo.
+
+Uma das grandes vantagens de se usar arquivos binários
+é que podemos salvar (e recuperar) uma grande quantidade 
+de dados de forma bastante eficiente. 
+
+Neste curso, vamos apenas apresentar as duas funções 
+básicas para manipulação de arquivos binários.
+
+************************************************************
+FUNÇÃO PARA SALVAR E RECUPERAR
+************************************************************
+
+Para escrever (salvar) dados em arquivos binários, 
+usamos a função fwrite. 
+
+O protótipo dessa função pode ser simplificado por:
+
+int fwrite (void* p, int tam, int nelem, FILE* fp);
+
+O primeiro parâmetro dessa função representa o endereço de 
+memória cujo conteúdo deseja-se salvar em arquivo.
+
+O parâmetro tam indica o tamanho, em bytes, de cada elemento
+e o parâmetro nelem indica o número de elementos. 
+
+Por fim, passa-se o ponteiro do arquivo binário para o qual
+o conteúdo da memória será copiado.
+
+A função para ler (recuperar) dados de arquivos binários é 
+análoga, sendo que agora o conteúdo do disco é copiado para o
+endereço de memória passado como parâmetro.
+
+O protótipo da função pode ser dado por:
+
+int fread (void* p, int tam, int nelem, FILE* fp);
+
+Para exemplificar a utilização dessas funções, vamos 
+considerar que uma aplicação tem um conjunto de pontos 
+armazenados num vetor. 
+
+O tipo que define o ponto pode ser:
+
+struct ponto {
+
+ float x, y, z;
+
+};
+
+typedef struct ponto Ponto;
+
+Uma função para salvar o conteúdo de um vetor de pontos 
+pode receber como parâmetros o nome do arquivo, o número 
+de pontos no vetor, e o ponteiro para o vetor.
+
+Uma possível implementação dessa função é ilustrada abaixo:
+
+void salva (char* arquivo, int n, Ponto* vet)
+{
+
+ FILE* fp = fopen(arquivo,"wb");
+
+ if (fp==NULL) {
+
+ printf("Erro na abertura do arquivo.\n");
+
+ exit(1);
+
+ }
+
+ fwrite(vet,sizeof(Ponto),n,fp);
+
+ fclose(fp);
+
+}
+A função para recuperar os dados salvos pode ser:
+void carrega (char* arquivo, int n, Ponto* vet)
+{
+
+ FILE* fp = fopen(arquivo,"rb");
+
+ if (fp==NULL) {
+
+ printf("Erro na abertura do arquivo.\n");
+
+ exit(1);
+
+ }
+
+ fread(vet,sizeof(Ponto),n,fp);
+
+ fclose(fp);
+
+}
+
+		W. Celes e J. L. Rangel
+

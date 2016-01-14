@@ -1,0 +1,272 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+12 - CONCEITOS FUNDAMENTAIS: Construções com Laços
+
+
+É muito comum, em programas computacionais, termos 
+procedimentos iterativos, isto é, procedimentos que devem 
+ser executados em vários passos. Como exemplo, vamos
+considerar o cálculo do valor do fatorial de um número 
+inteiro não negativo. Por definição:
+
+     n != n× (n −1) × (n − 2)...3× 2×1, onde 0 !=1
+
+Para calcular o fatorial de um número através de um 
+programa de computador, utilizamos tipicamente um processo 
+iterativo, em que o valor da variável varia de 1 a n.
+A linguagem C oferece diversas construções possíveis para a 
+realização de laços iterativos.O primeiro a ser apresentado 
+é o comando while. Sua forma geral é:
+
+while (expr)
+{
+
+	 bloco de comandos
+	 ...
+
+}
+
+Enquanto expr for avaliada em verdadeiro, o bloco de comandos 
+é executado repetidamente. Se expr for avaliada em falso, o 
+bloco de comando não é executado e a execução do programa 
+prossegue. Uma possível implementação do cálculo do fatorial
+usando while é mostrada a seguir.
+
+/* Fatorial */
+
+#include <stdio.h>
+
+int main (void)
+{
+
+ 	int i;
+ 	int n;
+ 	int f = 1;
+
+ 	printf("Digite um número inteiro nao negativo:");
+ 	scanf("%d", &n);
+
+	/* calcula fatorial */
+ 	i = 1;
+
+ 	while (i <= n)
+ 		{
+
+ 			f *= i;
+ 			i++;
+
+		}
+
+ 			printf(" Fatorial = %d \n", f);
+
+ return 0;
+}
+
+Uma segunda forma de construção de laços em C, mais compacta
+e amplamente utilizada, é através de laços for. A forma geral 
+do for é:
+
+for (expr_inicial; expr_booleana; expr_de_incremento)
+{
+
+ bloco de comandos
+ ...
+
+} 
+
+A ordem de avaliação desta construção é ilustrada a seguir:
+
+expr_inicial;
+while (expr_booleana)
+{
+
+ 	bloco de comandos
+ 	...
+ 	expr_de_incremento
+
+}
+
+A seguir, ilustramos a utilização do comando for no programa 
+para cálculo do fatorial.
+
+/* Fatorial (versao 2) */
+#include <stdio.h>
+int main (void)
+{
+ 	int i;
+ 	int n;
+ 	int f = 1;
+
+ 	printf("Digite um número inteiro nao negativo:");
+ 	scanf("%d", &n);
+
+ 	/* calcula fatorial */
+ 	for (i = 1; i <= n; i++)
+ 	{
+
+ 		f *= i;
+
+ 	}
+
+	 printf(" Fatorial = %d \n", f);
+
+ return 0;
+}
+
+Observamos que as chaves que seguem o comando for, neste caso, 
+são desnecessárias, jáque o corpo do bloco é composto por um 
+único comando.
+
+Tanto a construção com while como a construção com for avaliam 
+a expressão booleana que caracteriza o teste de encerramento no 
+início do laço. Assim, se esta expressão tiver valor igual a 
+zero (falso), quando for avaliada pela primeira vez, os comandos 
+do corpo do bloco não serão executados nem uma vez.
+
+C provê outro comando para construção de laços cujo teste de 
+encerramento é avaliado no final. Esta construção é o do-while, 
+cuja forma geral é:
+
+do
+{
+
+ 	bloco de comandos
+
+} while (expr_booleana);
+
+
+Um exemplo do uso desta construção é mostrado abaixo, onde 
+validamos a inserção dousuário, isto é, o programa repetidamente 
+requisita a inserção de um número enquanto o usuário inserir um 
+inteiro negativo (cujo fatorial não está definido). 
+
+/* Fatorial (versao 3) */
+#include <stdio.h>
+int main (void)
+{
+ 	int i;
+ 	int n;
+ 	int f = 1;
+
+ /* requisita valor do usuário */
+ do
+ {
+
+ 	printf("Digite um valor inteiro nao negativo:");
+ 	scanf ("%d", &n);
+
+ 	} while (n<0);
+
+ /* calcula fatorial */
+ for (i = 1; i <= n; i++)
+
+ f *= i;
+
+ printf(" Fatorial = %d\n", f);
+
+ return 0;
+}
+
+Interrupções com break e continue.
+
+A linguagem C oferece ainda duas formas para a interrupção 
+antecipada de um determinado laço. O comando break, quando 
+utilizado dentro de um laço, interrompe e termina a execução 
+do mesmo. A execução prossegue com os comandos subseqüentes 
+ao bloco. O código abaixo ilustra o efeito de sua utilização.
+
+#include <stdio.h>
+int main (void)
+{
+ 	int i;
+
+ 	for (i = 0; i < 10; i++)
+ 	{
+
+ 	if (i == 5)
+
+ 		break;
+
+ 		printf("%d ", i);
+
+ 	}
+
+ 	printf("fim\n");
+
+ return 0;
+}
+
+A saída deste programa, se executado, será:
+
+0 1 2 3 4 fim
+
+pois, quando i tiver o valor 5, o laço será interrompido e 
+finalizado pelo comando break, passando o controle para o 
+próximo comando após o laço, no caso uma chamada final de
+printf. O comando continue também interrompe a execução dos 
+comandos de um laço. A diferença básica em relação ao comando 
+break é que o laço não é automaticamente finalizado. O comando
+continue interrompe a execução de um laço passando para a
+próxima iteração. Assim, o código:
+
+#include <stdio.h>
+int main (void)
+{
+ 	int i;
+
+ 	for (i = 0; i < 10; i++ )
+ 	{
+
+	if (i == 5) continue;
+
+ 		printf("%d ", i);
+
+ 	}
+
+ 	printf("fim\n");
+
+ return 0;
+}
+
+gera a saída:
+
+	0 1 2 3 4 6 7 8 9 fim
+
+Devemos ter cuidado com a utilização do comando continue nos
+laços while. O programa:
+
+/* INCORRETO */
+#include <stdio.h>
+int main (void)
+{
+ 	int i = 0;
+
+ 	while (i < 10)
+ 	{
+
+ 	if (i == 5) continue;
+
+ 	printf("%d ", i);
+
+ 		i++;
+
+ 	}
+ 	printf("fim\n");
+
+ return 0;
+}
+
+é um programa INCORRETO, pois o laço criado não tem fim,
+a execução do programa não termina. Isto porque a variável
+i nunca terá valor superior a 5, e o teste será sempre
+verdadeiro. O que ocorre é que o comando continue "pula" os 
+demais comandos do laço quando i vale 5, inclusive o comando
+que incrementa a variável i. 
+
+		- W. Celes e J. L. Rangel
+

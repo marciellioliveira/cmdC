@@ -1,0 +1,10 @@
+
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+69 - CONCEITOS FUNDAMENTAIS: Lista generica
+
+		- W. Celes e J. L. Rangel

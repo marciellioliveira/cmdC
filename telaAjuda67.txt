@@ -1,0 +1,54 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+67 - CONCEITOS FUNDAMENTAIS: Arvores com numero variavel de
+filhos
+
+Definição
+
+Uma árvore binária (= binary tree) é formada de nós; cada 
+nó tem um certo conteúdo (por exemplo, um número inteiro) e
+os endereços (das raízes) de duas subárvores: uma esquerda
+e uma direita. Eis um exemplo de nó:
+
+typedef struct node *link;
+
+struct node {
+
+   int  item;  // conteúdo do nó
+
+   link l, r;  // 'l' de "left" e 'r' de "right"
+
+} ;
+
+Termos técnicos importantes:  raiz de uma árvore,  filho de
+um nó, pai de um nó, folha de uma árvore, nó interno de uma
+árvore, nível de um nó.
+
+Em geral, quando dizemos  um nó x  devemos entender que  x  
+é o endereço de um nó. Nesses termos, o filho esquerdo de um
+nó  x  é  x->l  e o filho direito é  x->r. 
+
+Um nó  x  é uma folha se não tem filhos, ou seja, se  
+x->l  e  x->r  valem  NULL.
+
+Para ilustrar o conceito de árvore, eis uma pequena função 
+(veja programa 5.17, p.236, do Sedgewick) que calcula o número
+de nós de uma árvore binária.
+
+// Esta função devolve o número de nós
+// da árvore binária cuja raiz é h.
+
+int count(link h) {
+
+    if (h == NULL) return 0;
+
+    return count(h->l) + count(h->r) + 1;
+
+}
+
+	-Site, http://www.ime.usp.br/

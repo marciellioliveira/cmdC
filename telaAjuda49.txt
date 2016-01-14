@@ -1,0 +1,69 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+49 - CONCEITOS FUNDAMENTAIS: Listas encadeadas
+
+Numa lista encadeada, para cada novo elemento inserido na 
+estrutura, alocamos um espaço de memória para armazená-lo. 
+
+Desta forma, o espaço total de memória gasto pela estrutura 
+é proporcional ao número de elementos nela armazenado.
+
+No entanto, não podemos garantir que os elementos armazenados 
+na lista ocuparão um espaço de memória contíguo, portanto 
+não temos acesso direto aos elementos da lista. 
+
+Para que seja possível percorrer todos os elementos da lista, 
+devemos explicitamente guardar o encadeamento dos elementos,
+o que é feito armazenando-se, junto com a informação de cada 
+elemento, um ponteiro para o próximo elemento da lista. 
+
+A estrutura consiste numa seqüência encadeada de elementos,
+em geral chamados de nós da lista. A lista é representada 
+por um ponteiro para o primeiro elemento (ou nó).
+
+Do primeiro elemento, podemos alcançar o segundo seguindo
+o encadeamento, e assim por diante. 
+
+O último elemento da lista aponta para NULL, sinalizando que
+não existe um próximo elemento.
+
+Para exemplificar a implementação de listas encadeadas em 
+C, vamos considerar um exemplo simples em que queremos 
+armazenar valores inteiros numa lista encadeada. 
+
+O nó da lista pode ser representado pela estrutura abaixo:
+
+struct lista {
+
+ int info;
+
+ struct lista* prox;
+
+};
+
+typedef struct lista Lista;
+
+Devemos notar que trata-se de uma estrutura 
+auto-referenciada, pois, além do campo que armazena a 
+informação (no caso, um número inteiro), há um campo que é 
+um ponteiro para uma próxima estrutura do mesmo tipo. 
+
+Embora não seja essencial, é uma boa estratégia definirmos 
+o tipo Lista como sinônimo de struct lista, conforme
+ilustrado acima.
+
+O tipo Lista representa um nó da lista e a estrutura de 
+lista encadeada é representada pelo ponteiro para seu 
+primeiro elemento (tipo Lista*).
+
+Considerando a definição de Lista, podemos definir as 
+principais funções necessárias para implementarmos uma lista
+encadeada.
+
+		- W. Celes e J. L. Rangel
+

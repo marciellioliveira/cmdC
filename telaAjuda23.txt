@@ -1,0 +1,145 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+23 - CONCEITOS FUNDAMENTAIS: Vetores
+
+
+A forma mais simples de estruturarmos um conjunto de dados é
+por meio de vetores. Como a maioria das linguagens de 
+programação, C permite a definição de vetores. 
+
+Definimos um vetor em C da seguinte forma:
+
+int v[10];
+
+A declaração acima diz que v é um vetor de inteiros 
+dimensionado com 10 elementos, isto é, reservamos um espaço 
+de memória contínuo para armazenar 10 valores inteiros. 
+
+Assim, se cada int ocupa 4 bytes, a declaração acima reserva
+um espaço de memória de 40 bytes.
+
+O acesso a cada elemento do vetor é feito através de uma 
+indexação da variável v. 
+
+Observamos que, em C, a indexação de um vetor varia de zero
+a n-1, onde n representa a dimensão do vetor. Assim:
+
+v[0] ? acessa o primeiro elemento de v
+v[1] ? acessa o segundo elemento de v
+...
+v[9] ? acessa o último elemento de v
+
+Mas:
+
+v[10] ? está ERRADO (invasão de memória)
+Para exemplificar o uso de vetores, vamos considerar um 
+programa que lê 10 números reais, fornecidos via teclado,
+e calcula a média e a variância destes números. A média e a
+variância são dadas por:
+
+ m = ?x / N, v = ?(x-2)² / N
+
+Uma possível implementação é apresentada a seguir.
+/* Cálculo da media e da variância de 10 números reais */
+
+#include <stdio.h>
+int main ( void )
+{
+
+ float v[10]; /* declara vetor com 10 elementos */
+ float med, var; /* variáveis para armazenar a média e a 
+ variância */
+ int i; /* variável usada como índice do vetor */
+ /* leitura dos valores */
+ for (i = 0; i < 10; i++) /* faz índice variar de 0 a 9 */
+ scanf("%f", &v[i]); /* lê cada elemento do vetor */
+
+ /* cálculo da média */
+
+ med = 0.0; /* inicializa média com zero */
+
+ for (i = 0; i < 10; i++)
+
+ med = med + v[i]; /* acumula soma dos elementos */
+
+ med = med / 10; /* calcula a média */
+
+ /* cálculo da variância */
+
+ var = 0.0; /* inicializa variância com zero */
+
+ for ( i = 0; i < 10; i++ )
+
+ var = var+(v[i]-med)*(v[i]-med); /* acumula quadrado da 
+ diferença */
+
+ var = var / 10; /* calcula a variância */
+
+ printf ( "Media = %f Variancia = %f \n", med, var );
+
+ return 0;
+
+}
+
+Devemos observar que passamos para a função scanf o endereço
+de cada elemento do vetor (&v[i]), pois desejamos que os 
+valores capturados sejam armazenados nos elementos do vetor.
+
+Se v[i] representa o (i+1)-ésimo elemento do vetor, &v[i] 
+representa o endereço de memória onde esse elemento está 
+armazenado.
+
+Na verdade, existe uma associação forte entre vetores e 
+ponteiros, pois se existe a declaração:
+
+int v[10];
+
+a variável v, que representa o vetor, é uma constante que 
+armazena o endereço inicial do vetor, isto é, v, sem 
+indexação, aponta para o primeiro elemento do vetor. 
+
+A linguagem C também suporta aritmética de ponteiros. 
+Podemos somar e subtrair ponteiros, desde que o valor do
+ponteiro resultante aponte para dentro da área reservada 
+para o vetor. Se p representa um ponteiro para um inteiro,
+p+1 representa um ponteiro para o próximo inteiro armazenado
+na memória, isto é, o valor de p é incrementado de 4 (mais
+uma vez assumindo que um inteiro tem 4 bytes). 
+
+Com isto, num vetor temos as seguintes equivalências:
+
+v+0 ? aponta para o primeiro elemento do vetor
+v+1 ? aponta para o segundo elemento do vetor
+v+2 ? aponta para o terceiro elemento do vetor
+ ...
+v+9 ? aponta para o último elemento do vetor
+
+Portanto, escrever &v[i] é equivalente a escrever (v+i).
+
+De maneira análoga, escrever v[i] é equivalente a escrever 
+*(v+i) (é lógico que a forma indexada é mais clara e
+adequada). 
+
+Devemos notar que o uso da aritmética de ponteiros aqui é
+perfeitamente válido, pois os elementos dos vetores são 
+armazenados de forma contínua na memória.
+
+Os vetores também podem ser inicializados na declaração:
+
+int v[5] = { 5, 10, 15, 20, 25 };
+
+ou simplesmente:
+
+int v[] = { 5, 10, 15, 20, 25 };
+
+Neste último caso, a linguagem dimensiona o vetor pelo 
+número de elementos inicializados.  
+
+		- W. Celes e J. L. Rangel
+
+

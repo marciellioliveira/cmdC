@@ -1,0 +1,18 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+26 - CONCEITOS FUNDAMENTAIS: Matrizes
+
+A linguagem C também permite a construção de conjuntos bi ou
+multidimensionais. 
+
+Neste capítulo, discutiremos em detalhe a manipulação de
+matrizes,representadas por conjuntos  bidimensionais de 
+valores numéricos. As construções apresentadas aqui podem
+ser estendidas para conjuntos de dimensões maiores. 
+
+		- W. Celes e J. L. Rangel

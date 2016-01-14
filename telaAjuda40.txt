@@ -1,0 +1,61 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+40 - CONCEITOS FUNDAMENTAIS: Vetores de Estruturas
+
+Um vetor de estruturas pode ser usado para definir um 
+polígono. 
+
+O polígono passa a ser representado por um seqüência de
+pontos. 
+
+Podemos, então, escrever uma função para calcular a 
+área de um polígono, dados o número de pontos e o
+vetor de pontos que o representa. 
+
+Uma implementação dessa função é mostrada abaixo.
+
+float area (int n, Ponto* p)
+{
+
+ int i, j;
+
+ float a = 0;
+
+ for (i=0; i<n; i++) {
+
+ j = (i+1) % n; /* próximo índice (incremento circular) */
+
+ a += (p[j].x-p[i].x)*(p[i].y + p[j].y)/2;
+
+ }
+
+ if (a < 0)
+
+ return -a;
+
+ else
+
+ return a;
+
+} 
+
+Um exemplo de uso dessa função é mostrado no código abaixo:
+
+int main (void)
+{
+
+ Ponto p[3] = {{1.0,1.0},{5.0,1.0},{4.0,3.0}};
+
+ printf("area = %f\n",area (3,p));
+
+ return 0; 
+
+}
+
+		- W. Celes e J. L. Rangel
+

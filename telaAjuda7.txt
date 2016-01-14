@@ -1,0 +1,20 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+7 - CONCEITOS FUNDAMENTAIS: Variaveis
+
+
+Podemos dizer que uma variável representa um espaço na 
+memória do computador para armazenar determinado tipo de 
+dado. Na linguagem C, todas as variáveis devem ser 
+explicitamente declaradas. Na declaração de uma variável, 
+obrigatoriamente, devem ser especificados seu tipo e seu 
+nome: o nome da variável serve de referência ao dado
+armazenado no espaço de memória da variável e o tipo da 
+variável determina a natureza do dado que será armazenado.
+
+		- W. Celes e J. L. Rangel

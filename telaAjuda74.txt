@@ -1,0 +1,116 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+74 - CONCEITOS FUNDAMENTAIS: Arquivos em modo texto
+
+Nesta seção, vamos descrever as principais funções para 
+manipular arquivos em modo texto. 
+
+Também discutiremos algumas estratégias para organização
+de dados em arquivos.
+
+
+************************************************************
+	FUNÇÕES PARA LER DADOS
+************************************************************
+
+
+A principal função de C para leitura de dados em arquivos em 
+modo texto é a função fscanf, similar à função scanf que 
+temos usado para capturar valores entrados via o teclado. 
+No caso da fscanf, os dados são capturados de um arquivo 
+previamente aberto para leitura. 
+
+A cada leitura, os dados correspondentes são transferidos 
+para a memória e o ponteiro do arquivo avança, passando a
+apontar para o próximo dado do arquivo (que pode ser 
+capturado numa leitura subseqüente). 
+
+O protótipo da função fscanf é:
+
+int fscanf (FILE* fp, char* formato, ...);
+
+Conforme pode ser observado, o primeiro parâmetro deve ser 
+o ponteiro do arquivo do qual os dados serão lidos. Os 
+demais parâmetros são os já discutidos para a função scanf:
+o formato e a lista de endereços de variáveis que 
+armazenarão os valores lidos.
+
+Como a função scanf, a função fscanf também tem como valor
+de retorno o número de dados lidos com sucesso.
+
+Uma outra função de leitura muito usada em modo texto é a
+função fgetc que, dado o ponteiro do arquivo, captura o 
+próximo caractere do arquivo.
+
+O protótipo dessa função é:
+
+int fgetc (FILE* fp);
+
+Apesar do tipo do valor de retorno ser int, o valor 
+retornado é o caractere lido. Se o fim do arquivo for 
+alcançado, a constante EOF (end of file) é retornada.
+Uma outra função muito utilizada para ler linhas de um 
+arquivo é a função fgets. 
+
+Essa função recebe como parâmetros três valores: a 
+cadeia de caracteres que armazenará o conteúdo lido
+do arquivo, o número máximo de caracteres que deve 
+ser lido e o ponteiro do arquivo.
+
+O protótipo da função é:
+
+char* fgets (char* s, int n, FILE* fp);
+
+A função lê do arquivo uma seqüência de caracteres, até
+que um caractere '\n' seja encontrado ou que o máximo de
+caracteres especificado seja alcançado. A especificação
+de um número máximo de caracteres é importante para 
+evitarmos que se invada memória quando a linha do 
+arquivo for maior do que supúnhamos. 
+
+Assim, se dimensionarmos nossa cadeia de caracteres, que
+receberá o conteúdo da linha lida, com 121 caracteres,
+passaremos esse valor para a função, que lerá no máximo 
+120 caracteres, pois o último será ocupado pelo finalizador
+de string – o caractere '\0'.
+
+O valor de retorno dessa função é o ponteiro da própria 
+cadeia de caracteres passada como parâmetro ou NULL no 
+caso de ocorrer erro de leitura (por exemplo, quando
+alcançar o final do arquivo).
+
+************************************************************
+	FUNÇÕES PARA ESCREVER DADOS
+************************************************************
+
+Dentre as funções que existem para escrever (salvar) dados 
+em um arquivo, vamos considerar as duas mais freqüentemente
+utilizadas: fprintf e fputc, que são análogas, mas para 
+escrita, às funções que vimos para leitura.
+
+A função fprintf é análoga a função printf que temos usado
+para imprimir dados na saída padrão – em geral, o monitor.
+A diferença consiste na presença do parâmetro que indica o
+arquivo para o qual o dado será salvo.
+
+O valor de retorno dessa função representa o número de bytes 
+escritos no arquivo. 
+
+O protótipo da função é dado por:
+
+int fprintf(FILE* fp, char* formato, ...);
+
+A função fputc escreve um caractere no arquivo. O protótipo é:
+
+int fputc (int c, FILE* fp);
+
+O valor de retorno dessa função é o próprio caractere escrito, 
+ou EOF se ocorrer um erro na escrita.
+
+		W. Celes e J. L. Rangel
+

@@ -1,0 +1,106 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+17 - CONCEITOS FUNDAMENTAIS: Ponteiro de Variaveis
+
+A linguagem C permite o armazenamento e a manipulação de 
+valores de endereços de memória. Para cada tipo existente, 
+há um tipo ponteiro que pode armazenar endereços de memória
+onde existem valores do tipo correspondente armazenados. 
+Por exemplo, quando escrevemos:
+
+int a;
+
+declaramos uma variável com nome a que pode armazenar 
+valores inteiros.
+
+Automaticamente, reserva-se um espaço na memória suficiente 
+para armazenar valores inteiros (geralmente 4 bytes).
+Da mesma forma que declaramos variáveis para armazenar 
+inteiros, podemos declarar variáveis que, em vez de servirem
+para armazenar valores inteiros, servem para armazenar
+valores de endereços de memória onde há variáveis inteiras 
+armazenadas. 
+
+C não reserva uma palavra especial para a declaração de 
+ponteiros; usamos a mesma palavra do tipo com os nomes das
+variáveis precedidas pelo caractere *. Assim, podemos escrever:
+
+int *p;
+
+Neste caso, declaramos uma variável com nome p que pode 
+armazenar endereços de memória onde existe um inteiro 
+armazenado. Para atribuir e acessar endereços de memória,
+a linguagem oferece dois operadores unários ainda não 
+discutidos. O operador unário & (“endereço de”), aplicado a 
+variáveis, resulta no endereço da posição da memória 
+reservada para a variável. O operador unário * (“conteúdo 
+de”), aplicado a variáveis do tipo ponteiro, acessa o 
+conteúdo do endereço de memória armazenado pela variável 
+ponteiro. 
+
+A possibilidade de manipular ponteiros de variáveis é uma 
+das maiores potencialidades de C. Por outro lado, o uso 
+indevido desta manipulação é o maior causador de programas
+que "voam", isto é, não só não funcionam como, pior ainda,
+podem gerar efeitos colaterais não previstos. 
+A seguir, apresentamos outros exemplos de uso de ponteiros.
+
+O código abaixo:
+
+int main ( void )
+{
+
+ int a;
+ int *p;
+ p = &a;
+ *p = 2;
+ printf(" %d ", a);
+ return;
+
+}
+
+imprime o valor 2.
+Agora, no exemplo abaixo:
+
+int main ( void )
+{
+
+ int a, b, *p;
+ a = 2;
+ *p = 3;
+ b = a + (*p);
+ printf(" %d ", b);
+ return 0;
+
+}
+
+cometemos um ERRO típico de manipulação de ponteiros. 
+
+O pior é que esse programa, embora incorreto, às vezes pode 
+funcionar. O erro está em usar a memória apontada por p
+para armazenar o valor 3. Ora, a variável p não tinha sido 
+inicializada e, portanto, tinha armazenado um valor (no caso,
+endereço) "lixo". Assim, a atribuição *p = 3; armazena 3 num 
+espaço de memória desconhecido, que tanto pode ser um espaço 
+de memória não utilizado, e aí o programa aparentemente 
+funciona bem, quanto um espaço que armazena outras informações
+fundamentais – por exemplo, o espaço de memória utilizado por
+outras variáveis ou outros aplicativos. 
+
+Neste caso, o erro pode ter efeitos colaterais indesejados.
+Portanto, só podemos preencher o conteúdo de um ponteiro se 
+este tiver sido devidamente inicializado, isto é, ele deve 
+apontar para um espaço de memória onde já se prevê o 
+armazenamento de valores do tipo em questão.
+
+De maneira análoga, podemos declarar ponteiros de outros tipos:
+
+float *m;
+char *s;
+
+		- W. Celes e J. L. Rangel

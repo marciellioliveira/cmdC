@@ -1,0 +1,58 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+44 - CONCEITOS FUNDAMENTAIS: EXERCICIOS
+
+1) Escreva uma função para determinar se um caractere é uma
+letra, com protótipo:
+
+int letra(char c); 
+
+2) Escreva uma função para converter um caractere para 
+maiúscula. Se o caractere dado representar uma letra 
+minúscula, devemos ter como valor de retorno a letra 
+maiúscula correspondente. Se o caractere dado não for 
+uma letra minúscula, devemos ter como valor de retorno 
+o mesmo caractere, sem alteração. O protótipo desta função
+pode ser dado por:
+
+char maiuscula(char c); 
+
+3) Exemplo 5: Duplicação de cadeias de caracteres.
+Consideremos agora um exemplo com alocação dinâmica. 
+O objetivo é implementar uma função que receba como 
+parâmetro uma cadeia de caracteres e forneça uma cópia
+da cadeia, alocada dinamicamente. O protótipo desta
+função pode ser dado por:
+
+char* duplica (char* s);
+
+Uma possível implementação, usando as funções da biblioteca
+padrão, é:
+
+#include <stdlib.h>
+
+#include <string.h>
+
+char* duplica (char* s)
+{
+
+ int n = strlen(s);
+
+ char* d = (char*) malloc ((n+1)*sizeof(char));
+
+ strcpy(d,s);
+
+ return d;
+
+}
+
+A função que chama duplica fica responsável por liberar o 
+espaço alocado. 
+
+		- W. Celes e J. L. Rangel
+

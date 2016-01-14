@@ -1,0 +1,109 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+82 - CONCEITOS FUNDAMENTAIS: Arvore binaria de busca
+
+
+Se precisarmos inserir e remover elementos da estrutura, e
+ao mesmo tempo dar suporte a eficientes funções de busca, a
+estrutura de vetor (e, conseqüentemente, o uso do algoritmo
+de busca binária) não se torna adequada. 
+
+Para inserirmos um novo elemento num vetor ordenado, temos
+que rearrumar os elementos no vetor, para abrir espaço 
+para a inserção do novo elemento.
+
+Situação análoga ocorre quando removemos um elemento do
+vetor. Precisamos portanto de uma estrutura dinâmica que
+dê suporte a operações de busca.
+
+Um dos resultados que apresentamos anteriormente foi o da
+relação entre o número de nós de uma árvore binária e sua 
+altura. 
+
+A cada nível, o número (potencial) de nós vai dobrando, 
+de maneira que uma árvore binária de altura h 
+pode ter um número de nós dado por:
+
+1 + 2 + 22
+
+ + … + 2h-1 + 2h
+
+ = 2h+1-1
+
+Assim, dizemos que uma árvore binária de altura h pode ter 
+no máximo O(2h) nós, ou, pelo outro lado, que uma árvore 
+binária com n nós pode ter uma altura mínima de O(log n).
+
+Essa relação entre o número de nós e a altura mínima da 
+árvore é importante porque se as condições forem 
+favoráveis, podemos alcançar qualquer um dos n nós de uma
+árvore binária a partir da raiz em, no máximo, O(log n)
+passos. 
+
+Se tivéssemos os n nós em uma lista linear, o número 
+máximo de passos seria O(n), e, para os valores de n
+encontrados na prática, log n é muito menor do que n.
+
+A altura de uma árvore é, certamente, uma medida do tempo
+necessário para encontrar um dado nó.
+
+
+No entanto, é importante observar que para acessarmos 
+qualquer nó de maneira eficiente é necessário termos árvores
+binárias “balanceadas”, em que os nós internos têm todos, ou
+quase todos, o máximo número de filhos, no caso 2. 
+
+Lembramos que o número mínimo de nós de uma árvore binária de
+altura h é h+1, de forma que a altura máxima de uma árvore com
+n nós é O(n). Esse caso extremo corresponde à árvore 
+“degenerada”, em que todos os nós têm apenas 1 filho, com
+exceção da (única) folha.
+
+As árvores binárias que serão consideradas nesta seção têm
+uma propriedade fundamental: o valor associado à raiz é 
+sempre maior que o valor associado a qualquer nó da 
+sub-árvore à esquerda (sae), e é sempre menor que o valor
+associado a qualquer nó da sub-árvore à direita (sad). Essa
+propriedade garante que, quando a árvore é percorrida em 
+ordem simétrica (sae - raiz - sad), os valores são 
+encontrados em ordem crescente.
+
+Uma variação possível permite que haja repetição de valores
+na árvore: o valor associado à raiz é sempre maior que o 
+valor associado a qualquer nó da sae, e é sempre menor ou 
+igual ao valor associado a qualquer nó da sad. 
+
+Nesse caso, como a repetição de valores é permitida, quando 
+a árvore é percorrida em ordem simétrica, os valores são 
+encontrados em ordem não decrescente.
+
+Usando essa propriedade de ordem, a busca de um valor em 
+uma árvore pode ser simplificada.
+
+Para procurar um valor numa árvore, comparamos o valor que
+buscamos com o valor associado à raiz. Em caso de igualdade,
+o valor foi encontrado; se o valor dado for menor que o valor
+associado à raiz, a busca continua na sae; caso contrário, 
+se o valor associado à raiz for menor, a busca continua na 
+sad.
+
+Por essa razão, estas árvores são freqüentemente chamadas de
+árvores binárias de busca.
+
+Naturalmente, a ordem a que fizemos referência acima é
+dependente da aplicação. Se a informação a ser armazenada
+em cada nó da árvore for um número inteiro podemos usar o
+habitual operador relacional menor que (“<”). 
+
+Porém, se tivermos que considerar casos em que a informação 
+é mais complexa, já vimos que uma função de comparação deve 
+ser definida pelo programador, especificamente para cada 
+caso.
+
+	-W. Celes e J. L. Rangel
+

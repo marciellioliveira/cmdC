@@ -1,0 +1,513 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+81 - CONCEITOS FUNDAMENTAIS: Busca em Vetor
+
+
+Nesta seção, apresentaremos os algoritmos de busca em vetor.
+Dado um vetor vet com n elementos, desejamos saber se um 
+determinado elemento elem está ou não presente no vetor.
+
+
+************************************************************
+	BUSCA LINEAR
+************************************************************
+
+
+A forma mais simples de fazermos uma busca num vetor consiste
+em percorrermos o vetor, elemento a elemento, verificando se
+o elemento de interesse é igual a um dos elementos do vetor.
+
+Esse algoritmo pode ser implementado conforme ilustrado pelo
+código a seguir, considerando-se um vetor de números 
+inteiros.
+
+A função apresentada tem como valor de retorno o índice do 
+vetor no qual foi encontrado o elemento; se o elemento não 
+for encontrado, o valor de retorno é –1.
+
+int busca (int n, int* vet, int elem)
+{
+
+ int i;
+
+ for (i=0; i<n; i++) {
+
+ if (elem == vet[i])
+
+ return i; /* elemento encontrado */
+
+ }
+
+ /* percorreu todo o vetor e não encontrou elemento */
+
+ return -1;
+
+}
+
+Esse algoritmo de busca é extremamente simples, mas pode 
+ser muito ineficiente quando o número de elementos no vetor
+for muito grande. 
+
+Isto porque o algoritmo (a função, no caso) pode ter que 
+percorrer todos os elementos do vetor para  verificar 
+que um determinado elemento está ou não presente.
+
+Dizemos que no pior caso será necessário realizar n 
+comparações, onde n representa o número de elementos no 
+vetor.
+
+Portanto, o desempenho computacional desse algoritmo varia 
+linearmente com relação ao tamanho do problema – chamamos 
+esse algoritmo de busca linear.
+
+Em geral, usamos a notação “Big-O” para expressarmos como 
+a complexidade de um algoritmo varia com o tamanho do 
+problema.
+
+Assim, nesse caso em que o tempo computacional varia 
+linearmente com o tamanho do problema, dizemos que 
+trata-se de um algoritmo de ordem linear e expressamos 
+isto escrevendo O(n).
+
+No melhor caso, se dermos sorte do elemento procurado 
+ocupar a primeira posição do vetor, o algoritmo acima 
+necessitaria de apenas uma única comparação. 
+
+Esse fato, no entanto, não pode ser usado para fazermos
+uma análise de desempenho do algoritmo, pois o melhor 
+caso representa um situação muito particular.
+
+Além do pior caso, devemos analisar o caso médio, isto é,
+o caso que ocorre na média.
+
+Já vimos que o algoritmo em questão requer n comparações 
+quando o elemento não está presente no vetor. E no caso
+do elemento estar presente, quantas operações de comparação
+são, em média, necessárias? Na média, podemos concluir que
+são necessárias n/2 comparações. 
+
+Em termos de ordem de complexidade, no entanto, continuamos
+a ter uma variação linear, isto é, O(n), pois dizemos que 
+O(k n), onde k é uma constante, é igual a O(n).
+
+Em diversas aplicações reais, precisamos de algoritmos de 
+busca mais eficientes. Seria possível melhorarmos a 
+eficiência do algoritmo de busca mostrado acima? 
+
+Infelizmente, se os elementos estiverem armazenados em 
+uma ordem aleatória no vetor, não temos como melhorar o 
+algoritmo de busca, pois precisamos verificar todos os 
+elementos.
+
+No entanto, se assumirmos, por exemplo, que os elementos 
+estão armazenados em ordem crescente, podemos concluir 
+que um elemento não está presente no vetor se acharmos 
+um elemento maior, pois se o elemento que buscamos
+estivesse presente ele precederia um elemento maior na
+ordem do vetor.
+
+O código abaixo ilustra a implementação da busca linear 
+assumindo que os elementos do vetor estão ordenados 
+(vamos assumir ordem crescente).
+
+int busca_ord (int n, int* vet, int elem)
+{
+
+ int i;
+
+ for (i=0; i<n; i++) {
+
+ if (elem == vet[i])
+
+ return i; /* elemento encontrado */
+
+ else if (elem < vet[i])
+
+ return -1; /* interrompe busca */
+
+ }
+
+ /* percorreu todo o vetor e não encontrou elemento */
+
+ return -1;
+
+}
+
+No caso do elemento procurado não pertencer ao vetor, 
+esse segundo algoritmo apresenta um desempenho 
+ligeiramente superior ao primeiro, mas a ordem dessa 
+versão do algoritmo continua sendo linear – O(n). 
+
+No entanto, se os elementos do vetor estão ordenados, 
+existe um algoritmo muito mais eficiente que será 
+apresentado a seguir.
+
+
+************************************************************
+	BUSCA BINÁRIA
+************************************************************
+
+
+No caso dos elementos do vetor estarem em ordem, podemos 
+aplicar um algoritmo mais eficiente para realizarmos a 
+busca. Trata-se do algoritmo de busca binária. 
+
+A idéia do algoritmo é testar o elemento que buscamos com 
+o valor do elemento armazenado no meio do vetor. 
+
+Se o elemento que buscamos for menor que o elemento do meio,
+sabemos que, se o elemento estiver presente no vetor, 
+ele estará na primeira parte do vetor; se for maior, 
+estará na segunda parte do vetor; se for igual, achamos 
+o elemento no vetor. 
+
+Se concluirmos que o elemento está numa das partes do vetor, 
+repetimos o procedimento considerando apenas a parte que 
+restou: comparamos o elemento que buscamos com o elemento 
+armazenado no meio dessa parte. 
+
+Este procedimento é continuamente repetido, subdividindo 
+a parte de interesse, até encontrarmos o elemento ou 
+chegarmos a uma parte do vetor com tamanho zero. 
+
+O código a seguir ilustra uma implementação de busca binária 
+num vetor de valores inteiros ordenados de forma crescente.
+
+int busca_bin (int n, int* vet, int elem)
+{
+
+ /* no inicio consideramos todo o vetor */
+
+ int ini = 0;
+
+ int fim = n-1;
+
+ int meio;
+
+ /* enquanto a parte restante for maior que zero */
+
+ while (ini <= fim) {
+
+ meio = (ini + fim) / 2;
+
+ if (elem < vet[meio])
+
+ fim = meio – 1; /* ajusta posicão final */
+
+ else if (elem > vet[meio])
+
+ ini = meio + 1; /* ajusta posicão inicial */
+
+ else
+
+ return meio; /* elemento encontrado */
+
+ }
+
+ /* não encontrou: restou parte de tamanho zero */
+
+ return -1;
+
+}
+
+O desempenho desse algoritmo é muito superior ao de busca 
+linear. Novamente, o pior caso caracteriza-se pela situação
+do elemento que buscamos não estar no vetor. 
+
+Quantas vezes precisamos repetir o procedimento de subdivisão
+para concluirmos que o elemento não está presente no vetor? A 
+cada repetição, a parte considerada na busca é dividida à
+metade. 
+
+O algoritmo de busca binária consiste em repetirmos o mesmo
+procedimento recursivamente, podendo ser naturalmente 
+implementado de forma recursiva. 
+
+Embora a implementação não recursiva seja mais eficiente e 
+mais adequada para esse algoritmo, a implementação recursiva
+é mais sucinta e vale a pena ser apresentada. 
+
+Na implementação recursiva, temos dois casos a serem tratados.
+
+No primeiro, a busca deve continuar na primeira metade do 
+vetor, logo chamamos a função recursivamente passando como
+parâmetros o número de elementos dessa primeira parte 
+restante e o mesmo ponteiro para o primeiro elemento, 
+pois a primeira parte tem o mesmo primeiro elemento do que
+o vetor como um todo. 
+
+No segundo caso, a busca deve continuar apenas na segunda 
+parte do vetor, logo passamos na chamada recursiva, além do
+número de elementos restantes, um ponteiro para o primeiro
+elemento dessa segunda parte. 
+
+Para simplificar, a função de busca apenas informa se o
+elemento pertence ou não ao vetor, tendo como valor de 
+retorno falso (0) ou verdadeiro (1). 
+
+Uma possível implementação usando essa estratégia é 
+mostrada a seguir.
+
+int busca_bin_rec (int n, int* vet, int elem)
+{
+ /* testa condição de contorno: parte com tamanho zero */
+
+ if (n <= 0)
+
+ return 0;
+
+ else {
+
+ /* deve buscar o elemento entre os índices 0 e n-1 */
+
+ int meio = (n - 1) / 2;
+
+ if (elem < vet[meio])
+
+ return busca_bin_rec(meio,vet,elem);
+
+ else if (elem > vet[meio])
+
+ return busca_bin_rec(n–1-meio, &vet[meio+1],elem);
+
+ else
+
+ return 1; /* elemento encontrado */
+
+ }
+
+}
+
+Em particular, devemos notar a expressão &vet[meio+1] que,
+como sabemos, resulta num ponteiro para o primeiro elemento
+da segunda parte do vetor.
+
+Se quisermos que a função tenha como valor de retorno o 
+índice do elemento, devemos acertar o valor retornado pela
+chamada recursiva na segunda parte do vetor. 
+
+Uma implementação com essa modificação é apresentada abaixo:
+
+int busca_bin_rec (int n, int* vet, int elem)
+{
+
+ /* testa condição de contorno: parte com tamanho zero */
+
+ if (n <= 0)
+
+ return -1;
+
+ else {
+
+ /* deve buscar o elemento entre os índices 0 e n-1 */
+
+ int meio = (n - 1) / 2;
+
+ if (elem < vet[meio])
+
+ return busca_bin_rec(meio,vet,elem);
+
+ else if (elem > vet[meio])
+ {
+
+ int r = busca_bin_rec(n-1-meio, &vet[meio+1],elem);
+
+ if (r<0) return -1;
+
+ else return meio+1+r;
+
+ }
+ else
+
+ return meio; /* elemento encontrado */
+
+ }
+
+}
+
+
+************************************************************
+	ALGORITMO GENÉRICO
+************************************************************
+
+A biblioteca padrão de C disponibiliza, via a interface 
+stdlib.h, uma função que faz a busca binária de um elemento
+num vetor. A função disponibilizada pela biblioteca
+independe do tipo de informação armazenada no vetor. 
+
+A implementação dessa função genérica segue os mesmos 
+princípios discutidos no capítulo anterior. O protótipo da
+função de busca binária da biblioteca é:
+
+void* bsearch (void* info, void *v, int n, int tam,
+int (*cmp)(const void*, const void*)
+);
+
+Se o elemento for encontrado no vetor, a função tem como
+valor de retorno o endereço do elemento no vetor; caso o 
+lemento não seja encontrado, o valor de retorno é NULL.
+
+Análogo a função qsort, apresentada no capítulo anterior,
+os parâmetros de entrada dessa função são:
+
+info: o ponteiro para a informação que se deseja buscar 
+no vetor – representa a chave de busca;
+
+v: o ponteiro para o primeiro elemento do vetor onde a 
+busca será feita. Os elementos do vetor têm que estar 
+ordenados, segundo o critério de ordenação
+adotado pela função de comparação descrita abaixo.
+
+n: o número de elementos do vetor.
+
+tam: o tamanho, em bytes, de cada elemento do vetor.
+
+cmp: o ponteiro para a função responsável por comparar 
+a informação buscada e um elemento do vetor. 
+
+O primeiro parâmetro dessa função é sempre o endereço 
+da informação buscada, e o segundo é um ponteiro para 
+um dos elementos do vetor. 
+
+O critério de comparação adotado por essa função deve
+ser compatível com o critério de ordenação do vetor. 
+
+Essa função deve ter como valor de retorno –1, 0, ou 1,
+dependendo se a informação buscada for menor, igual,
+ou maior que a informação armazenada no elemento,
+respectivamente.
+
+Para ilustrar a utilização da função bsearch vamos, 
+inicialmente, considerar um vetor de valores inteiros.
+Neste caso, os dois ponteiros genéricos passados para a
+função de comparação representam ponteiros para int.
+
+
+/* Ilustra uso do algoritmo bsearch */
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+/* função de comparação de inteiros */
+
+int comp_int (const void* p1, const void* p2)
+{
+
+ /*converte ponteiros genéricos para ponteiros de int*/
+
+ int *i1 = (int*)p1;
+
+ int *i2 = (int*)p2;
+
+ /* dados os ponteiros de int, faz a comparação */
+
+ if (*i1 < *i2) return –1;
+
+ else if (*i1 > *i2) return 1;
+
+ else return 0;
+
+}/* programa que faz a busca em um vetor */
+
+int main (void)
+{
+
+ int v[8] = {12,25,33,37,48,57,86,92};
+
+ int e = 57; /* informação que se deseja buscar */
+
+ int* p;
+
+ p = (int*)bsearch(&e,v,8,sizeof(int),comp_int);
+
+ if (p == NULL)
+
+ printf("Elemento nao encontrado.\n");
+
+ else
+
+ printf("Elemento encontrado no indice: %d\n", p-v);
+
+ return 0;
+
+}
+Devemos notar que o índice do elemento, se encontrado no
+vetor, pode ser extraído subtraindo-se o ponteiro do 
+elemento do ponteiro do primeiro elemento (p-v). 
+
+Essa aritmética de ponteiros é válida aqui pois podemos 
+garantir que ambos os ponteiros armazenam endereços de 
+memória de um mesmo vetor. 
+
+A diferença entre os ponteiros representa a “distância”
+em que os elementos estão armazenados na memória.
+
+Vamos agora considerar que queremos efetuar uma busca 
+num vetor de ponteiros para alunos. 
+
+A estrutura que representa um aluno pode ser dada por:
+
+struct aluno {
+
+ char nome[81];
+
+ char mat[8];
+
+ char turma;
+
+ char email[41];
+
+};
+
+typedef struct aluno Aluno;
+
+Considerando que o vetor está ordenado segundo os nomes 
+dos alunos, podemos buscar a ocorrência de um determinado
+aluno passando para a função de busca um nome e o vetor. 
+A função de comparação então receberá dois ponteiros: um 
+ponteiro para uma cadeia de caracteres e um ponteiro para 
+um elemento do vetor (no caso será um ponteiro
+para ponteiro de aluno, ou seja, um Aluno**).
+
+/* Função de comparação: char* e Aluno** */
+
+int comp_alunos (const void* p2, const void* p2)
+
+ /*converte ponteiros genéricos para ponteiros 
+específicos*/
+
+ char* s = (char*)p1;
+
+ Aluno **pa = (Aluno**)p2;
+
+ /* faz a comparação */
+
+ return strcmp(s,(*pa)->nome);
+
+}
+
+Conforme observamos, o tipo de informação a ser buscada 
+nem sempre é igual ao tipo do elemento; para dados 
+complexos, em geral não é. 
+
+A informação buscada geralmente representa um campo da 
+estrutura armazenada no vetor (ou da estrutura apontada 
+por elementos do vetor).
+
+Devemos finalmente salientar que se tivermos os dados 
+armazenados em uma lista encadeada, só temos a 
+alternativa de implementar um algoritmo de busca linear,
+mesmo se os elementos estiverem ordenados. 
+
+Portanto, lista encadeada não é uma boa opção para 
+estruturarmos nossos dados, se desejarmos realizar muitas
+operações de busca. 
+
+	W. Celes e J. L. Rangel
+

@@ -1,0 +1,206 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+70 - CONCEITOS FUNDAMENTAIS: Uso de callbacks
+
+Em todas as estruturas de dados, é muito comum necessitarmos
+de funções que percorrem os elementos, executando uma ação 
+específica para cada elemento. 
+
+Como um exemplo adicional, podemos imaginar uma função para
+imprimir os elementos na ordem em que eles aparecem na 
+tabela de dispersão. 
+
+Ainda usando o exemplo de void, poderíamos ter:
+
+
+void imprime_tabela (Hash tab)
+{
+
+ int i;
+
+ Palavra* p;
+
+ for (i=0; i<NTAB; i++) {
+
+ for (p=tab[i]; p!=NULL; p=p->prox)
+
+ printf("%s = %d\n",p->pal,p->n);
+
+ }
+
+}
+
+
+Podemos observar que as estruturas dessas funções são as
+mesmas. Como também teriam as mesmas estruturas funções 
+para percorrer os elementos de uma lista encadeada, de uma
+árvore, etc.
+
+Nesses casos, podemos separar a função que percorre os 
+elementos da ação que realizamos a cada elemento. Assim,
+a função que percorre os elementos é única e pode ser 
+usada para diversos fins. A ação que deve ser executada é 
+passada como parâmetro, via um ponteiro para uma função. 
+Essa função é usualmente chamada de callback pois é
+uma função do cliente (quem usa a função que percorre os 
+elementos) que é “chamada de volta” a cada elemento 
+encontrado na estrutura de dados.
+
+Usualmente essa função callback recebe como parâmetro o
+elemento encontrado na estrutura. No nosso exemplo, 
+como os elementos são ponteiros para a estrutura 
+Palavra, a função receberia o ponteiro para cada palavra
+encontrada na tabela.
+
+Uma função genérica para percorrer os elementos da tabela
+de dispersão do nosso exemplo pode ser dada por:
+
+
+void percorre (Hash tab, void (*cb)(Palavra*) )
+{
+
+ int i;
+
+ Palavra* p;
+
+ for (i=0; i<NTAB; i++) {
+
+ for (p=tab[i]; p!=NULL; p=p->prox)
+
+ cb(p);
+
+ }
+
+}
+
+
+Para ilustrar sua utlização, podemos usar essa função 
+para imprimir os elementos. 
+
+Para tanto, devemos escrever a função que executa a 
+ação de imprimir cada elemento. 
+
+Essa função pode ser dada por:
+
+
+void imprime_elemento (Palavra* p)
+{
+
+ printf("%s = %d\n",p->pal,p->n);
+
+}
+
+Assim, para imprimir os elementos da tabela bastaria chamar
+a função percorre com a ação acima passada como parâmetro.
+
+
+...
+
+percorre(tab,imprime_elemento);
+
+...
+
+
+Essa mesma função percorre pode ser usada para, por exemplo,
+contar o número de elementos que existe armazenado na 
+tabela. A ação associada aqui precisa apenas incrementar um 
+contador do número de vezes que a callback é chamada. Para 
+tanto, devemos usar uma variável global que representa esse 
+contador e fazer a callback incrementar esse contador cada 
+vez que for chamada. 
+
+Nesse caso, o ponteiro do elemento passado como parâmetro
+para a callback não é utilizado, pois o incremento ao 
+contador independe do elemento. 
+
+Assumindo que Total é uma variável global inicializada com 
+o valor zero, a ação para contar o número de elementos é 
+dada simplesmente por:
+
+
+void conta_elemento (Palavra* p)
+{
+
+ Total++;
+
+}
+
+
+Já mencionamos que o uso de variáveis globais deve, sempre 
+que possível, ser evitado, pois seu uso indiscriminado torna
+um programa ilegível e difícil de ser mantido. Para evitar o
+uso de variáveis globais nessas funções callbacks devemos 
+arrumar um meio de transferir, para a função callback, um 
+dado do cliente. 
+
+A função que percorre os elementos não manipula esse dado,
+apenas o transfere para a função callback. 
+
+Como não sabemos a priori o tipo de dado que será necessário,
+definimos a callback recebendo dois parâmetros:
+
+o elemento sendo visitado e um ponteiro genérico (void*).
+O cliente chama a função que percorre os elementos passando
+como parâmetros a função callback e um ponteiro a ser 
+repassado para essa mesma callback.
+
+Vamos exemplificar o uso dessa estratégia re-implementando
+a função que percorre os elementos.
+
+
+void percorre (Hash tab, void (*cb)(Palavra*, void*),
+ void* dado)
+{
+
+ int i;
+
+ Palavra* p;
+
+ for (i=0; i<NTAB; i++) {
+
+ for (p=tab[i]; p!=NULL; p=p->prox)
+
+ cb(p,dado); /* passa para a callback o ponteiro 
+ recebido */
+
+ }
+
+}
+
+
+Agora, podemos usar essa nova versão da função para contar
+o número de elementos, sem usar variável global. Primeiro 
+temos que definir a callback, que, nesse caso, receberá um
+ponteiro para um inteiro que representa o contador.
+
+
+void conta_elemento (Palavra* p, void* dado)
+{
+
+ int *contador = (int*)dado;
+
+ (*contador)++;
+
+}
+
+
+Por fim, uma função que conta o número de elemento, usando
+as funções acima, é mostrada a seguir.
+
+
+int total_elementos (Hash tab)
+{
+
+ int total = 0;
+
+ percorre(tab,conta_elemento,&total);
+
+ return total;
+
+}
+

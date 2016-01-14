@@ -1,0 +1,63 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+53 - CONCEITOS FUNDAMENTAIS: Listas de tipos estruturados
+
+Definição
+
+Estruturas de Dados é a disciplina que estuda as técnicas 
+computacionais para a organização e manipulação eficiente 
+de quaisquer quantidades de informação.
+
+Estruturas de Dados - 2 Aspectos:
+
+Em um projeto de software, 2 aspectos devem ser considerados
+para sua implementação:
+
+De que forma estão organizados os dados, qual a sua estrutura.
+
+Quais procedimentos atuam sobre estes dados, que operações 
+podem ser realizadas sobre eles.
+
+Ao estudar estruturas de dados teremos sempre este par:
+
+Um conjunto estruturado de informações
+
+Uma classe de objetos ou um tipo de dados.
+
+Um conjunto definido de operações sobre estes dados:
+
+Um conjunto de métodos ou funções.
+
+Pilhas usando Vetores
+
+Vetores possuem um espaço limitado para armazenamento 
+de dados.
+
+Necessitamos definir um espaço grande o suficiente para a 
+nossa pilha.
+
+Necessitamos de um indicador de qual elemento do vetor é o
+atual topo da pilha.
+
+Implementação de Pilhas utilizando Programação Estruturada
+
+Implementaremos a Estrutura de Dados Pilha utilizando a 
+técnica da Programação Estruturada.
+
+Progr. Estr.: Inventada por Niklaus Wirth (década 70) 
+Também chamada de "Programação sem GoTo"
+
+Procedimento Didático:
+
+Revisão/introdução da Programação Estruturada
+Modelagem da Pilha e de seus algoritmos usando esta técnica.
+
+Veja mais no site da ufsc
+
+	-Site, http://www.inf.ufsc.br/
+

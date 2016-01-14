@@ -1,0 +1,21 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+88 - CONCEITOS FUNDAMENTAIS: EXERCICIOS
+
+
+1) Faça um programa que utilize as funções de tabelas de 
+dispersão.
+
+2) Faça um programa dotado de ordenação rápida.
+
+3)  Escreva uma função com o protótipo
+
+int igual(ArvGen*a, ArvGen*b);
+
+para testar se duas árvores são iguais.
+

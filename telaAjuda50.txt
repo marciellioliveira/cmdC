@@ -1,0 +1,97 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+50 - CONCEITOS FUNDAMENTAIS: Implementações recursivas
+
+Uma lista pode ser definida de maneira recursiva. 
+
+Podemos dizer que uma lista encadeada é representada por:
+uma lista vazia; ou um elemento seguido de uma 
+(sub-)lista.
+
+Neste caso, o segundo elemento da lista representa o 
+primeiro elemento da sub-lista.
+
+Com base na definição recursiva, podemos implementar as 
+funções de lista recursivamente. 
+
+Por exemplo, a função para imprimir os elementos da lista
+pode ser reescrita da forma ilustrada abaixo:
+
+/* Função imprime recursiva */
+
+void imprime_rec (Lista* l)
+{
+
+ if (vazia(l))
+
+ return;
+
+ /* imprime primeiro elemento */
+
+ printf(“info: %d\n”,l->info);
+
+ /* imprime sub-lista */
+
+ imprime_rec(l->prox);
+
+}
+
+É fácil alterarmos o código acima para obtermos a impressão 
+dos elementos da lista em ordem inversa: basta invertermos
+a ordem das chamadas às funções printf e imprime_rec.
+
+A função para retirar um elemento da lista também pode ser 
+escrita de forma recursiva.
+
+Neste caso, só retiramos um elemento se ele for o primeiro
+da lista (ou da sub-lista). 
+
+Se o elemento que queremos retirar não for o primeiro, 
+chamamos a função recursivamente para retirar o elemento 
+da sub-lista.
+
+/* Função retira recursiva */
+
+Lista* retira_rec (Lista* l, int v)
+{
+
+ if (vazia(l))
+
+ return l; /* lista vazia: retorna valor original */
+
+ /* verifica se elemento a ser retirado é o primeiro */
+
+ if (l->info == v) {
+
+ Lista* t = l; /* temporário para poder liberar */
+
+ l = l->prox;
+
+ free(t);
+
+ }
+ else {
+
+ /* retira de sub-lista */
+
+ l->prox = retira_rec(l->prox,v);
+
+ }
+
+ return l;
+
+}
+
+A função para liberar uma lista também pode ser escrita 
+recursivamente, de forma bastante simples. 
+
+Nessa função, se a lista não for vazia, liberamos primeiro
+a sub-lista e depois liberamos a lista.
+
+		- W. Celes e J. L. Rangel
+

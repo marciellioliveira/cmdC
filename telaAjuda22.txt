@@ -1,0 +1,223 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+22 - CONCEITOS FUNDAMENTAIS: Vetores e Alocação Dinâmica
+
+------------------------------------------------------------
+Vetores
+------------------------------------------------------------
+
+É possível utilizar arrays com várias dimensões.
+
+Exemplo:
+
+float notas[20]; //array de 1 dimensão, conhecido como vetor.
+
+float matriz1[5][5]; //array de 2 dimensões, conhecido como 
+matriz.
+
+Também é possível declarar matrizes com múltiplas dimensões.
+
+int matriz3d [4][4][4]
+
+primeira posição da matriz: 0,0,0
+
+última posição da matriz: 3,3,3
+
+Note que uma matriz desse tamanho tem um consumo de:
+
+4 X 4 X 4 = 64 variáveis
+
+então é necessário um certo cuidado com o consumo excessivo
+ de memória.
+
+Como atribuir um array para outro array?
+Suponha dois vetores.
+
+int v1[5], v2[5];
+
+v1 = v2; //Esta atribuição NÃO É CORRETA!
+Isto não é possível porque o compilador não copia todas as 
+posições do vetor de uma vez.
+
+Então só seria possível copiar posição por posição. 
+
+Além do mais os vetores poderiam ter tamanhos diferentes o que 
+poderia causar problemas no caso de uma atribuição desse tipo.
+
+Inicializando de arrays
+
+Veremos como inicializar arrays de uma dimensão (vetores) e de
+várias dimensões (matrizes).
+
+Como inicializar um vetor com zeros.
+
+É possível usar uma estrutura de repetição for para “zerar” 
+todas as posições do vetor.
+
+#include<stdio.h>
+
+int main(void)
+{
+  int vetor[19],i;
+ 
+  /* Inicializando o vetor com zeros */
+  for (i = 0; i <= 19; i++)
+  {
+     vetor[i] = 0;
+  }
+ 
+  /* Imprimindo os valores do vetor */
+  for (i = 0; i <= 19; i++)
+  {
+     printf ("vetor[%d] = %d\n", i, vetor[i]);
+  }
+ 
+  getch();
+  return 0;
+}
+
+Como podemos ver esta técnica funciona bem e é muito útil 
+especialmente para vetores de muitas posições.
+
+Mas e se os valores atribuídos fossem diferentes?
+
+Neste caso, não poderíamos usar o for pois não há um único 
+valor a ser atribuído e sim vários valores diferentes.
+
+Poderíamos declarar o vetor atribuir valores durante a 
+própria declaraçao assim:
+
+#include<stdio.h>
+
+int main(void)
+{
+  int i,vetor[6] = {7, 55, 5, 4, 76, 89};
+ 
+  /* Imprimindo os valores do vetor */
+  for (i = 0; i <= 5; i++)
+  {
+     printf ("vetor[%d] = %d\n", i, vetor[i]);
+  }
+ 
+  getch();
+  return 0;
+}
+
+------------------------------------------------------------
+Alocação Dinâmica
+------------------------------------------------------------
+
+Na alocação dinâmica podemos alocar espaços durante a execução
+de um programa, ou seja, a alocação dinâmica é feita em tempo 
+de execução. Isto é bem interessante do ponto de vista do 
+programador, pois permite que o espaço em memória seja 
+alocado apenas quando necessário. Além disso, a alocação 
+dinâmica permite aumentar ou até diminuir a quantidade de
+memória alocada.
+ 
+sizeof
+ 
+A função sizeof determina o número de bytes para um 
+determinado tipo de dados.
+
+É interessante notar que o número de bytes reservados pode 
+variar de acordo com o compilador utilizado.
+ 
+Exemplo:
+
+x = sizeof(int); //retorna 4 no gcc
+
+malloc
+A função malloc aloca um espaço de memória e retorna um 
+ponteiro do tipo void para o início do espaço de memória 
+alocado.
+ 
+free
+A função free libera o espaço de memória alocado.
+ 
+Exemplo: Vetor Dinâmico
+ 
+Quando um programador define tipo e o número de elementos um
+vetor ele está utilizando alocação estática.
+
+Uma alternativa interessante é declarar um vetor como 
+ponteiro, a fim de utilizar alocação dinâmica. Para tanto
+devemos usar a função malloc. 
+
+Porém, esta função necessita saber a quantidade de bytes 
+que devem ser reservados. Para fazer esse cálculo usamos o 
+comando sizeof.
+ 
+Vejamos como implementar esses detalhes no exemplo prático 
+abaixo:
+
+#include <stdio.h>
+#include <stdlib.h> 
+//stdlib - Para usar as funções malloc() e free()
+#include <conio.h>
+ 
+int main(void)
+{
+    float *v; //definindo o ponteiro v
+    int i, num_componentes;    
+     
+    printf("Informe o numero de componentes do vetor\n");
+    scanf("%d", &num_componentes);
+     
+   /* -- Alocando dinamicamente o espaço necessário -- 
+     
+    1 - Calcular o número de bytes necessários
+    primeiramente multiplicamos o número de componentes do 
+	vetor pela quantidade de bytes que é dada pelo comando
+	sizeof, portanto temos: 
+
+             num_componentes * sizeof(float)
+     
+    2 - Reservar a quantidade de memória
+    usamos malloc para reservar essa quantidade de memória,    
+    então temos: 
+          malloc(num_componentes * sizeof(float))
+     
+    3 - Converter o ponteiro para o tipo de dados desejado
+    como a função malloc retorna um ponteiro do tipo void, 
+    precisamos converter esse ponteiro para o tipo da nossa
+	variável, no caso float, por isso usamos o comando de
+	conversão explicita:
+     
+		 (float *)
+     
+    4- juntando tudo e atribuindo em v temos o comando
+	abaixo:*/
+      
+    v = (float *) malloc(num_componentes * sizeof(float));  
+      
+    //Armazenando os dados em um vetor
+    for (i = 0; i < num_componentes; i++)
+    {
+    printf("\nDigite o valor: ", i+1);
+	// O valor digitado para a posicao %d do vetor
+    scanf("%f",&v[i]);
+    }   
+     
+   // -- Percorrendo o vetor e imprimindo os valores
+   printf("\n***** Valores do vetor dinamico *****\n\n");
+    
+   for (i = 0;i < num_componentes; i++)
+   {
+       printf("%.2f\n",v[i]);
+   }       
+    
+   //liberando o espaço de memória alocado 
+   free(v);
+    
+   getch();
+   return 0;
+}    
+
+- Eduardo Casavella, do blog http://linguagemc.com.br/
+

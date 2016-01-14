@@ -1,0 +1,38 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+80 - CONCEITOS FUNDAMENTAIS: Busca
+
+
+A operação de busca é encontrada com muita freqüência em 
+aplicações computacionais, sendo portanto importante estudar
+estratégias distintas para efetuá-la. 
+
+Por exemplo, um programa de controle de estoque pode buscar,
+dado um código numérico ou um nome, a descrição e as 
+características de um determinado produto. 
+
+Se temos um grande número de produtos cadastrados, o método
+para efetuar a busca deve ser eficiente, caso contrário a busca
+pode ser muito demorada, inviabilizando sua utilização.
+
+Neste capítulo, estudaremos algumas estratégias de busca. 
+Inicialmente, consideraremos que temos nossos dados 
+armazenados em um vetor e discutiremos os algoritmos de
+busca que podemos empregar. 
+
+A seguir, discutiremos a utilização de árvores binárias de
+busca, que são estruturas de árvores projetadas para darem 
+suporte a operações de busca de forma eficiente. 
+
+No próximo capítulo, discutiremos as estruturas conhecidas 
+como tabelas de dispersão (hash) que podem, como veremos, 
+realizar buscas de forma extremamente eficiente, fazendo 
+uso de espaço de memória adicional.
+
+		W. Celes e J. L. Rangel
+

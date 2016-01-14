@@ -1,0 +1,30 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+14 - CONCEITOS FUNDAMENTAIS: Funçoes
+
+As funções dividem grandes tarefas de computação em tarefas 
+menores. Os programas em C geralmente consistem de várias 
+pequenas funções em vez de poucas de maior tamanho. 
+
+A criação de funções evita a repetição de código, de modo 
+que um procedimento que é repetido deve ser transformado 
+numa função que, então, será chamada diversas vezes. 
+
+Um programa bem estruturado deve ser pensado em termos de 
+funções, e estas, por sua vez, podem (e devem, se possível)
+esconder do corpo principal do programa detalhes ou
+particularidades de implementação. 
+
+Em C, tudo é feito através de funções. Os exemplos anteriores
+utilizam as funções da biblioteca padrão para realizar entrada
+e saída. 
+
+Neste capítulo, discutiremos a codificação de nossas 
+próprias funções.
+
+		- W. Celes e J. L. Rangel

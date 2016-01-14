@@ -1,0 +1,76 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+84 - CONCEITOS FUNDAMENTAIS: Ideia central
+
+
+A idéia central por trás de uma tabela de dispersão é 
+identificar, na chave de busca, quais as partes 
+significativas. Na PUC-Rio, por exemplo, além do dígito de
+controle, alguns outros dígitos do número de matrícula têm
+significados especiais. 
+
+Numa turma de aluno, é comum existirem vários alunos com o
+mesmo ano e período de ingresso. 
+
+Portanto, esses três primeiros dígitos não são bons candidatos
+para identificar individualmente cada aluno.
+
+Reduzimos nosso problema para uma chave com os quatro 
+dígitos seqüenciais. 
+
+Podemos ir além e constatar que os números seqüenciais mais 
+significativos são os últimos, pois num universo de uma 
+turma de alunos, o dígito que representa a unidade varia 
+mais do que o dígito que representa o milhar.
+
+Desta forma, podemos usar um número de matrícula parcial, 
+de acordo com a dimensão que queremos que tenha nossa 
+tabela (ou nosso vetor). 
+
+Por exemplo, para dimensionarmos nossa tabela com apenas 
+100 elementos, podemos usar apenas os últimos dois dígitos
+seqüenciais do número de matrícula.
+
+A tabela pode então ser declarada por:
+
+Aluno* tab[100].
+
+Para acessarmos o nome do aluno cujo número de matrícula é
+dado por mat, usamos como índice da tabela apenas os dois
+últimos dígitos. 
+
+Isso pode ser conseguido aplicando-se o operador modulo 
+(%): vet[mat%100]->nome.
+
+Desta forma, o uso de memória excedente é pequeno e o 
+acesso a um determinado aluno, a partir do número de 
+matrícula, continua imediato. 
+
+O problema que surge é que provavelmente existirão dois 
+ou mais alunos da turma que apresentarão os mesmos últimos
+dois dígitos no número de matrícula. 
+
+Dizemos que há uma colisão, pois alunos diferentes são 
+mapeados para o mesmo índice da tabela.
+
+Para que a estrutura funcione de maneira adequada, temos 
+que resolver esse problema, tratando as colisões.
+
+Existem diferentes métodos para tratarmos as colisões em
+tabelas de dispersão. 
+
+No momento, vale salientar que não há como eliminar 
+completamente a ocorrência de colisões em tabelas de 
+dispersão. 
+
+Devemos minimizar as colisões e usar um método que,
+mesmo com colisões, saibamos identificar cada elemento 
+da tabela individualmente.
+
+	-W. Celes e J. L. Rangel
+

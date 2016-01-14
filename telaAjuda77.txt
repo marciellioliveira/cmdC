@@ -1,0 +1,84 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+77 - CONCEITOS FUNDAMENTAIS: Ordenação
+
+
+Em diversas aplicações, os dados devem ser armazenados 
+obedecendo uma determinada ordem. 
+
+Alguns algoritmos podem explorar a ordenação dos dados
+para operar de maneira mais eficiente, do ponto de vista
+de desempenho computacional. 
+
+Para obtermos os dados ordenados, temos basicamente duas 
+alternativas: ou inserimos os elementos na estrutura de 
+dados respeitando a ordenação (dizemos que a ordenação é
+garantida por construção), ou, a partir de um conjunto de
+dados já criado, aplicamos um algoritmo para ordenar seus
+elementos. Neste capítulo, vamos discutir dois algoritmos 
+de ordenação que podem ser empregados em aplicações 
+computacionais.
+
+Devido ao seu uso muito freqüente, é importante ter à 
+disposição algoritmos de ordenação (sorting) eficientes 
+tanto em termos de tempo (devem ser rápidos) como em termos
+de espaço (devem ocupar pouca memória durante a execução).
+
+Vamos descrever os algoritmos de ordenação considerando o
+seguinte cenário:
+
+a entrada é um vetor cujos elementos precisam ser ordenados;
+
+a saída é o mesmo vetor com seus elementos na ordem 
+especificada;
+
+o espaço que pode ser utilizado é apenas o espaço do próprio
+vetor.
+
+Portanto, vamos discutir ordenação de vetores. Como veremos,
+os algoritmos de ordenação podem ser aplicados a qualquer 
+informação, desde que exista uma ordem definida entre os 
+elementos. Podemos, por exemplo, ordenar um vetor de 
+valores inteiros, adotando uma ordem crescente ou 
+decrescente. 
+
+Podemos também aplicar algoritmos de ordenação em vetores que 
+guardam informações mais complexas, por exemplo um vetor que
+guarda os dados relativos a alunos de uma turma, com nome,
+número de matrícula, etc. 
+
+Nesse caso, a ordem entre os elementos tem que ser definida
+usando uma das informações do aluno como chave da ordenação:
+alunos ordenados pelo nome, alunos ordenados pelo número de
+matrícula, etc.
+
+Nos casos em que a informação é complexa, raramente se 
+encontra toda a informação relevante sobre os elementos do
+vetor no próprio vetor; em vez disso, cada componente
+do vetor pode conter apenas um ponteiro para a informação
+propriamente dita, que pode ficar em outra posição na memória.
+
+Assim, a ordenação pode ser feita sem necessidade de mover 
+grandes quantidades de informação, para re-arrumar as 
+componentes do vetor na sua ordem correta. 
+
+Para trocar a ordem entre dois elementos, apenas os ponteiros
+são trocados.
+
+Em muitos casos, devido ao grande volume, a informação pode
+ficar em um arquivo de disco, e o elemento do vetor ser 
+apenas uma referência para a posição da informação nesse 
+arquivo.
+
+Neste capítulo, examinaremos os algoritmos de ordenação 
+conhecidos como “ordenação bolha” (bubble sort) e “ordenação
+rápida” (quick sort), ou, mais precisamente, versões
+simplificadas desses algoritmos.
+
+	W. Celes e J. L. Rangel
+

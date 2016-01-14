@@ -1,0 +1,81 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+32 - CONCEITOS FUNDAMENTAIS: Cadeias de Caracteres
+
+Uma string (ou cadeia de caracteres) na linguagem C é um 
+vetor de caracteres em que o caractere nulo ('\0') é 
+interpretado como fim da parte relevante do vetor.  
+
+Exemplo:
+
+char *s;
+
+s = malloc (10 * sizeof (char));
+
+s[0] = 'A';
+
+s[1] = 'B';
+
+s[2] = 'C';
+
+s[3] = '\0';
+
+s[4] = 'D';
+
+Depois da execução desse fragmento de código, o vetor 
+s[0..3] contém a string ABC.  
+
+O caractere nulo marca o fim dessa string. A porção s[4..9]
+do vetor é ignorada.
+
+Poderíamos tratar strings como um novo tipo-de-dados
+introduzindo a definição
+
+typedef char *string;
+Feito isso, todas as ocorrências de char * poderiam 
+ser trocadas por string.
+
+Comprimento e endereço
+
+O comprimento (= length) de uma string é o seu número de 
+caracteres, sem contar o caractere nulo final.  Uma string é 
+vazia se seu comprimento é zero.
+
+O endereço de uma string é o endereço do seu primeiro 
+caractere, da mesma forma que o endereço de um vetor é o 
+endereço de seu primeiro elemento.
+
+Em discussões informais, é usual confundir uma string com o 
+seu endereço. 
+
+Assim, a expressão considere a string s deve ser entendida como
+considere a string cujo endereço é s.
+
+Strings constantes
+
+Para especificar uma string constante, basta embrulhar uma sequência
+de caracteres num par de aspas duplas. O caractere nulo final fica
+subentendido. Por exemplo, "ABC" é uma string constante e o fragmento
+de código
+
+char *s;
+
+s = "ABC";
+
+é equivalente ao que aparece na introdução desta página (exceto 
+pelo fato de que a string "ABC" ocupa apenas 4 bytes na memória).
+
+O primeiro argumento das funções printf e scanf, é quase sempre uma
+string constante. Por exemplo,
+
+scanf ("%d", &n);
+
+printf ("O valor de n é %d", n);
+
+	-Site, http://www.ime.usp.br/
+

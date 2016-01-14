@@ -1,0 +1,229 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+11 - CONCEITOS FUNDAMENTAIS: Tomada de Decisão
+
+
+***********************************************************
+			Decisões com if
+***********************************************************
+
+
+if é o comando de decisão básico em C. Sua forma pode ser:
+
+	if (expr) {
+
+ 		bloco de comandos 1
+ 		...
+
+	}
+
+			ou
+
+	if ( expr ) {
+
+ 		bloco de comandos 1
+		 ...
+
+	}
+	else {
+
+ 		bloco de comandos 2
+ 		...
+
+	}  
+
+Se expr produzir um valor diferente de 0 (verdadeiro), o 
+bloco de comandos 1 será executado. A inclusão do else 
+requisita a execução do bloco de comandos 2 se a expressão
+produzir o valor 0 (falso). Cada bloco de comandos deve 
+ser delimitado por uma chave aberta e uma chave fechada. 
+Se dentro de um bloco tivermos apenas um comando a ser 
+executado, as chaves podem ser omitidas (na verdade, 
+deixamos de ter um bloco): 
+
+	if ( expr )
+
+		 comando1;
+
+	else
+
+ 		comando2; 
+
+A indentação (recuo de linha) dos comandos é fundamental
+para uma maior clareza do código. O estilo de indentação 
+varia a gosto do programador. Além da forma ilustrada acima,
+outro estilo bastante utilizado por programadores C é: 
+
+	if ( expr )
+	{
+
+		 bloco de comandos 1
+ 		...
+
+	}
+	else
+	{
+
+ 		bloco de comandos 2
+ 		...
+
+	} 
+
+Podemos aninhar comandos if. Um exemplo simples é ilustrado 
+a seguir:
+
+#include <stdio.h>
+int main (void)
+{
+ 	int a, b;
+
+ 	printf("Insira dois numeros inteiros:");
+ 	scanf("%d%d",&a,&b);
+
+ 	if (a%2 == 0)
+
+ 		if (b%2 == 0)
+
+ 		printf("Voce inseriu dois numeros pares!\n");
+
+	return 0;
+}
+
+Primeiramente, notamos que não foi necessário criar blocos 
+( {...} ) porque a cada if está associado apenas um comando.
+ 
+Ao primeiro, associamos o segundo comando if, e ao segundo if 
+associamos o comando que chama a função printf. Assim, o 
+segundo if só será avaliado se o primeiro valor fornecido for 
+par, e a mensagem só será impressa se o segundo valor fornecido
+também for par. Outra construção para este mesmo exemplo 
+simples pode ser:
+
+int main (void)
+{
+ 	int a, b;
+
+ 	printf("Digite dois numeros inteiros:");
+ 	scanf("%d%d",&a,&b);
+
+ 	if ((a%2 == 0) && (b%2 == 0))
+
+ 		printf ( "Voce digitou dois numeros pares!\n");
+
+ 	return 0;
+}
+
+produzindo resultados idênticos.
+
+Devemos, todavia, ter cuidado com o aninhamento de comandos 
+if-else. Para ilustrar,consideremos o exemplo abaixo.
+
+/* temperatura (versao 1 - incorreta) */
+#include <stdio.h>
+int main (void)
+{
+ 	int temp;
+
+ 	printf("Digite a temperatura: ");
+ 	scanf("%d", &temp);
+
+	 if (temp < 30)
+
+ 		if (temp > 20)
+
+ 		printf(" Temperatura agradavel \n");
+
+ 		else
+
+ 		printf(" Temperatura muito quente \n");
+
+return 0;
+}
+
+A idéia deste programa era imprimir a mensagem "Temperatura 
+agradável" se fosse fornecido um valor entre 20 e 30, e 
+imprimir a mensagem "Temperatura muito quente" se fosse fornecido
+um valor maior que 30. No entanto, vamos analisar o caso de ser 
+fornecido o valor 5 para temp. Observando o código do programa, 
+podemos pensar que nenhuma mensagem seria fornecida, pois o 
+primeiro daria resultado verdadeiro e então seria avaliado o 
+segundo if. Neste caso, teríamos um resultado falso e como,
+aparentemente, não há um comando else associado, nada seria 
+impresso. Puro engano. A indentação utilizada pode nos levar a 
+erros de interpretação. O resultado para o valor 5 seria a 
+mensagem "Temperatura muito quente". Isto é, o programa está 
+INCORRETO.
+
+Em C, um else está associado ao último if que não tiver seu 
+próprio else. Para os casos em que a associação entre if e else 
+não está clara, recomendamos a criação explícita de blocos, mesmo 
+contendo um único comando. Reescrevendo o programa, podemos obter
+o efeito desejado. 
+
+/* temperatura (versao 2) */
+
+#include <stdio.h>
+
+int main (void)
+{
+	int temp;
+
+ 	printf ( "Digite a temperatura: " );
+ 	scanf ( "%d", &temp );
+
+ 	if ( temp < 30 )
+ 	{
+
+ 		if ( temp > 20 )
+
+ 		printf ( " Temperatura agradavel \n" );
+
+ 		}
+ 		else
+
+		printf ( " Temperatura muito quente \n" );
+
+ return 0;
+}
+
+Esta regra de associação do else propicia a construção do tipo 
+else-if, sem que se tenha o comando elseif explicitamente na 
+gramática da linguagem. Na verdade, em C, construímos estruturas 
+else-if com if’s aninhados. O exemplo abaixo é válido e funciona 
+como esperado.
+
+/* temperatura (versao 3) */
+#include <stdio.h>
+int main (void)
+{
+ 	int temp;
+
+ 	printf("Digite a temperatura: ");
+ 	scanf("%d", &temp);
+
+ 	if (temp < 10)
+
+ 		printf("Temperatura muito fria \n");
+
+ 		else if (temp < 20)
+
+ 		printf(" Temperatura fria \n");
+
+ 		else if (temp < 30)
+
+		    printf("Temperatura agradavel \n");
+
+		else
+
+ 	 	    printf("Temperatura muito quente \n");
+
+ return 0;
+} 
+
+		- W. Celes e J. L. Rangel
+

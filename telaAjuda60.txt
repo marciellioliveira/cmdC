@@ -1,0 +1,55 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+60 - CONCEITOS FUNDAMENTAIS: Interface do tipo fila
+
+Antes de discutirmos as duas estratégias de implementação, 
+podemos definir a interface disponibilizada pela estrutura, 
+isto é, definir quais operações serão implementadas para
+manipular a fila. Mais uma vez, para simplificar a 
+exposição, consideraremos uma estrutura que armazena valores
+reais. Independente da estratégia de implementação, a
+interface do tipo abstrato que representa uma estrutura de
+fila pode ser composta pelas seguintes operações:
+
+	• criar uma estrutura de fila;
+
+	• inserir um elemento no fim;
+
+	• retirar o elemento do início;
+
+	• verificar se a fila está vazia;
+
+	• liberar a fila.
+
+O arquivo fila.h, que representa a interface do tipo, pode
+conter o seguinte código:
+
+typedef struct fila Fila;
+
+Fila* cria (void);
+
+void insere (Fila* f, float v);
+
+float retira (Fila* f);
+
+int vazia (Fila* f);
+
+void libera (Fila* f);
+
+A função cria aloca dinamicamente a estrutura da fila, 
+inicializa seus campos e retorna seu ponteiro; a função 
+insere adiciona um novo elemento no final da fila e a 
+função
+
+Estruturas de Dados – PUC-Rio 11-2
+
+retira remove o elemento do início; a função vazia informa
+se a fila está ou não vazia; e a função libera destrói a 
+estrutura, liberando toda a memória alocada.
+
+		- W. Celes e J. L. Rangel

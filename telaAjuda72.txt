@@ -1,0 +1,132 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+72 - CONCEITOS FUNDAMENTAIS: Arquivos
+
+Um arquivo em disco representa um elemento de informação do 
+dispositivo de memória secundária. A memória secundária 
+(disco) difere da memória principal em diversos aspectos. 
+
+
+As duas diferenças mais relevantes são: eficiência e 
+persistência. Enquanto o acesso a dados armazenados na 
+memória principal é muito eficiente do ponto de vista de 
+desempenho computacional, o acesso a informações armazenadas
+em disco é, em geral, extremamente ineficiente. 
+
+Para contornar essa situação, os sistemas operacionais 
+trabalham com buffers, que representam áreas da memória
+principal usadas como meio de transferência das informações
+de/para o disco. 
+
+Normalmente, trechos maiores (alguns kbytes) são lidos e 
+armazenados no buffer a cada acesso ao dispositivo.
+
+Desta forma, uma subseqüente leitura de dados do arquivo,
+por exemplo, possivelmente não precisará acessar o disco, 
+pois o dado requisitado pode já se encontrar no buffer.
+
+Os detalhes de como estes acessos se realizam dependem 
+das características do dispositivo e do sistema operacional 
+empregado.
+
+
+A outra grande diferença entre memória principal e 
+secundária (disco) consiste no fato das informações em 
+disco serem persistentes, e em geral são lidas por 
+programas e pessoas diferentes dos que as escreveram,
+o que faz com que seja mais prático atribuir nomes aos
+elementos de informação armazenados do disco (em vez de
+endereços), falando assim em arquivos e diretórios 
+(pastas). 
+
+Cada arquivo é identificado por seu nome e pelo diretório
+onde encontra-se armazenado numa determinada unidade de 
+disco. 
+
+Os nomes dos arquivos são, em geral, compostos pelo nome 
+em si, seguido de uma extensão. 
+
+A extensão pode ser usada para identificar a natureza da 
+informação armazenada no arquivo ou para identificar o
+programa que gerou (e é capaz de interpretar) o arquivo.
+
+Assim, a extensão “.c” é usada para identificar arquivos
+que têm códigos fontes da linguagem C e a extensão “.doc” 
+é, no Windows, usada para identificar arquivos gerados pelo 
+editor Word da Microsoft.
+
+Um arquivo pode ser visto de duas maneiras, na maioria 
+dos sistemas operacionais: em “modo texto”, como um texto
+composto de uma seqüência de caracteres, ou em “modo
+binário”, como uma seqüência de bytes (números binários).
+
+ 
+Podemos optar por salvar (e recuperar) informações em disco
+usando um dos dois modos, texto ou binário. Uma vantagem do 
+arquivo texto é que pode ser lido por uma pessoa e editado 
+com editores de textos convencionais. 
+
+Em contrapartida, com o uso de um arquivo binário é possível
+salvar (e recuperar) grandes quantidades de informação de
+forma bastante eficiente. 
+
+O sistema operacional pode tratar arquivos “texto” de maneira
+diferente da utilizada para tratar arquivos “binários”.
+
+Em casos especiais, pode ser interessante tratar arquivos 
+de um tipo como se fossem do outro, tomando os cuidados 
+apropriados.
+
+
+Para minimizar a dificuldade com que arquivos são manipulados,
+os sistemas operacionais oferecem um conjunto de serviços para
+ler e escrever informações do disco. 
+
+A linguagem C disponibiliza esses serviços para o programador
+através de um conjunto de funções. 
+
+Os principais serviços que nos interessam são:
+
+abertura de arquivos: o sistema operacional encontra o arquivo 
+com o nome dado e prepara o buffer na memória.
+
+leitura do arquivo: o sistema operacional recupera o trecho 
+solicitado do arquivo. Como o buffer contém parte da informação
+do arquivo, parte ou toda a informação solicitada pode vir do
+buffer.
+
+escrita no arquivo: o sistema operacional acrescenta ou altera
+o conteúdo do arquivo. A alteração no conteúdo do arquivo é 
+feita inicialmente no buffer para depois ser transferida para 
+o disco.
+
+fechamento de arquivo: toda a informação constante do buffer é
+atualizada no disco e a área do buffer utilizada na memória é 
+liberada.
+
+
+Uma das informações que é mantida pelo sistema operacional
+é um ponteiro de arquivo (file pointer), que indica a posição 
+de trabalho no arquivo. Para ler um arquivo, este apontador 
+percorre o arquivo, do início até o fim, conforme os dados 
+vão sendo recuperados (lidos) para a memória. 
+
+Para escrever, normalmente, os dados são acrescentados
+quando o apontador se encontra no fim do arquivo.
+
+
+Nas seções subseqüentes, vamos apresentar as funções mais 
+utilizadas em C para acessar arquivos e vamos discutir 
+diferentes estratégias para tratar arquivos. 
+
+Todas as funções da biblioteca padrão de C que manipulam 
+arquivos encontram-se na biblioteca de entrada e saída,
+com interface em stdio.h.
+
+		W. Celes e J. L. Rangel
+

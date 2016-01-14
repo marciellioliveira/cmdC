@@ -1,0 +1,63 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+51 - CONCEITOS FUNDAMENTAIS: Listas circulares
+
+Algumas aplicações necessitam representar conjuntos 
+cíclicos. 
+
+Por exemplo, as arestas que delimitam uma face podem ser 
+agrupadas por uma estrutura circular.
+
+Para esses casos, podemos usar listas circulares.
+
+Numa lista circular, o último elemento tem como próximo o 
+primeiro elemento da lista, formando um ciclo. 
+
+A rigor, neste caso, não faz sentido falarmos em primeiro
+ou último elemento.
+
+A lista pode ser representada por um ponteiro para um 
+elemento inicial qualquer da lista.
+
+Para percorrer os elementos de uma lista circular, 
+visitamos todos os elementos a partir do ponteiro do 
+elemento inicial até alcançarmos novamente esse mesmo 
+elemento. 
+
+O código abaixo exemplifica essa forma de percorrer os 
+elementos. Neste caso, para simplificar, consideramos uma 
+lista que armazena valores inteiros.
+
+Devemos salientar que o caso em que a lista é vazia ainda 
+deve ser tratado (se a lista é vazia, o ponteiro para um
+elemento inicial vale NULL).
+
+void imprime_circular (Lista* l)
+{
+
+ Lista* p = l; /* faz p apontar para o nó inicial */
+
+ /* testa se lista não é vazia */
+
+ if (p) {
+
+ {
+
+ /* percorre os elementos até alcançar novamente o início */
+
+ do {
+
+ printf("%d\n", p->info); /* imprime informação do nó */
+
+ p = p->prox; /* avança para o próximo nó */
+
+ } while (p != l);
+
+}
+
+		- W. Celes e J. L. Rangel

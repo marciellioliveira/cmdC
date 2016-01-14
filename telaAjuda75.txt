@@ -1,0 +1,553 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+75 - CONCEITOS FUNDAMENTAIS: Estruturação de dados em arquivos 
+texto
+
+
+Existem diferentes formas para estruturarmos os dados em 
+arquivos em modo texto, e diferentes formas de capturarmos
+as informações contidas neles. 
+
+A forma de estruturar e a forma de tratar as informações 
+dependem da aplicação. 
+
+A seguir, apresentaremos três formas de representarmos e 
+acessarmos dados armazenados em arquivos: caractere a
+caractere, linha a linha, e usando palavras chaves.
+
+
+************************************************************
+	ACESSO CARACTERE A CARACTERE
+************************************************************
+
+
+Para exemplificar o acesso caractere a caractere, vamos 
+discutir duas aplicações simples. 
+
+Inicialmente, vamos considerar o desenvolvimento de um 
+programa que conta as linhas de um determinado arquivo 
+(para simplificar, vamos supor um arquivo fixo, com o
+nome “entrada.txt”).
+
+Para calcular o número de linhas do arquivo, podemos ler,
+caractere a caractere, todo o conteúdo do arquivo, 
+contando o número de ocorrências do caractere que indica 
+mudança de linha, isto é, o número de ocorrências do 
+caractere '\n'.
+
+
+/* Conta número de linhas de um arquivo */
+
+#include <stdio.h>
+
+int main (void)
+{
+
+ int c;
+
+ int nlinhas = 0; /* contador do número de linhas */
+
+ FILE *fp;
+
+ /* abre arquivo para leitura */
+
+ fp = fopen("entrada.txt","rt");
+
+ if (fp==NULL) {
+
+ printf("Não foi possivel abrir arquivo.\n");
+
+ return 1;
+
+ }
+
+ /* lê caractere a caractere */
+
+ while ((c = fgetc(fp)) != EOF) {
+
+ if (c == '\n')
+
+ nlinhas++;
+
+ }
+
+ /* fecha arquivo */
+
+ fclose(fp);
+
+ /* exibe resultado na tela */
+
+ printf("Numero de linhas = %d\n", nlinhas);
+
+ return 0;
+
+}
+
+
+Como segundo exemplo, vamos considerar o desenvolvimento de
+um programa que lê o conteúdo do arquivo e cria um arquivo
+com o mesmo conteúdo, mas com todas as letras minúsculas 
+convertidas para maiúsculas. 
+
+Os nomes dos arquivos serão fornecidos, via teclado, pelo 
+usuário. 
+
+Uma possível implementação desse programa é mostrada a
+seguir:
+
+/* Converte arquivo para maiúsculas */
+
+#include <stdio.h>
+
+#include <ctype.h> /* função toupper */
+
+int main (void)
+{
+
+ int c;
+
+ char entrada[121];/*armazena nome do arquivo de entrada*/
+
+ char saida[121]; /* armazena nome do arquivo de saída */
+
+ FILE* e; /* ponteiro do arquivo de entrada */
+
+ FILE* s; /* ponteiro do arquivo de saída */
+
+ /* pede ao usuário os nomes dos arquivos */
+
+ printf("Digite o nome do arquivo de entrada: ");
+ scanf("%120s",entrada);
+
+ printf("Digite o nome do arquivo de saida: ");
+ scanf("%120s",saida);
+
+ /* abre arquivos para leitura e para escrita */
+
+ e = fopen(entrada,"rt");
+
+ if (e == NULL) {
+
+ printf("Não foi possível abrir arquivo de entrada.\n");
+
+ return 1;
+
+ }
+
+ s = fopen(saida,"wt");
+
+ if (s == NULL) {
+
+ printf("Não foi possível abrir arquivo de saida.\n");
+
+ fclose(e);
+
+ return 1;
+
+ }
+
+ /* lê da entrada e escreve na saída */
+
+ while ((c = fgetc(e)) != EOF)
+
+ fputc(toupper(c),s);
+
+ /* fecha arquivos */
+
+ fclose(e);
+
+ fclose(s);
+
+ return 0;
+
+}
+
+
+************************************************************
+	ACESSO LINHA A LINHA
+************************************************************
+
+
+Em diversas aplicações, é mais adequado tratar o conteúdo do
+arquivo linha a linha. 
+
+Um caso simples que podemos mostrar consiste em procurar a 
+ocorrência de uma sub-cadeia de caracteres dentro de um 
+arquivo (análogo a o que é feito pelo utilitário grep dos 
+sistemas Unix). 
+
+Se a sub-cadeia for encontrada, apresentamos como saída 
+o número da linha da primeira ocorrência.
+
+Para implementar esse programa, vamos utilizar a função 
+strstr, que procura a ocorrência de uma sub-cadeia numa 
+cadeia de caracteres maior.
+
+A função retorna o endereço da primeira ocorrência ou 
+NULL, se a sub-cadeia não for encontrada. O protótipo 
+dessa função é:
+
+char* strstr (char* s, char* sub);
+
+A nossa implementação consistirá em ler, linha a linha, o 
+conteúdo do arquivo, contanto o número da linha. 
+
+Para cada linha, verificamos se a ocorrência da sub-cadeia,
+interrompendo a leitura em caso afirmativo.
+
+/* Procura ocorrência de sub-cadeia no arquivo */
+
+#include <stdio.h>
+
+#include <string.h> /* função strstr */
+
+int main (void)
+{
+
+ int n = 0; /* número da linha corrente */
+
+ int achou = 0; /* indica se achou sub-cadeia */
+
+ char entrada[121]; /*armazena nome do arquivo de 
+entrada*/
+
+ char subcadeia[121]; /* armazena sub-cadeia */
+
+ char linha[121]; /* armazena cada linha do arquivo */
+
+ FILE* fp; /* ponteiro do arquivo de entrada */
+
+ /* pede ao usuário o nome do arquivo e a sub-cadeia */
+
+ printf("Digite o nome do arquivo de entrada: ");
+ scanf("%120s",entrada);
+
+ printf("Digite a sub-cadeia: ");
+ scanf("%120s",subcadeia);
+
+ /* abre arquivos para leitura */
+
+ fp = fopen(entrada,"rt");
+
+ if (fp == NULL) {
+
+ printf("Não foi possível abrir arquivo de entrada.\n");
+
+ return 1;
+
+ }
+ /* lê linha a linha */
+
+ while (fgets(linha,121,fp) != NULL) {
+
+ n++;
+
+ if (strstr(linha,subcadeia) != NULL) {
+
+ achou = 1;
+
+ break;
+
+ }
+
+ }
+
+ /* fecha arquivo */
+
+ fclose(fp);
+
+ /* exibe saída */
+
+ if (achou)
+
+ printf("Achou na linha %d.\n", n);
+
+ else
+
+ printf("Nao achou.");
+
+ return 0;
+
+}
+
+
+Como segundo exemplo de arquivos manipulados linha a linha, 
+podemos citar o caso em que salvamos os dados com formatação
+por linha. 
+
+Para exemplificar, vamos considerar que queremos salvar as 
+informações da lista de figuras geométricas que discutimos 
+na seção 9.3. 
+
+A lista continha retângulos, triângulos e círculos.
+
+
+Para salvar essas informações num arquivo, temos que 
+escolher um formato apropriado, que nos permita 
+posteriormente recuperar a informação salva. 
+
+Para exemplificar um formato válido, vamos adotar uma 
+formatação por linha: em cada linha salvamos um caractere 
+que indica o tipo da figura (r, t ou c), seguido dos 
+parâmetros que definem a figura, base e altura para os 
+retângulos e triângulos ou raio para os círculos. Para
+enriquecer o formato, podemos considerar que as linhas 
+iniciadas com o caractere # representam comentários e devem 
+ser desconsideradas na leitura. Por fim, linhas em branco 
+são permitidas e desprezadas. 
+
+
+Para recuperarmos as informações contidas num arquivo com 
+esse formato, podemos ler do arquivo cada uma das linhas e
+depois ler os dados contidos na linha.
+
+Para tanto, precisamos introduzir uma função adicional muito
+útil. 
+
+Trata-se da função que permite ler dados de uma cadeia de 
+caracteres. A função sscanf é similar às funções scanf e
+fscanf, mas captura os valores armazenados numa string.
+ 
+O protótipo dessa função é:
+
+int sscanf (char* s, char* formato, ...);
+
+A primeira cadeia de caracteres passada como parâmetro
+representa a string da qual os dados serão lidos. Com essa
+função, é possível ler uma linha de um arquivo e depois ler
+as informações contidas na linha. (Analogamente, existe a 
+função sprintf que permite escrever dados formatados numa 
+string.)
+
+Faremos a interpretação do arquivo da seguinte forma: para 
+cada linha lida do arquivo, tentaremos ler do conteúdo da 
+linha um caractere (desprezando eventuais caracteres brancos
+iniciais) seguido de dois números reais.
+
+Se nenhum dado for lido com sucesso, significa que temos 
+uma linha vazia e devemos desprezá-la. Se pelo menos um 
+dado (no caso, o caractere) for lido com sucesso, podemos
+interpretar o tipo da figura geométrica armazenada na 
+linha, ou detectar a ocorrência de um comentário. 
+
+Se for um retângulo ou um triângulo, os dois valores reais 
+também deverão ter sido lidos com sucesso. Se for um círculo,
+apenas um valor real deverá ter sido lido com sucesso. 
+
+O fragmento de código abaixo ilustra essa implementação. 
+
+Supõe-se que fp representa um ponteiro para um arquivo
+com formato válido aberto para leitura, em modo texto.
+
+ char c;
+
+ float v1, v2;
+
+ FILE* fp;
+
+ char linha[121];
+
+ ...
+
+ while (fgets(linha,121,fp)) {
+
+ int n = sscanf(linha," %c %f %f",&c,&v1,&v2);
+
+ if (n>0) {
+
+ switch(c) {
+
+ case '#':
+
+ /* desprezar linha de comentário */
+
+ break;
+
+ case 'r':
+
+ if (n!=3) {
+
+ /* tratar erro de formato do arquivo */
+
+...
+
+ }
+
+ else {
+
+ /* interpretar retângulo: base = v1, altura = v2 */
+
+ ...
+
+ }
+
+ break;
+
+ case 't':
+
+ if (n!=3) {
+
+ /* tratar erro de formato do arquivo */
+
+ ...
+
+ }
+
+ else {
+
+ /* interpretar triângulo: base = v1, altura = v2 */
+
+ ...
+
+ }
+
+ break;
+
+ case 'c':
+
+ if (n!=2) {
+
+ /* tratar erro de formato do arquivo */
+
+ ...
+
+ }
+
+ else {
+
+ /* interpretar círculo: raio = v1 */
+
+ ...
+
+ }
+
+ break;
+
+ default:
+
+ /* tratar erro de formato do arquivo */
+
+ ...
+
+ break;
+
+ }
+
+ }
+
+ }
+
+ ...
+
+A rigor, para o formato descrito, não precisávamos fazer a 
+interpretação do arquivo linha a linha. 
+
+O arquivo poderia ter sido interpretado capturando-se 
+inicialmente um caractere que então indicaria qual a próxima
+informação a ser lida. 
+
+No entanto, em algumas situações a interpretação linha a 
+linha ilustrada acima é a única forma possível.
+
+Para exemplificar, vamos considerar um arquivo que 
+representa um conjunto de pontos no espaço 3D. 
+
+Esses pontos podem ser dados pelas suas três coordenadas 
+x, y e z. 
+
+Um formato bastante flexível para esse arquivo considera que
+cada ponto é dado em uma linha e permite a omissão da 
+terceira coordenada, se essa for igual a zero. 
+
+Dessa forma, o formato atende também a descrição de pontos 
+no espaço 2D.
+
+Um exemplo desse formato é ilustrado abaixo:
+
+2.3 4.5 6.0
+
+1.2 10.4
+
+7.4 1.3 9.6
+
+...
+
+Para interpretar esse formato, devemos ler cada uma das linhas
+e tentar ler três valores reais de cada linha (aceitando o caso 
+de apenas dois valores serem lidos com sucesso).
+
+
+************************************************************
+	ACESSO VIA PALAVRAS CHAVE
+************************************************************
+
+
+Quando os objetos num arquivo têm descrições de tamanhos 
+variados, é comum adotarmos uma formatação com o uso de 
+palavras chaves. 
+
+Cada objeto é precedido por uma palavra chave que o 
+identifica. 
+
+A interpretação desse tipo de arquivo pode ser feita 
+lendo-se as palavras chaves e interpretando a descrição 
+do objeto correspondente. 
+
+Para ilustrar, vamos considerar que, além de retângulos, 
+triângulos e círculos, também temos polígonos quaisquer 
+no nosso conjunto de figuras geométricas. 
+
+Cada polígono pode ser descrito pelo número de vértices 
+que o compõe, seguido das respectivas coordenadas desses
+vértices. 
+
+O fragmento de código a seguir ilustra a interpretação 
+desse formato, onde fp representa o ponteiro para o 
+arquivo aberto para leitura.
+
+ ...
+
+ FILE* fp;
+
+ char palavra[121];
+
+ ...
+
+ while (fscanf(fp,"%120s",palavra) == 1)
+ {
+
+ if (strcmp(palavra,"RETANGULO")==0) {
+
+ /* interpreta retângulo */
+
+ }
+ else if (strcmp(palavra,"TRIANGULO")==0) {
+
+ /* interpreta triângulo */
+
+ }
+ else if (strcmp(palavra,"CIRCULO")==0) {
+
+ /* interpreta círculo */
+
+ }
+ else if (strcmp(palavra,"POLIGONO")==0) {
+
+ /* interpreta polígono */
+
+ }
+ else {
+
+ /* trata erro de formato */
+
+ }
+
+ }
+
+	W. Celes e J. L. Rangel
+

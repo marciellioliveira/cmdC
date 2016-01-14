@@ -1,0 +1,61 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+42 - CONCEITOS FUNDAMENTAIS: Tipo união
+
+Em C, uma união é uma localização de memória que é 
+compartilhada por diferentes variáveis, que podem ser de 
+tipos diferentes. 
+
+As uniões são usadas quando queremos armazenar valores 
+heterogêneos num mesmo espaço de memória.
+
+A definição de uma união é parecida com a de uma estrutura:
+
+union exemplo
+{
+
+ int i;
+
+ char c;
+
+} 
+
+Análogo à estrutura, este fragmento de código não declara 
+nenhuma variável, apenas define o tipo união.
+
+Após uma definição, podemos declarar variáveis do tipo união:
+
+union exemplo v;
+
+Na variável v, os campos i e c compartilham o mesmo espaço
+de memória.
+
+A variável ocupa pelo menos o espaço necessário para 
+armazenar o maior de seus campos (um inteiro, no caso).
+
+O acesso aos campos de uma união é análogo ao acesso a 
+campos de uma estrutura.
+
+Usamos o operador ponto (.) para acessá-los diretamente
+e o operador seta (->) para acessá-los através de um 
+ponteiro da união. 
+
+Assim, dada a declaração acima, podemos escrever:
+
+v.i = 10;
+
+ou
+
+v.c = 'x';
+
+Salientamos, no entanto, que apenas um único elemento de 
+uma união pode estar armazenado num determinado instante,
+pois a atribuição a um campo da união sobrescreve o 
+valor anteriormente atribuído a qualquer outro campo. 
+
+		- W. Celes e J. L. Rangel

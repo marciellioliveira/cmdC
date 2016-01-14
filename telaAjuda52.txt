@@ -1,0 +1,59 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+52 - CONCEITOS FUNDAMENTAIS: Listas duplamente encadeadas
+
+A estrutura de lista encadeada vista nas seções anteriores 
+caracteriza-se por formar um encadeamento simples entre os 
+elementos: cada elemento armazena um ponteiro para o próximo 
+elemento da lista. 
+
+Desta forma, não temos como percorrer eficientemente os 
+elementos em ordem inversa, isto é, do final para o início 
+da lista. O encadeamento simples também dificulta a retirada
+de um elemento da lista. Mesmo se tivermos o ponteiro do 
+elemento que desejamos retirar, temos que percorrer a lista,
+elemento por elemento, para encontrarmos o elemento anterior,
+pois, dado um determinado elemento, não temos como acessar
+diretamente seu elemento anterior.
+
+Para solucionar esses problemas, podemos formar o que 
+chamamos de listas duplamente encadeadas. Nelas, cada 
+elemento tem um ponteiro para o próximo elemento e um 
+ponteiro para o elemento anterior. 
+
+Desta forma, dado um elemento, podemos acessar ambos os
+elementos adjacentes: o próximo e o anterior. 
+
+Se tivermos um ponteiro para o último elemento da lista,
+podemos percorrer a lista em ordem inversa, bastando 
+acessar continuamente o elemento anterior, até alcançar
+o primeiro elemento da lista, que não tem elemento anterior
+(o ponteiro do elemento anterior vale NULL).
+
+Para exemplificar a implementação de listas duplamente 
+encadeadas, vamos novamente considerar o exemplo simples 
+no qual queremos armazenar valores inteiros na lista. 
+
+O nó da lista pode ser representado pela estrutura abaixo 
+e a lista pode ser representada através do ponteiro para 
+o primeiro nó.
+
+struct lista2 {
+
+ int info;
+
+ struct lista2* ant;
+
+ struct lista2* prox;
+
+};
+
+typedef struct Lista2 Lista2;
+
+		- W. Celes e J. L. Rangel
+

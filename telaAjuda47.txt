@@ -1,0 +1,45 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+47 - CONCEITOS FUNDAMENTAIS: Tipo abstrato de dados
+
+Geralmente, um módulo agrupa vários tipos e funções com 
+funcionalidades relacionadas, caracterizando assim uma 
+finalidade bem definida. 
+
+Por exemplo, na seção anterior vimos um módulo com funções
+para manipulação de cadeias de caracteres. 
+
+Nos casos em que um módulo define um novo tipo de dado e o
+conjunto de operações para manipular dados desse tipo, 
+falamos que o módulo representa um tipo abstrato de dados 
+(TAD).
+
+Nesse contexto, abstrato significa “esquecida a forma de
+implementação”, ou seja, um TAD é descrito pela finalidade
+do tipo e de suas operações, e não pela forma como está 
+implementado.
+
+Podemos, por exemplo, criar um TAD para representar matrizes
+alocadas dinamicamente. Para isso, criamos um tipo “matriz” e
+uma série de funções que o manipulam. Podemos pensar, por
+exemplo, em funções que acessem e manipulem os valores dos
+elementos da matriz.
+
+Criando um tipo abstrato, podemos “esconder” a estratégia de
+implementação.
+
+Quem usa o tipo abstrato precisa apenas conhecer a 
+funcionalidade que ele implementa, não a forma como ele é
+implementado. 
+
+Isto facilita a manutenção e o re-uso de códigos.
+
+O uso de módulos e TADs são técnicas de programação muito 
+importantes. 
+
+		- W. Celes e J. L. Rangel

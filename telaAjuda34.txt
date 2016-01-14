@@ -1,0 +1,125 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+34 - CONCEITOS FUNDAMENTAIS: Cadeias de Caracteres (String)
+
+Cadeias de caracteres (strings), em C, são representadas por
+vetores do tipo char terminadas, obrigatoriamente, pelo 
+caractere nulo ('\0'). 
+
+Portanto, para armazenarmos uma cadeia de caracteres, devemos
+reservar uma posição adicional para o caractere de fim da 
+cadeia.
+
+Todas as funções que manipulam cadeias de caracteres (e a
+biblioteca padrão de C oferece várias delas) recebem como 
+parâmetro um vetor de char, isto é, um ponteiro para o 
+primeiro elemento do vetor que representa a cadeia, e 
+processam caractere por caractere, até encontrarem o 
+caractere nulo, que sinaliza o final da cadeia.
+
+Por exemplo, o especificador de formato %s da função printf
+permite imprimir uma cadeia de caracteres. A função printf
+então recebe um vetor de char e imprime elemento por 
+elemento, até encontrar o caractere nulo.
+
+O código abaixo ilustra a representação de uma cadeia de 
+caracteres. Como queremos representar a palavra Rio, 
+composta por 3 caracteres, declaramos um vetor com dimensão
+4 (um elemento adicional para armazenarmos o caractere nulo 
+no final da cadeia). O código preenche os elementos do 
+vetor, incluindo o caractere '\0', e imprime a palavra na 
+tela.
+
+int main ( void )
+{
+
+ char cidade[4];
+
+ cidade[0] = 'R';
+
+ cidade[1] = 'i';
+
+ cidade[2] = 'o';
+
+ cidade[3] = '\0';
+
+ printf("%s \n", cidade);
+
+ return 0;
+
+}
+
+Se o caractere '\0' não fosse colocado, a função printf 
+executaria de forma errada, pois não conseguiria 
+identificar o final da cadeia.
+
+Como as cadeias de caracteres são vetores, podemos 
+reescrever o código acima inicializando os valores dos 
+elementos do vetor na declaração:
+
+int main ( void ) 
+{
+
+ char cidade[ ] = {'R', 'i', 'o', '\0'};
+
+ printf("%s \n", cidade);
+
+ return 0;
+
+}
+
+A inicialização de cadeias de caracteres é tão comum em 
+códigos C que a linguagem permite que elas sejam 
+inicializadas escrevendo-se os caracteres entre aspas 
+duplas. 
+
+Neste caso, o caractere nulo é representado implicitamente. 
+O código acima pode ser reescrito da seguinte forma:
+
+int main ( void )
+{
+
+ char cidade[ ] = "Rio";
+
+ printf("%s \n", cidade);
+
+ return 0;
+
+}
+
+A variável cidade é automaticamente dimensionada e 
+inicializada com 4 elementos.
+
+Para ilustrar a declaração e inicialização de cadeias 
+de caracteres, consideremos as declarações abaixo:
+
+char s1[] = "";
+
+char s2[] = "Rio de Janeiro";
+
+char s3[81];
+
+char s4[81] = "Rio";
+
+Nestas declarações, a variável s1 armazena uma cadeia de 
+caracteres vazia, representada por um vetor com um único 
+elemento,  o caractere '\0'. 
+
+A variável s2 representa um vetor com 15 elementos. 
+A variável s3 representa uma cadeia de caracteres capaz 
+de representar cadeias com até 80 caracteres, já que foi
+dimensionada com 81 elementos. 
+
+Esta variável, no entanto, não foi inicializada e seu 
+conteúdo é desconhecido. A variável s4 também foi 
+dimensionada para armazenar cadeias até 80 caracteres,
+mas seus primeiros quatro elementos foram atribuídos 
+na declaração. 
+
+		- W. Celes e J. L. Rangel
+

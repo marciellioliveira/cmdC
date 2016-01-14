@@ -1,0 +1,188 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+46 - CONCEITOS FUNDAMENTAIS: Modulos e Compilação em Separado
+
+Como foi visto no capítulo 1, um programa em C pode ser 
+dividido em vários arquivos fontes (arquivos com extensão 
+.c). 
+
+Quando temos um arquivo com funções que representam 
+apenas parte da implementação de um programa completo, 
+denominamos esse arquivo de módulo. 
+
+Assim, a implementação de um programa pode ser composta 
+por um ou mais módulos.
+
+No caso de um programa composto por vários módulos, cada um
+desses módulos deve ser compilado separadamente, gerando um
+arquivo objeto (geralmente um arquivo com extensão .o ou 
+.obj) para cada módulo. 
+
+Após a compilação de todos os módulos, uma outra ferramenta,
+denominada ligador, é usada para juntar todos os arquivos 
+objeto em um único arquivo executável.
+
+Para programas pequenos, o uso de vários módulos pode não
+se justificar. Mas para programas de médio e grande porte,
+a sua divisão em vários módulos é uma técnica fundamental,
+pois facilita a divisão de uma tarefa maior e mais complexa
+em tarefas menores e, provavelmente, mais fáceis de 
+implementar e de testar. 
+
+Além disso, um módulo com funções C pode ser utilizado para 
+compor vários programas, e assim poupar muito tempo de 
+programação.
+
+Para ilustrar o uso de módulos em C, considere que temos um
+arquivo str.c que contém apenas a implementação das funções
+de manipulação de strings comprimento, copia e concatena 
+vistas no capítulo 6. Considere também que temos um arquivo
+prog1.c com o seguinte código:
+
+#include <stdio.h>
+
+int comprimento (char* str);
+
+void copia (char* dest, char* orig);
+
+void concatena (char* dest, char* orig);
+
+int main (void) {
+
+ char str[101], str1[51], str2[51];
+
+ printf("Entre com uma seqüência de caracteres: ");
+ scanf(" %50[^\n]", str1);
+
+ printf("Entre com outra seqüência de caracteres: ");
+ scanf(" %50[^\n]", str2);
+
+ copia(str, str1);
+
+ concatena(str, str2);
+
+ printf("Comprimento da concatenação: %d\n"
+,comprimento(str));
+
+ return 0;
+
+}
+
+A partir desses dois arquivos fontes, podemos gerar um 
+programa executável compilando cada um dos arquivos 
+separadamente e depois ligando-os em um único arquivo 
+executável. 
+
+Por exemplo, com o compilador Gnu C (gcc) utilizaríamos
+a seguinte seqüência de comandos para gerar o arquivo 
+executável prog1.exe:
+
+> gcc –c str.c
+
+> gcc –c prog1.c
+
+> gcc –o prog1.exe str.o prog1.o
+
+O mesmo arquivo str.c pode ser usado para compor outros 
+programas que queiram utilizar suas funções. 
+
+Para que as funções implementadas em str.c possam ser
+usadas por um outro módulo C, este precisa conhecer os
+cabeçalhos das funções oferecidas por str.c. 
+
+No exemplo anterior, isso foi resolvido pela repetição
+dos cabeçalhos das funções no início do arquivo prog1.c.
+
+Entretanto, para módulos que ofereçam várias funções ou
+que queiram usar funções de muitos outros módulos, essa
+repetição manual pode ficar muito trabalhosa e sensível
+a erros.
+
+Para contornar esse problema, todo módulo de funções C 
+costuma ter associado a ele um arquivo que contém apenas
+os cabeçalhos das funções oferecidas pelo módulo e, 
+eventualmente, os tipos de dados que ele exporte 
+(typedef’s, struct’s, etc).
+
+Esse arquivo de cabeçalhos segue o mesmo nome do módulo 
+ao qual está associado, só que com a extensão .h. 
+
+Assim, poderíamos definir um arquivo str.h para o módulo 
+do exemplo anterior, com o seguinte conteúdo:
+
+/* Funções oferecidas pelo modulo str.c */
+
+/* Função comprimento
+** Retorna o número de caracteres da string passada como 
+parâmetro
+*/
+
+int comprimento (char* str);
+
+/* Função copia
+** Copia os caracteres da string orig (origem) para dest 
+(destino)
+*/
+
+void copia (char* dest, char* orig);
+
+/* Função concatena
+** Concatena a string orig (origem) na string dest 
+(destino)
+*/
+
+void concatena (char* dest, char* orig);
+
+Observe que colocamos vários comentários no arquivo str.h.
+Isso é uma prática muito comum, e tem como finalidade 
+documentar as funções oferecidas por um módulo. 
+
+Esses comentários devem esclarecer qual é o comportamento 
+esperado das funções exportadas por um módulo, facilitando
+o seu uso por outros programadores (ou pelo mesmo
+programador algum tempo depois da criação do módulo).
+
+Agora, ao invés de repetir manualmente os cabeçalhos dessas
+funções, todo módulo que quiser usar as funções de str.c 
+precisa apenas incluir o arquivo str.h. No exemplo anterior,
+o módulo prog1.c poderia ser simplificado da seguinte forma:
+
+#include <stdio.h>
+
+#include "str.h"
+
+int main (void) {
+
+ char str[101], str1[51], str2[51];
+
+ printf("Entre com uma seqüência de caracteres: ");
+ scanf(" %50[^\n]", str1);
+
+ printf("Entre com outra seqüência de caracteres: ");
+ scanf(" %50[^\n]", str2);
+
+ copia(str, str1);
+
+ concatena(str, str2);
+
+ printf("Comprimento da concatenação: %d\n"
+,comprimento(str));
+
+ return 0;
+
+}
+
+Note que os arquivos de cabeçalhos das funções da biblioteca
+padrão do C (que acompanham seu compilador) são incluídos da
+forma #include <arquivo.h>, enquanto que os arquivos de 
+cabeçalhos dos seus módulos são geralmente incluídos da
+forma #include "arquivo.h". O uso dos delimitadores < > e 
+" " indica para o compilador onde ele deve procurar esses
+arquivos de cabeçalhos durante a compilação.
+
+		- W. Celes e J. L. Rangel

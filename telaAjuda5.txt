@@ -1,0 +1,46 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+5 - CONCEITOS FUNDAMENTAIS: Ciclo de Desenvolvimento
+
+
+Programas como editores, compiladores e ligadores são às
+vezes chamados de “ferramentas”, usadas na “Engenharia” de 
+Software. Exceto no caso de programas muito pequenos (como 
+é o caso de nosso exemplo), é raro que um programa seja 
+composto de um único arquivo fonte. 
+
+Normalmente, para facilitar o projeto, os programas são
+divididos em vários arquivos. Como vimos, cada um desses
+arquivos pode ser compilado em separado, mas para sua 
+execução é necessário reunir os códigos de todos eles,
+sem esquecer das bibliotecas necessárias, e esta é a
+função do ligador.
+
+A tarefa das bibliotecas é permitir que funções de 
+interesse geral estejam disponíveis com facilidade.
+
+Nosso exemplo usa a biblioteca de entrada/saída 
+padrão do C, stdio, que oferece funções que permitem
+a captura de dados a partir do teclado e a saída de
+dados para a tela. 
+
+Além de bibliotecas preparadas pelo fornecedor do 
+compilador, ou por outros fornecedores de software,
+podemos ter bibliotecas preparadas por um usuário 
+qualquer, que pode “empacotar” funções com utilidades
+relacionadas em uma biblioteca e, dessa maneira, 
+facilitar seu uso em outros programas.
+
+Em alguns casos, a função do ligador é executada pelo 
+próprio compilador. Por exemplo, quando compilamos o 
+primeiro programa prog.c, o ligador foi chamado 
+automaticamente para reunir o código do programa aos 
+códigos de scanf, printf e de outras funções
+necessárias à execução independente do programa.
+
+		- W. Celes e J. L. Rangel

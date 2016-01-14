@@ -1,0 +1,100 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+4 - CONCEITOS FUNDAMENTAIS: Exemplo de Código em C
+
+
+Para exemplificar códigos escritos em C, consideremos um 
+programa que tem a finalidade de converter valores de 
+temperatura dados em Celsius para Fahrenheit. Este programa
+define uma função principal que captura um valor de 
+temperatura em Celsius, fornecido via teclado pelo usuário, 
+e exibe como saída a temperatura correspondente em 
+Fahrenheit. Para fazer a conversão, é utilizada uma função 
+auxiliar. O código C deste programa exemplo é mostrado 
+abaixo.
+
+	/* Programa para conversão de temperatura */
+
+	#include <stdio.h>
+	float converte (float c)
+	{
+ 	  float f;
+ 	  f = 1.8*c + 32;
+ 	  return f;
+	}
+
+	int main (void)
+	{
+ 	  float t1;
+ 	  float t2;
+ 	  /* mostra mensagem para usuario */
+ 	  printf("Digite a temperatura em Celsius: ");
+	  /* captura valor entrado via teclado */
+	  scanf("%f",&t1);
+ 	 /* faz a conversao */
+ 	 t2 = converte(t1);
+ 	 /* exibe resultado */
+ 	 printf("A temperatura em Fahrenheit é: %f\n", t2);
+ 	 return 0;
+	}
+
+Um programa em C, em geral, é constituído de diversas 
+pequenas funções, que são independentes entre si – não 
+podemos, por exemplo, definir uma função dentro de outra.
+Dois tipos de ambientes são caracterizados em um código C: 
+O ambiente global, externo às funções, e os ambientes 
+locais, definidos pelas diversas funções (lembrando que os
+ambientes locais são independentes entre si). Podem-se 
+inserir comentários no código fonte, iniciados com /* e 
+finalizados com */, conforme ilustrado acima. Devemos 
+notar também que comandos e declarações em C são terminados 
+pelo caractere ponto-e-vírgula (; ).
+
+Um programa em C tem que, obrigatoriamente, conter a 
+função principal (main). A execução de um programa começa 
+pela função principal (a função main é automaticamente 
+chamada quando o programa é carregado para a memória). As 
+funções auxiliares são chamadas, direta ou indiretamente, 
+a partir da função principal.
+
+Em C, como nas demais linguagens “convencionais”, devemos 
+reservar área de memória para armazenar cada dado. Isto é 
+feito através da declaração de variáveis, na qual informamos 
+o tipo do dado que iremos armazenar naquela posição de 
+memória. Assim, a declaração float t1; , do código mostrado, 
+reserva um espaço de memória para armazenarmos um valor real 
+(ponto flutuante – float). Este espaço de memória é
+referenciado através do símbolo t1. Uma característica 
+fundamental da linguagem C diz respeito ao tempo de vida e à
+visibilidade das variáveis. Uma variável (local) declarada 
+dentro de uma função "vive" enquanto esta função está sendo 
+executada, e nenhuma outra função tem acesso direto a esta 
+variável. Outra característica das variáveis locais é que 
+devem sempre ser explicitamente inicializadas antes de seu 
+uso, caso contrário conterão “lixo”, isto é, valores
+indefinidos.
+
+Como alternativa, é possível definir variáveis que sejam 
+externas às funções, isto é, variáveis globais, que podem 
+ser acessadas pelo nome por qualquer função subseqüente 
+(são “visíveis” em todas as funções que se seguem à sua 
+definição). Além do mais, devido às variáveis externas 
+(ou globais) existirem permanentemente (pelo menos 
+enquanto o programa estiver sendo executado), elas 
+retêm seus valores mesmo quando as funções que as 
+acessam deixam de existir. Embora seja possível definir 
+variáveis globais em qualquer parte do ambiente global 
+(entre quaisquer funções), é prática comum defini-las no 
+início do arquivo-fonte.
+
+Como regra geral, por razões de clareza e estruturação 
+adequada do código, devemos evitar o uso indisciplinado de 
+variáveis globais e resolver os problemas fazendo uso de 
+variáveis locais sempre que possível.
+
+		- W. Celes e J. L. Rangel

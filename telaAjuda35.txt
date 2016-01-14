@@ -1,0 +1,137 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+35 - CONCEITOS FUNDAMENTAIS: Vetor de cadeia de caracteres
+
+Para capturarmos o valor de um caractere simples fornecido 
+pelo usuário via teclado,usamos a função scanf, com o 
+especificador de formato %c.
+
+char a;
+
+...
+
+scanf("%c", &a);
+
+...
+
+Desta forma, se o usuário digitar a letra r, por exemplo, o
+código associado à letra r será armazenado na variável a.
+
+Vale ressaltar que, diferente dos especificadores %d e %f, o
+especificador %c não pula os caracteres brancos2.
+
+Portanto, se o usuário teclar um espaço antes da letra r,
+o código do espaço será capturado e a letra r será capturada
+apenas numa próxima chamada da função scanf. 
+
+Se desejarmos pular todas as ocorrências de caracteres 
+brancos que porventura antecedam o caractere que queremos
+capturar, basta incluir um espaço em branco no formato, 
+antes do especificador.
+
+char a;
+
+...
+
+scanf(" %c", %a); /* o branco no formato pula brancos da 
+entrada */
+
+...
+
+Já mencionamos que o especificador %s pode ser usado na 
+função printf para imprimir uma cadeia de caracteres.
+
+O mesmo especificador pode ser utilizado para capturar 
+cadeias de caracteres na função scanf. 
+
+No entanto, seu uso é muito limitado. O especificador %s
+na função scanf pula os eventuais caracteres brancos e 
+captura a seqüência de caracteres não brancos. 
+
+Consideremos o fragmento de código abaixo:
+
+char cidade[81];
+
+...
+
+scanf("%s", cidade);
+
+...
+
+Devemos notar que não usamos o caractere & na passagem da 
+cadeia para a função, pois a cadeia é um vetor (o nome da 
+variável representa o endereço do primeiro elemento do 
+vetor e a função atribui os valores dos elementos a partir
+desse endereço). 
+
+O uso do especificador de formato %s na leitura é limitado, 
+pois o fragmento de código acima funciona apenas para 
+capturar nomes simples. 
+
+Se o usuário digitar Rio de Janeiro, apenas a palavra Rio 
+será capturada, pois o %s lê somente uma seqüência de 
+caracteres não brancos.
+
+Em geral, queremos ler nomes compostos (nome de pessoas,
+cidades, endereços para correspondência, etc.). 
+
+Para capturarmos estes nomes, podemos usar o 
+especificador de formato %[...], no qual listamos entre
+os colchetes todos os caracteres que aceitaremos na leitura.
+
+Assim, o formato "%[aeiou]" lê seqüências de vogais, isto é,
+a leitura prossegue até que se encontre um caractere que não
+seja uma vogal. 
+
+Se o primeiro caractere entre colchetes for o acento
+circunflexo (^), teremos o efeito inverso (negação). 
+
+Assim, com o formato "%[^aeiou]" a leitura prossegue 
+enquanto uma vogal não for encontrada.
+
+Esta construção permite capturarmos nomes compostos. 
+
+Consideremos o código abaixo:
+
+char cidade[81];
+
+...
+
+scanf(" %[^\n]", cidade);
+
+...
+
+A função scanf agora lê uma seqüência de caracteres até que
+seja encontrado o caractere de mudança de linha ('\n'). 
+
+Em termos práticos, captura-se a linha fornecida pelo usuário
+até que ele tecle “Enter”. 
+
+A inclusão do espaço no formato (antes do sinal %) garante
+que eventuais caracteres brancos que precedam o nome serão 
+pulados.
+
+Para finalizar, devemos salientar que o trecho de código 
+acima é perigoso, pois, se o usuário fornecer uma linha que
+tenha mais de 80 caracteres, estaremos invadindo um espaço
+de memória que não está reservado (o vetor foi dimensionado
+com 81 elementos). 
+
+Para evitar esta possível invasão, podemos limitar o número
+máximo de caracteres que serão capturados.
+
+char cidade[81];
+
+...
+
+scanf(" %80[^\n]", cidade); /* lê no máximo 80 caracteres */
+ 
+...
+
+		- W. Celes e J. L. Rangel
+

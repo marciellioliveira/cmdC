@@ -1,0 +1,19 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+10 - CONCEITOS FUNDAMENTAIS: Controle de Fluxo
+
+
+A linguagem C provê as construções fundamentais de controle 
+de fluxo necessárias para programas bem estruturados: 
+agrupamentos de comandos, tomadas de decisão (if-else),
+laços com teste de encerramento no início (while, for) 
+ou no fim (do-while), e seleção de um dentre um conjunto 
+de possíveis casos (switch).
+
+		
+		- W. Celes e J. L. Rangel

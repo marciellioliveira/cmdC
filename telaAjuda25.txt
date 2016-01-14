@@ -1,0 +1,81 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+25 - CONCEITOS FUNDAMENTAIS: Vetores Locais e Funções
+
+************************************************************
+Vetores
+************************************************************
+
+Vetores são arrays em linguagem C. 
+
+O vetor é uma estrutura de dados indexada, que pode 
+armazenar uma determinada quantidade de valores do mesmo 
+tipo. 
+
+Os dados armazenados em um vetor são chamados de 
+itens do vetor.
+
+************************************************************
+Funções
+************************************************************
+
+Uma função é um pedaço de código que faz alguma tarefa 
+específica e pode ser chamado de qualquer parte do programa
+quantas vezes desejarmos.
+
+Podemos também dizer que funções agrupam operações em um só
+nome que pode ser chamado em qualquer parte do programa. 
+
+Essas operações são então executadas todas as vezes que 
+chamamos o nome da função.
+
+Utilizamos funções para obter:
+
+Clareza do código: separando pedaços de código da função 
+main(), podemos entender mais facilmente o que cada parte
+do código faz. Além disso, para procurarmos por uma certa 
+ação feita pelo programa, basta buscar a função 
+correspondente.
+Isso torna muito mais fácil o ato de procurar por erros.
+
+Reutilização: muitas vezes queremos executar uma certa
+tarefa várias vezes ao longo do programa. Repetir todo o 
+código para essa operação é muito trabalhoso, e torna mais 
+difícil a manutenção do código: se acharmos um erro nesse 
+código, teremos que corrigi-lo em todas as repetições do 
+código. Chamar uma função diversas vezes contorna esses
+dois problemas.
+
+Independência: uma função é relativamente independente do
+código que a chamou. Uma função pode modificar variáveis 
+globais ou ponteiros, mas limitando-se aos dados fornecidos
+pela chamada de função.
+
+A ideia funções é permitir você encapsular várias operações
+em um só escopo que pode ser invocado ou chamado através 
+de um nome.
+
+Assim é possível então chamar a função de várias partes do
+seu programa simplesmente usando o seu nome.
+
+Exemplo:
+
+  #include <stdio.h>
+
+  int main(void) {
+
+   imprime_par(3,4);
+
+   imprime_par(-2,8);
+
+   return 0;
+
+  }
+
+	-Org, wikibooks.
+

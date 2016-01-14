@@ -1,0 +1,85 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+68 - CONCEITOS FUNDAMENTAIS: Estruturas genericas
+
+Como vimos, numa árvore binária o número de filhos dos nós 
+é limitado em no máximo dois.
+
+No caso da árvore genérica, esta restrição não existe. Cada
+nó pode ter um número arbitrário de filhos. Essa estrutura 
+deve ser usada, por exemplo, para representar uma árvore de
+diretórios.
+
+Como veremos, as funções para manipularem uma árvore 
+genérica também serão implementadas de forma recursiva, e 
+serão baseadas na seguinte definição: uma árvore genérica é
+composta por:
+
+um nó raiz; e zero ou mais sub-árvores.
+
+Estritamente, segundo essa definição, uma árvore não pode 
+ser vazia, e a árvore vazia não é sequer mencionada na 
+definição. 
+
+Assim, uma folha de uma árvore não é um nó com sub-árvores
+vazias, como no caso da árvore binária, mas é um nó com zero
+sub-árvores. 
+
+Em qualquer definição recursiva deve haver uma “condição
+de contorno”, que permita a definição de estruturas finitas,
+e, no nosso caso, a definição de uma árvore se encerra nas
+folhas, que são identificadas como sendo nós com zero 
+sub-árvores.
+
+Como as funções que implementaremos nesta seção serão 
+baseadas nessa definição, não será considerado o caso de
+árvores vazias. 
+
+Esta pequena restrição simplifica as implementações recursivas e, 
+em geral, não limita a utilização da estrutura em aplicações reais.
+
+Uma árvore de diretório, por exemplo, nunca é vazia, pois
+sempre existe o diretório base – o diretório raiz.
+
+Como as sub-árvores de um determinado nó formam um conjunto
+linear e são dispostas numa determinada ordem, faz sentido 
+falarmos em primeira sub-árvore (sa1), segunda sub-árvore 
+(sa2), etc.
+
+De forma semelhante ao que foi feito no caso das árvores 
+binárias, podemos representar essas árvores através de 
+notação textual, seguindo o padrão: <raiz sa1 sa2 ...
+san>. Com esta notação, a árvore da Figura 13.7 seria 
+representada por:
+
+a = <a <b <c <d>> <e>> <f> <g <h> <i <j>>>>
+
+Podemos verificar que a representa a árvore do exemplo
+seguindo a seqüência de definição a partir das folhas:
+
+a1 = <d>
+
+a2 = <c a1> = <c <d>>
+
+a3 = <e>
+
+a4 = <b a2 a3> = <b <c <d>> <e>>
+
+a5 = <f>
+
+a6 = <h>
+
+a7 = <j>
+
+a8 = <i a7> = <i <j>>
+
+a9 = <g a6 a8> = <g <h> <i <j>>>
+
+a = <a a4 a5 a9> = <a <b <c <d>> <e>> <f> <g <h> <i <j>>>>
+
+		- W. Celes e J. L. Rangel

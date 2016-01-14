@@ -1,0 +1,53 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+19 - CONCEITOS FUNDAMENTAIS: Variaveis Estaticas
+
+
+Podemos declarar variáveis estáticas dentro de funções. 
+
+Neste caso, as variáveis não são armazenadas na pilha, 
+mas sim numa área de memória estática que existe enquanto
+o programa está sendo executado. Ao contrário das variáveis 
+locais (ou automáticas), que existem apenas enquanto a 
+função à qual elas pertencem estiver sendo executada, as
+estáticas, assim como as globais, continuam existindo mesmo
+antes ou depois de a função ser executada. 
+
+No entanto, uma variável estática declarada dentro de uma
+função só é visível dentro dessa função. Uma utilização
+importante de variáveis estáticas dentro de funções é
+quando se necessita recuperar o valor de uma variável
+atribuída na última vez que a função foi executada.
+
+Para exemplificar a utilização de variáveis estáticas 
+declaradas dentro de funções, consideremos uma função que 
+serve para imprimir números reais. A característica desta
+função é que ela imprime um número por vez, separando-os 
+por espaços em branco e colocando, no máximo, cinco números
+por linha. Com isto, do primeiro ao quinto número são 
+impressos na primeira linha, do sexto ao décimo na segunda,
+e assim por diante.
+
+void imprime ( float a )
+{
+
+ static int n = 1;
+ printf(" %f ", a);
+ if ((n % 5) == 0) printf(" \n ");
+ n++;
+
+}
+
+Se uma variável estática não for explicitamente inicializada 
+na declaração, ela é automaticamente inicializada com zero. 
+
+As variáveis globais também são, por default, inicializadas
+com zero.
+
+		- W. Celes e J. L. Rangel
+

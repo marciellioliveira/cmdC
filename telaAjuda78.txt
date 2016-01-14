@@ -1,0 +1,260 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+78 - CONCEITOS FUNDAMENTAIS: Ordenação bolha
+
+
+O algortimo de “ordenação bolha”, ou “bubble sort”, recebeu
+este nome pela imagem pitoresca usada para descrevê-lo: os
+elementos maiores são mais leves, e sobem como bolhas até 
+suas posições corretas. 
+
+A idéia fundamental é fazer uma série de comparações entre 
+os elementos do vetor.
+
+Quando dois elementos estão fora de ordem, há uma inversão
+e esses dois elementos são trocados de posição, ficando 
+em ordem correta. 
+
+Assim, o primeiro elemento é comparado com o segundo. 
+
+Se uma inversão for encontrada, a troca é feita.
+
+Em seguida, independente se houve ou não troca após a
+primeira comparação, o segundo elemento é comparado com o
+terceiro, e, caso uma inversão seja encontrada, a troca é 
+feita. 
+
+O processo continua até que o penúltimo elemento seja 
+comparado com o último. Com este processo, garante-se que 
+o elemento de maior valor do vetor será levado para a 
+última posição. 
+
+A ordenação continua, posicionando o segundo maior 
+elemento, o terceiro, etc., até que todo o vetor 
+esteja ordenado.
+
+Para exemplificar, vamos considerar que os elementos do 
+vetor que queremos ordenar são valores inteiros. Assim, 
+consideremos a ordenação do seguinte vetor:
+
+25 48 37 12 57 86 33 92
+
+Seguimos os passos indicados:
+
+25 48 37 12 57 86 33 92 25x48
+
+25 48 37 12 57 86 33 92 48x37 troca
+
+25 37 48 12 57 86 33 92 48x12 troca
+
+25 37 12 48 57 86 33 92 48x57
+
+25 37 12 48 57 86 33 92 57x86
+
+25 37 12 48 57 86 33 92 86x33 troca
+
+25 37 12 48 57 33 86 92 86x92
+
+25 37 12 48 57 33 86 92 final da primeira passada
+
+Neste ponto, o maior elemento, 92, já está na sua posição 
+final.
+
+25 37 12 48 57 33 86 92 25x37
+
+25 37 12 48 57 33 86 92 37x12 troca
+
+25 12 37 48 57 33 86 92 37x48
+
+25 12 37 48 57 33 86 92 48x57
+
+25 12 37 48 57 33 86 92 57x33 troca
+
+25 12 37 48 33 57 86 92 57x86
+
+25 12 37 48 33 57 86 92 final da segunda passada
+
+Neste ponto, o segundo maior elemento, 86, já está na sua 
+posição final.
+
+25 12 37 48 33 57 86 92 25x12 troca
+
+12 25 37 48 33 57 86 92 25x37
+
+12 25 37 48 33 57 86 92 37x48
+
+12 25 37 48 33 57 86 92 48x33 troca
+
+12 25 37 33 48 57 86 92 48x57
+
+12 25 37 33 48 57 86 92 final da terceira passada
+
+Idem para 57.
+
+12 25 37 33 48 57 86 92 12x25
+
+12 25 37 33 48 57 86 92 25x37
+
+12 25 37 33 48 57 86 92 37x33 troca
+
+12 25 33 37 48 57 86 92 37x48
+
+12 25 33 37 48 57 86 92 final da quarta passada
+
+Idem para 48.
+
+12 25 33 37 48 57 86 92 12x25
+
+12 25 33 37 48 57 86 92 25x33
+
+12 25 33 37 48 57 86 92 33x37
+
+12 25 33 37 48 57 86 92 final da quinta passada
+
+Idem para 37.
+
+12 25 33 37 48 57 86 92 12x25
+
+12 25 33 37 48 57 86 92 25x33
+
+12 25 33 37 48 57 86 92 final da sexta passada
+
+Idem para 33.
+
+12 25 33 37 48 57 86 92 12x25
+
+12 25 33 37 48 57 86 92 final da sétima passada
+
+Idem para 25 e, consequentemente, 12.
+
+12 25 33 37 48 57 86 92 final da ordenação
+
+A parte sabidamente já ordenada do vetor está sublinhada. 
+
+Na realidade, após a troca de 37x33, o vetor se encontra 
+totalmente ordenado, mas esse fato não é levado em
+consideração por esta versão do algoritmo.
+
+Uma função que implementa esse algoritmo é apresentada a 
+seguir.
+
+A função recebe como parâmetros o número de elementos e
+o ponteiro do primeiro elemento do vetor que se deseja 
+ordenar. 
+
+Vamos considerar o ordenação de um vetor de valores 
+inteiros.
+
+/* Ordenação bolha */
+
+void bolha (int n, int* v)
+{
+
+ int i,j;
+
+ for (i=n-1; i>=1; i--)
+
+ for (j=0; j<i; j++)
+
+ if (v[j]>v[j+1]) { /* troca */
+
+ int temp = v[j];
+
+ v[j] = v[j+1];
+
+ v[j+1] = temp;
+
+ }
+
+}
+
+Uma função cliente para testar esse algoritmo pode ser dada
+por:
+
+/* Testa algoritmo de ordenação bolha */
+
+#include <stdio.h>
+
+int main (void)
+{
+
+ int i;
+
+ int v[8] = {25,48,37,12,57,86,33,92};
+
+ bolha(8,v);
+
+ printf("Vetor ordenado: ");
+
+ for (i=0; i<8; i++)
+
+ printf("%d ",v[i]);
+
+ printf("\n”);
+
+ return 0;
+
+}
+
+Para evitar que o processo continue mesmo depois de o vetor
+estar ordenado, podemos interromper o processo quando houver
+uma passagem inteira sem trocas, usando uma variante do 
+algoritmo apresentado acima:
+
+/* Ordenação bolha (2a. versão) */
+
+void bolha2 (int n, int* v)
+{
+
+ int i, j;
+
+ for (i=n-1; i>0; i--) {
+
+ int troca = 0;
+
+ for (j=0; j<i; j++)
+
+ if (v[j]>v[j+1]) { /* troca */
+
+ int temp = v[j];
+
+ v[j] = v[j+1];
+
+ v[j+1] = temp;
+
+ troca = 1;
+
+ }
+
+ if (troca == 0) /* nao houve troca */
+
+ return;
+
+ }
+
+}
+
+A variável troca guarda o valor 0 (falso) quando uma passada
+do vetor (no for interno) se faz sem nenhuma troca.
+
+O esforço computacional despendido pela ordenação de um 
+vetor por este procedimento é fácil de se determinar, pelo
+número de comparações, que serve também para estimar o
+número máximo de trocas que podem ser realizadas.
+
+Na primeira passada, fazemos n-1 comparações; na segunda,
+n-2; na terceira n-3; e assim por diante. Logo, o tempo 
+total gasto pelo algoritmo é proporcional a 
+(n-1) + (n-2) + ... + 2 + 1.
+
+A soma desses termos é proporcional ao quadrado de
+n. Dizemos que o algoritmo é de ordem quadrática e 
+representamos isso escrevendo O(n2).
+
+	W. Celes e J. L. Rangel
+

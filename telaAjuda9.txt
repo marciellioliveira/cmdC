@@ -1,0 +1,136 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+9 - CONCEITOS FUNDAMENTAIS: Entrada e Saída básicas
+
+
+A linguagem C não possui comandos de entrada e saída do tipo
+READ e WRITE encontrados na linguagem FORTRAN. Tudo em C é 
+feito através de funções, inclusive as operações de entrada 
+e saída. Por isso, já existe em C uma biblioteca padrão que
+possui as funções básicas normalmente necessárias.
+
+Na biblioteca padrão de C, podemos, por exemplo, encontrar 
+funções matemáticas do tipo raiz quadrada, seno, cosseno, 
+etc., funções para a manipulação de cadeias de caracteres e
+funções de entrada e saída. Nesta seção, serão apresentadas
+as duas funções básicas de entrada e saída disponibilizadas
+pela biblioteca padrão.
+
+Para utilizá-las, é necessário incluir o protótipo destas 
+funções no Estruturas de Dados –PUC-Rio 2-9 código.
+Basta saber que é preciso escrever:
+
+	#include <stdio.h>
+
+no início do programa que utiliza as funções da biblioteca
+de entrada e saída.
+
+
+*************************************************************
+		FUNÇÃO PRINTF
+*************************************************************
+
+A função printf possibilita a saída de valores (sejam eles 
+constantes, variáveis ou resultado de expressões) segundo 
+um determinado formato. Informalmente, podemos dizer que 
+a forma da função é:
+
+printf (formato, lista de constantes/variáveis/expressões);
+
+O primeiro parâmetro é uma cadeia de caracteres, em geral
+delimitada com aspas, que especifica o formato de saída 
+das constantes, variáveis e expressões listadas em seguida.
+Para cada valor que se deseja imprimir, deve existir um 
+especificador de formato correspondente na cadeia de 
+caracteres formato. 
+
+Os especificadores de formato variam com o tipo do valor 
+e a precisão em que queremos que eles sejam impressos. 
+Estes especificadores são precedidos pelo caractere % 
+e podem ser, entre outros:
+
+	%c  especifica um char
+	%d  especifica um int
+	%u  especifica um unsigned int
+	%f  especifica um double (ou float)
+	%e  especifica um double (ou float) no formato 
+	científico
+	%g  especifica um double (ou float) no formato mais
+ 	apropriado (%f ou %e)
+	%s  especifica uma cadeia de caracteres
+
+Além dos especificadores de formato, podemos incluir textos 
+no formato, que são mapeados diretamente para a saída. 
+Assim, a saída é formada pela cadeia de caracteres do 
+formato onde os especificadores são substituídos pelos 
+valores correspondentes.
+
+Existem alguns caracteres de escape que são freqüentemente 
+utilizados nos formatos de saída. São eles:
+
+	\n caractere de nova linha
+	\t caractere de tabulação
+	\r caractere de retrocesso
+	\" o caractere "
+	\\ o caractere \
+
+Ainda, se desejarmos ter como saída um caractere %, 
+devemos, dentro do formato, escrever %%.
+
+*************************************************************
+		FUNÇÃO SCANF
+*************************************************************
+
+A função scanf permite capturarmos valores fornecidos via 
+teclado pelo usuário do programa. Informalmente, podemos 
+dizer que sua forma geral é:
+
+	scanf ( formato, endereços das variáveis...);
+
+O formato deve possuir especificadores de tipos similares 
+aos mostrados para a função printf. Para a função scanf, no 
+entanto, existem especificadores diferentes para o tipo
+float e o tipo double:
+
+	%c  especifica um char
+	%d  especifica um int
+	%u  especifica um unsigned int
+	%f,%e,%g especificam um float
+	%lf, %le, %lg especificam um double
+	%s  especifica uma cadeia de caracteres
+
+A principal diferença é que o formato deve ser seguido por 
+uma lista de endereços de variáveis (na função printf 
+passamos os valores de constantes, variáveis e expressões).
+Na seção sobre ponteiros, este assunto será tratado em 
+detalhes. Por ora, basta saber que, para ler um valor e 
+atribuí-lo a uma variável, devemos passar o endereço da 
+variável para a função scanf. O operador & retorna o 
+endereço de uma variável. Assim, para ler uminteiro, 
+devemos ter:
+
+	int n;
+	scanf ("%d", &n);
+
+Para a função scanf, os especificadores %f, %e e %g são 
+equivalentes. Aqui, caracteres
+diferentes dos especificadores no formato servem para 
+cercar a entrada. Por exemplo:
+
+	scanf ("%d:%d", &h, &m);
+
+obriga que os valores (inteiros) fornecidos sejam separados 
+pelo caractere dois pontos (: ).
+Um espaço em branco dentro do formato faz com que sejam 
+"pulados" eventuais brancos da entrada. Os especificadores
+ %d, %f, %e e %g automaticamente pulam os brancos que 
+precederem os valores numéricos a serem capturados. 
+A função scanf retorna o número de campos lidos com sucesso.
+
+
+		- W. Celes e J. L. Rangel

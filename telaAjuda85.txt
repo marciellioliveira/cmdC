@@ -1,0 +1,68 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+85 - CONCEITOS FUNDAMENTAIS: Função de dispersão
+
+
+A função de dispersão (função de hash) mapeia uma chave de 
+busca num índice da tabela. Por exemplo, no caso 
+exemplificado acima, adotamos como função de hash a
+utilização dos dois últimos dígitos do número de matrícula.
+A implementação dessa função recebe como parâmetro de 
+entrada a chave de busca e retorna um índice da tabela. 
+No caso da chave de busca ser um inteiro representando o
+número de matrícula, essa função pode ser dada por:
+
+
+int hash (int mat)
+{
+
+ return (mat%100);
+
+}
+
+
+Podemos generalizar essa função para tabelas de dispersão 
+com dimensão N. Basta avaliar o modulo do número de 
+matrícula por N:
+
+int hash (int mat)
+{
+
+ return (mat%N);
+
+}
+
+
+Uma função de hash deve, sempre que possível, apresentar as
+seguintes propriedades:
+
+Ser eficientemente avaliada: isto é necessário para termos 
+acesso rápido, pois temos que avaliar a função de hash para
+determinarmos a posição onde o elemento se encontra 
+armazenado na tabela.
+
+Espalhar bem as chaves de busca: isto é necessário para 
+minimizarmos as ocorrências de colisões. Como veremos, o 
+tratamento de colisões requer um procedimento adicional para
+encontrarmos o elemento. Se a função de hash resulta em 
+muitas colisões, perdemos o acesso rápido aos elementos. Um
+exemplo de função de hash ruim seria usar, como índice da 
+tabela, os dois dígitos iniciais do número de matrícula – 
+todos os alunos iriam ser mapeados para apenas três ou 
+quatro índices da tabela.
+
+Ainda para minimizarmos o número de colisões, a dimensão da
+tabela deve guardar uma folga em relação ao número de 
+elementos efetivamente armazenados. Como regra empírica, 
+não devemos permitir que a tabela tenha uma taxa de ocupação
+superior a 75%. Uma taxa de 50% em geral traz bons 
+resultados. Uma taxa menor que 25% pode representar um gasto
+excessivo de memória
+
+	-W. Celes e J. L. Rangel
+

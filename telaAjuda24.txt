@@ -1,0 +1,176 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+24 - CONCEITOS FUNDAMENTAIS: Alocação Dinâmica
+
+
+Até aqui, na declaração de um vetor, foi preciso 
+dimensioná-lo. Isto nos obrigava a saber, de antemão, 
+quanto espaço seria necessário, isto é, tínhamos que prever
+o número máximo de elementos no vetor durante a codificação. 
+
+Este pré-dimensionamento do vetor é um fator limitante. Por 
+exemplo, se desenvolvermos um programa para calcular a média 
+e a variância das notas de uma prova, teremos que prever o 
+número máximo de alunos. 
+
+Uma solução é dimensionar o vetor com um número absurdamente
+alto para não termos limitações quando da utilização do 
+programa.
+
+No entanto, isto levaria a um desperdício de memória que é 
+inaceitável em diversas aplicações. Se, por outro lado, formos
+modestos no pré-dimensionamento do vetor, o uso do programa 
+fica muito limitado, pois não conseguiríamos tratar turmas 
+com o número de alunos maior que o previsto.
+
+Felizmente, a linguagem C oferece meios de requisitarmos 
+espaços de memória em tempo de execução. Dizemos que podemos
+alocar memória dinamicamente. 
+
+Com este recurso, nosso programa para o cálculo da média e 
+variância discutido acima pode, em tempo de execução, 
+consultar o número de alunos da turma e então fazer a 
+alocação do vetor dinamicamente, sem desperdício de memória. 
+
+************************************************************
+	FUNÇÕES DA BIBLIOTECA PADRÃO	
+************************************************************
+
+Existem funções, presentes na biblioteca padrão stdlib, que
+permitem alocar e liberar memória dinamicamente. 
+
+A função básica para alocar memória é malloc. Ela recebe como
+parâmetro o número de bytes que se deseja alocar e retorna 
+o endereço inicial da área de memória alocada.
+
+Para exemplificar, vamos considerar a alocação dinâmica de
+um vetor de inteiros com 10 elementos. 
+
+Como a função malloc retorna o endereço da área alocada e,
+neste exemplo, desejamos armazenar valores inteiros nessa
+área, devemos declarar um ponteiro de inteiro para receber
+o endereço inicial do espaço alocado. O trecho de código
+então seria:
+
+int *v;
+v = malloc(10*4);
+
+Após este comando, se a alocação for bem sucedida, v 
+armazenará o endereço inicial de uma área contínua de 
+memória suficiente para armazenar 10 valores inteiros. 
+
+Podemos, então, tratar v como tratamos um vetor 
+declarado estaticamente, pois, se v aponta para o
+inicio da área alocada, podemos dizer que v[0] acessa
+o espaço para o primeiro elemento que armazenaremos, 
+v[1] acessa o segundo, e assim por diante (até v[9]).
+Para ficarmos independentes de compiladores e máquinas,
+usamos o operador sizeof( ).
+
+v = malloc(10*sizeof(int));
+
+Além disso, devemos lembrar que a função malloc é 
+usada para alocar espaço para armazenarmos valores de
+qualquer tipo. Por este motivo, malloc retorna um 
+ponteiro genérico, para um tipo qualquer, representado
+por void*, que pode ser convertido automaticamente pela 
+linguagem para o tipo apropriado na atribuição. No 
+entanto, é comum fazermos a conversão explicitamente,
+utilizando o operador de molde de tipo (cast).
+
+O comando para a alocação do vetor de inteiros fica
+então:
+
+v = (int *) malloc(10*sizeof(int));  
+
+Se, porventura, não houver espaço livre suficiente para 
+realizar a alocação, a função retorna um endereço nulo 
+(representado pelo símbolo NULL, definido em stdlib.h). 
+
+Podemos cercar o erro na alocação do programa verificando o
+valor de retorno da função malloc. Por exemplo, podemos 
+imprimir uma mensagem e abortar o programa com a função exit,
+também definida na stdlib. 
+
+…
+v = (int*) malloc(10*sizeof(int));
+if (v==NULL)
+{
+
+ printf("Memoria insuficiente.\n");
+ exit(1); /* aborta o programa e retorna 1 para o sist. 
+operacional */
+
+}
+…
+
+Para liberar um espaço de memória alocado dinamicamente, 
+usamos a função free. Esta função recebe como parâmetro o 
+ponteiro da memória a ser liberada. Assim, para liberar o
+vetor v, fazemos:
+
+free (v);
+
+Só podemos passar para a função free um endereço de memória
+que tenha sido alocado dinamicamente. Devemos lembrar ainda
+que não podemos acessar o espaço na memória depois que o 
+liberamos.
+
+Para exemplificar o uso da alocação dinâmica, alteraremos o
+programa para o cálculo da média e da variância mostrado 
+anteriormente. Agora, o programa lê o número de valores que 
+serão fornecidos, aloca um vetor dinamicamente e faz os 
+cálculos. 
+
+Somente a função principal precisa ser alterada, pois as 
+funções para calcular a média e a variância anteriormente 
+apresentadas independem do fato de o vetor ter sido alocado 
+estática ou dinamicamente.
+
+/* Cálculo da média e da variância de n reais */
+#include <stdio.h>
+#include <stdlib.h>
+...
+int main ( void )
+{
+
+ int i, n;
+ float *v;
+ float med, var;
+
+ /* leitura do número de valores */
+
+ scanf("%d", &n);
+ /* alocação dinâmica */
+
+ v = (float*) malloc(n*sizeof(float));
+
+ if (v==NULL) {
+
+ printf("Memoria insuficiente.\n”);
+ return 1;
+
+ }
+
+ /* leitura dos valores */
+
+ for (i = 0; i < n; i++)
+
+ scanf("%f", &v[i]);
+
+ med = media(n,v);
+ var = variancia(n,v,med);
+ printf("Media = %f Variancia = %f \n", med, var);
+ /* libera memória */
+ free(v);
+ return 0;
+
+}
+
+		- W. Celes e J. L. Rangel
+

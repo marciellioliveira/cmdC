@@ -1,0 +1,41 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+18 - CONCEITOS FUNDAMENTAIS: Variaveis Globais
+
+São declaradas fora de todos os blocos de funções.
+
+São acessíveis em qualquer parte do programa, ou seja,
+podem ser usadas e modificadas por todas as- outras funções.
+
+Existem durante toda a execução do programa.
+
+Exemplo:
+
+#include <stdio.h>
+
+//declaração de variáveis globais
+
+
+// ---------------- Funçao main()-------------------
+int main(void)
+{        
+  //declaração das variáveis locais da main()
+   
+   return(0);
+}
+// -------------------------------------------------
+
+
+void funcao1(variáveis locais de parâmetros) 
+{
+   // declaração das variáveis locais da função1
+   
+   return;
+}
+
+- Eduardo Casavella, do blog http://linguagemc.com.br/

@@ -1,0 +1,95 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+27 - CONCEITOS FUNDAMENTAIS: Alocação estática versus dinâmica
+
+Antes de tratarmos das construções de matrizes, vamos 
+recapitular alguns conceitos apresentados com vetores.
+
+A forma mais simples de declararmos um vetor de 
+inteiros em C é mostrada a seguir:
+
+int v[10];
+
+ou, se quisermos criar uma constante simbólica para a 
+dimensão:
+
+#define N 10
+int v[N];
+
+Podemos dizer que, nestes casos, os vetores são declarados 
+“estaticamente” 1. A variável que representa o vetor é uma
+constante que armazena o endereço ocupado pelo primeiro
+elemento do vetor. 
+
+Esses vetores podem ser declarados como variáveis globais 
+ou dentro do corpo de uma função. Se declarado dentro do 
+corpo de uma função, o vetor existirá apenas enquanto a 
+função estiver sendo executada, pois o espaço de memória
+para o vetor é reservado na pilha de execução. 
+
+Portanto, não podemos fazer referência ao espaço de memória
+de um vetor local de uma função que já retornou.
+
+O problema de declararmos um vetor estaticamente, seja como
+variável global ou local, é que precisamos saber de antemão
+a dimensão máxima do vetor. Usando alocação dinâmica,
+podemos determinar a dimensão do vetor em tempo de execução:
+
+int* v;
+…
+v = (int*) malloc(n * sizeof(int));
+
+Neste fragmento de código, n representa uma variável com a 
+dimensão do vetor, determinada em tempo de execução (podemos,
+por exemplo, capturar o valor de n fornecido pelo usuário). 
+Após a alocação dinâmica, acessamos os elementos do vetor da
+mesma forma que os elementos de vetores criados 
+estaticamente.
+
+Outra diferença importante: com alocação dinâmica, declaramos
+uma variável do tipo ponteiro que posteriormente recebe o 
+valor do endereço do primeiro elemento do vetor, alocado
+dinamicamente. 
+
+A área de memória ocupada pelo vetor permanece válida até que
+seja explicitamente liberada (através da função free). 
+
+Portanto, mesmo que um vetor seja criado dinamicamente dentro 
+da função, podemos acessá-lo depois da função ser finalizada,
+pois a área de memória ocupada por ele permanece válida, isto é,
+o vetor não está alocado na pilha de execução.
+
+Usamos esta propriedade quando escrevemos a função que duplica
+uma cadeia de caracteres (string): a função duplica aloca um 
+vetor de char dinamicamente, preenche seus valores e retorna 
+o ponteiro, para que a função que chama possa acessar a nova 
+cadeia de caracteres.
+
+A linguagem C oferece ainda um mecanismo para re-alocarmos um
+vetor dinamicamente.
+
+Em tempo de execução, podemos verificar que a dimensão 
+inicialmente escolhida para um vetor tornou-se insuficiente 
+(ou excessivamente grande), necessitando um redimensionamento.
+
+A função realloc da biblioteca padrão nos permite re-alocar um 
+vetor, preservando o conteúdo dos elementos, que permanecem 
+válidos após a re-alocação (no fragmento de código abaixo, m 
+representa a nova dimensão do vetor).
+
+v = (int*) realloc(v, m*sizeof(int));
+
+Vale salientar que, sempre que possível, optamos por trabalhar
+com vetores criados estaticamente. 
+
+Eles tendem a ser mais eficientes, já que os vetores alocados 
+dinamicamente têm uma indireção a mais (primeiro acessa-se o 
+valor do endereço armazenado na variável ponteiro para então 
+acessar o elemento do vetor). 
+
+		- W. Celes e J. L. Rangel

@@ -1,0 +1,76 @@
+﻿------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+1 - CONCEITOS FUNDAMENTAIS
+
+
+
+O curso de Estruturas de Dados discute diversas técnicas de
+programação, apresentando as estruturas de dados básicas 
+utilizadas no desenvolvimento de software. 
+
+O curso também introduz os conceitos básicos da linguagem 
+de programação C, que é utilizada para a implementação das
+estruturas de dados apresentadas. 
+
+A linguagem de programação C tem sido amplamente utilizada 
+na elaboração de programas e sistemas nas diversas áreas em
+que a informática atua, e seu aprendizado tornou-se 
+indispensável tanto para programadores profissionais como 
+para programadores que atuam na área de pesquisa. 
+
+O conhecimento de linguagens de programação por si só não 
+capacita programadores – é necessário saber usá-las de 
+maneira eficiente. 
+
+O projeto de um programa engloba a fase de identificação
+das propriedades dos dados e características funcionais. 
+
+Uma representação adequada dos dados, tendo em vista as
+funcionalidades que devem ser a tendidas, constitui uma
+etapa fundamental para a obtenção de programas eficientes
+e confiáveis.
+
+A linguagem C, assim como as linguagens Fortran e Pascal, 
+são ditas linguagens “convencionais”, projetadas a partir 
+dos elementos fundamentais da arquitetura de Von Neumann, 
+que serve como base para praticamente todos os computadores 
+em uso. 
+
+Para programar em uma linguagem convencional, precisamos de
+alguma maneira especificar as áreas de memória em que os 
+dados com que queremos trabalhar estão armazenados e, 
+freqüentemente, considerar os endereços de memória em que 
+os dados se situam, o que faz com que o processo de 
+programação envolva detalhes adicionais, que podem ser 
+ignorados quando se programa em uma linguagem como Scheme. 
+
+Em compensação, temos um maior controle da máquina quando 
+utilizamos uma linguagem convencional, e podemos fazer 
+programas melhores, ou seja, menores e mais rápidos.
+
+A linguagem C provê as construções fundamentais de fluxo de 
+controle necessárias para programas bem estruturados: 
+
+agrupamentos de comandos; tomadas de decisão (if-else); laços 
+com testes de encerramento no início (while, for) ou no fim 
+(do-while); e seleção de um dentre um conjunto de possíveis 
+casos (switch). C oferece ainda acesso a apontadores e a 
+habilidade de fazer aritmética com endereços. Por outro lado, 
+a linguagem C não provê operações para manipular diretamente 
+objetos compostos, tais como cadeias de caracteres, nem 
+facilidades de entrada e saída: não há comandos READ e WRITE. 
+
+Todos esses mecanismos devem ser fornecidos por funções 
+explicitamente chamadas. Embora a falta de algumas dessas
+facilidades possa parecer uma deficiência grave (deve-se,
+por exemplo, chamar uma função para comparar duas cadeias 
+de caracteres), a manutenção da linguagem em termos modestos
+tem trazido benefícios reais. C é uma linguagem relativamente
+pequena e, no entanto, tornou-se altamente poderosa e eficiente.
+
+		- W. Celes e J. L. Rangel
+

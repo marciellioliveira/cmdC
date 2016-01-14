@@ -1,0 +1,61 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+65 - CONCEITOS FUNDAMENTAIS: Arvores
+
+Nos capítulos anteriores examinamos as estruturas de dados 
+que podem ser chamadas de unidimensionais ou lineares, como
+vetores e listas. 
+
+A importância dessas estruturas é inegável, mas elas não são
+adequadas para representarmos dados que devem ser dispostos
+de maneira hierárquica. 
+
+Por exemplo, os arquivos (documentos) que criamos num 
+computador são armazenados dentro de uma estrutura 
+hierárquica de diretórios (pastas). 
+
+Existe um diretório base dentro do qual podemos armazenar 
+diversos subdiretórios e arquivos.
+
+Por sua vez, dentro dos sub-diretórios, podemos armazenar 
+outros sub-diretórios e arquivos, e assim por diante, 
+recursivamente. 
+
+Árvores são estruturas de dados adequadas para a
+representação de hierarquias. A forma mais natural para 
+definirmos uma estrutura de árvore é usando recursividade.
+Uma árvore é composta por um conjunto de nós.
+
+Existe um nó r, denominado raiz, que contém zero ou mais 
+sub-árvores, cujas raízes são ligadas diretamente a r. 
+
+Esses nós raízes das sub-árvores são ditos filhos do nó pai, r.
+ 
+Nós com filhos são comumente chamados de nós internos e nós
+que não têm filhos são chamados de folhas, ou nós externos.
+ 
+É tradicional desenhar as árvores com a raiz para cima e 
+folhas para baixo, ao contrário do que seria de se esperar. 
+
+Por adotarmos essa forma de representação gráfica, não
+representamos explicitamente a direção dos ponteiros, 
+subentendendo que eles apontam sempre do pai para os filhos.
+
+O número de filhos permitido por nó e as informações 
+armazenadas em cada nó diferenciam os diversos tipos de 
+árvores existentes. Neste capítulo, estudaremos dois tipos
+de árvores. Primeiro, examinaremos as árvores binárias, 
+onde cada nó tem, no máximo, dois filhos.
+
+Depois examinaremos as chamadas árvores genéricas, onde o
+número de filhos é indefinido. Estruturas recursivas serão
+usadas como base para o estudo e a implementação das 
+operações com árvores.
+
+		- W. Celes e J. L. Rangel
+

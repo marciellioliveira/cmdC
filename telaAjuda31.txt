@@ -1,0 +1,38 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+31 - CONCEITOS FUNDAMENTAIS: Representação de Matrizes Simétricas
+
+Em uma matriz simétrica n por n, não há necessidade, no caso
+de i≠j, de armazenar ambos os elementos mat[i][j] e 
+mat[j][i], porque os dois têm o mesmo valor. 
+
+Portanto, basta guardar os valores dos elementos da diagonal
+e de metade dos elementos restantes – por exemplo, os elementos 
+abaixo da diagonal, para os quais i>j. Ou seja, podemos 
+fazer uma economia de espaço usado para alocar a matriz. 
+Em vez de n2 valores, podemos armazenar apenas s elementos,
+sendo s dado por: 
+
+	s = 2 + (n²-n) / 2 = n(n+1) / 2
+
+Podemos também determinar s como sendo a soma de uma 
+progressão aritmética, pois temos que armazenar um elemento 
+da primeira linha, dois elementos da segunda, três da
+terceira, e assim por diante. 
+
+	s = 1+2+...+n = n(n+1) / 2
+
+A implementação deste tipo abstrato também pode ser feita com
+um vetor simples ou um vetor de ponteiros. 
+
+A seguir, discutimos a implementação das operações para
+criar uma matriz e para acessar os elementos, agora para
+um tipo que representa uma matriz simétrica. 
+
+		- W. Celes e J. L. Rangel
+

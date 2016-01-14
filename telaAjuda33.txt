@@ -1,0 +1,104 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+33 - CONCEITOS FUNDAMENTAIS: Caracteres
+
+Efetivamente, a linguagem C não oferece um tipo caractere. 
+Os caracteres são representados por códigos numéricos. 
+
+A linguagem oferece o tipo char, que pode armazenar valores 
+inteiros “pequenos”: um char tem tamanho de 1 byte, 8 bits, 
+e sua versão com sinal pode representar valores que variam 
+de –128 a 127. Como os códigos associados aos caracteres 
+estão dentro desse intervalo, usamos o tipo char para 
+representar caracteres. 
+
+A correspondência entre os caracteres e seus códigos 
+numéricos é feita por uma tabela de códigos. 
+
+Em geral, usa-se a tabela ASCII, mas diferentes máquinas
+podem usar diferentes códigos. Contudo, se desejamos 
+escrever códigos portáteis, isto é, que possam ser 
+compilados e executados em máquinas diferentes, devemos
+evitar o uso explícito dos códigos referentes a uma 
+determinada tabela.
+
+Em C, a diferença entre caracteres e inteiros é feita apenas 
+através da maneira pela qual são tratados. 
+
+Por exemplo, podemos imprimir o mesmo valor de duas formas
+diferentes usando formatos diferentes. Vamos analisar o
+fragmento de código abaixo:
+
+char c = 97;
+printf("%d %c\n",c,c);
+
+Considerando a codificação de caracteres via tabela ASCII, a
+variável c, que foi inicializada com o valor 97, representa 
+o caractere a. 
+
+A função printf imprime o conteúdo da variável c usando 
+dois formatos distintos: com o especificador de formato 
+para inteiro, %d, será impresso o valor do código numérico,
+97; com o formato de caractere, %c, será impresso o caractere
+associado ao código, a letra a.
+
+Conforme mencionamos, devemos evitar o uso explícito de 
+códigos de caracteres. Para tanto, a linguagem C permite a 
+escrita de constantes caracteres. 
+
+Uma constante caractere é escrita envolvendo o caractere com
+aspas simples. Assim, a expressão 'a' representa uma constante
+caractere e resulta no valor numérico associado ao caractere a.
+
+Podemos, então, reescrever o fragmento de código acima sem 
+particularizar a tabela ASCII.
+
+char c = 'a';
+printf("%d %c\n", c, c);
+
+Além de agregar portabilidade e clareza ao código, o uso de 
+constantes caracteres nos livra de conhecermos os códigos 
+associados a cada caractere. 
+
+Independente da tabela de códigos numéricos utilizada,
+garante-se que os dígitos são codificados em seqüência.
+
+Deste modo, se o dígito zero tem código 48, o dígito
+um tem obrigatoriamente código 49, e assim por diante. 
+
+As letras minúsculas e as letras maiúsculas também formam 
+dois grupos de códigos seqüenciais.
+
+O exemplo a seguir tira proveito desta seqüência dos 
+códigos de caracteres.
+
+Exemplo. Suponhamos que queremos escrever uma função para 
+testar se um caractere c é um dígito (um dos caracteres entre
+'0' e '9'). Esta função pode ter o protótipo:
+
+int digito(char c);
+
+e ter como resultado 1 (verdadeiro) se c for um dígito, e 0 
+(falso) se não for.
+
+A implementação desta função pode ser dada por:
+
+int digito(char c)
+{
+
+ if ((c>='0')&&(c<='9'))
+
+	 return 1;
+
+ 	else
+
+ 	return 0;
+
+} 
+
+		- W. Celes e J. L. Rangel

@@ -1,0 +1,268 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+79 - CONCEITOS FUNDAMENTAIS: Ordenação rapida
+
+
+Assim como o algoritmo anterior, o algoritmo “ordenação 
+rápida”, “quick sort”, que iremos discutir agora, procura 
+resolver o problema da ordenação por partes.
+
+No entanto, enquanto o algoritmo de ordenação bolha coloca
+em sua posição (no final do vetor) o maior elemento, a 
+ordenação rápida faz isso com um elemento arbitrário x, 
+chamado de pivô. 
+
+Por exemplo, podemos escolher como pivô o primeiro elemento
+do vetor, e posicionar esse elemento em sua correta posição
+numa primeira passada.
+
+Suponha que este elemento, x, deva ocupar a posição i do 
+vetor, de acordo com a ordenação, ou seja, que essa seja a
+sua posição definitiva no vetor. 
+
+Sem ordenar o vetor completamente, este fato pode ser 
+reconhecido quando todos os elementos v[0], … v[i-1] são
+menores que x, e todos os elementos v[i+1], …, v[n-1] são
+maiores que x. 
+
+Supondo que x já está na sua posição correta, com índice i,
+há dois problemas menores para serem resolvidos: ordenar os 
+(sub-) vetores formados por v[0], … v[i-1] e por v[i+1], 
+…, v[n-1]. Esses sub-problemas são resolvidos 
+(recursivamente) de forma semelhante, cada vez com vetores
+menores, e o processo continua até que os vetores que devem
+ser ordenados tenham zero ou um elementos, caso em que sua
+ordenação já está concluída.
+
+A grande vantagem desse algoritmo é que ele pode ser muito
+eficiente. 
+
+O melhor caso ocorre quando o elemento pivô representa o 
+valor mediano do conjunto dos elementos do vetor.
+
+Se isto acontece, após o posicionamento do pivô em sua 
+posição, restará dois sub-vetores para serem ordenados,
+ambos com o número de elementos reduzido a metade, em relação
+ao vetor original. 
+
+Pode-se mostrar que, neste melhor caso, o esforço computacional
+do algoritmo é proporcional a n log(n), e dizemos que o 
+algoritmo é O(n log(n)). 
+
+Um desempenho muito superior ao O(n2) apresentado pelo algoritmo
+de ordenação bolha. 
+
+Infelizmente, não temos como garantir que o pivô seja o mediano.
+
+ No pior caso, o pivô pode sempre ser, por exemplo, o maior 
+elemento, e recaímos no algoritmo de ordenação bolha. 
+
+No entanto, mostra-se que o algoritmo quicksort ainda apresenta,
+no caso médio, um desempenho O(n log(n)).
+
+A versão do “quicksort” que vamos apresentar aqui usa x=v[0]
+como primeiro elemento a ser colocado em sua posição correta.
+O processo compara os elementos v[1], v[2], … até encontrar
+um elemento v[a]>x. Então, a partir do final do vetor,
+compara os elementos v[n-1], v[n-2], … até encontrar um 
+elemento v[b]<=x.
+
+Neste ponto, v[a] e v[b] são trocados, e a busca continua, 
+para cima a partir de v [ a + 1 ] , e para baixo, a partir 
+de v[b-1]. Em algum momento, a busca termina, porque os 
+pontos de busca se encontrarão. Neste momento, a posição 
+correta de x está definida, e os valores v[0] e v[a] são 
+trocados.
+
+Vamos usar o mesmo exemplo da seção anterior:
+
+(0-7) 25 48 37 12 57 86 33 92
+
+onde indicamos através de (0-7) que se trata do vetor 
+inteiro, de v[0] a v[7]. 
+
+Podemos começar a executar o algoritmo procurando
+determinar a posição correta de x=v[0]=25. Partindo 
+do início do vetor, já temos, na primeira comparação,
+48>25 (a=1). 
+
+Partindo do final do vetor, na direção oposta, temos
+25<92, 25<33, 25<86, 25<57 e finalmente, 12<=25 (b=3).
+
+(0-7) 25 48 37 12 57 86 33 92
+         a↑    b↑
+
+Trocamos então v[a]=48 e v[b]=12, incrementando a de uma 
+unidade edecrementando b de uma unidade. 
+
+Os elementos do vetor ficam com a seguinte disposição:
+
+(0-7) 25 12 37 48 57 86 33 92
+         a,b↑
+
+Na continuação, temos 37>25 (a=2). Pelo outro lado, 
+chegamos também a 37 e temos 37>25 e 12<=25. 
+
+Neste ponto, verificamos que os índices a e b se cruzaram,
+agora com b<a.
+
+(0-7) 25 12 37 48 57 86 33 92
+         b↑ a↑
+
+Assim, todos os elementos de 37 (inclusive) em diante 
+são maiores que 25, e todos os elementos de 12 (inclusive)
+para trás são menores que 25. 
+
+Com exceção do próprio 25, é claro. 
+
+A próxima etapa troca o pivô, v[0]=25, com o último 
+dos valores menores que 25 encontrado: v[b]=12.
+
+Temos:
+
+(0-7)12 25 37 48 57 86 33 92
+
+com 25 em sua posição correta, e dois vetores menores 
+para ordenar. 
+
+Valores menores que 25:
+
+(0-0) 12
+E valores maiores:
+
+(2-7) 37 48 57 86 33 92
+
+Neste caso, em particular, o primeiro vetor (com apenas
+um elemento: (0-0)) já se encontra ordenado. 
+
+O segundo vetor (2-7) pode ser ordenado de forma semelhante:
+
+(2-7) 37 48 57 86 33 92
+
+Devemos decidir qual a posição correta de 37.
+
+Para isso identificamos o primeiro elemento maior que
+37, ou seja, 48, e o último menor que 37, ou seja, 33.
+
+(2-7) 37 48 57 86 33 92
+        a↑       b↑
+
+Trocamos os elementos e atualizamos os índices:
+
+(2-7) 37 33 57 86 48 92
+ a↑ b↑
+
+Continuando o processo, verificamos que
+
+37<57 e 37<86, 37<57, mas 37>=33.
+
+Identificamos novamente que a e b se cruzaram.
+(2-7) 37 33 57 86 48 92
+            b↑ a↑
+
+Assim, a posição correta de 37 é a posição ocupada por
+v[b], e os dois elementos devem ser trocados:
+
+(2-7) 33 37 57 86 48 92
+
+restando os vetores
+(2-2) 33
+
+e
+
+(4-7) 57 86 48 92
+
+para serem ordenados.
+
+O processo continua até que o vetor original esteja 
+totalmente ordenado.
+
+(0-7) 12 25 33 37 48 57 86 92
+
+A implementação do quick sort é normalmente recursiva,
+para facilitar a ordenação dos dois vetores menores 
+encontrados. 
+
+A seguir, apresentamos uma possível implementação do 
+algoritmo, adotando como pivô o primeiro elemento.
+
+/* Ordenação rápida */
+
+void rapida (int n, int* v)
+{
+
+ if (n <= 1)
+
+ return;
+
+ else {
+
+ int x = v[0];
+
+ int a = 1;
+
+ int b = n-1;
+
+ do {
+
+ while (a < n && v[a] <= x) a++;
+
+ while (v[b] > x) b--;
+
+ if (a < b) { /* faz troca */
+
+ int temp = v[a];
+
+ v[a] = v[b];
+
+ v[b] = temp;
+
+ a++; b--;
+
+ }
+
+ } while (a <= b);
+
+ /* troca pivô */
+
+ v[0] = v[b];
+
+ v[b] = x;
+
+ /* ordena sub-vetores restantes */
+
+ rapida(b,v);
+
+ rapida(n-a,&v[a]);
+
+ }
+
+}
+
+Devemos observar que para deslocar o índice a para a 
+direita, fizemos o teste:
+
+while (a < n && v[a] <= x)
+
+enquanto que para deslocar o índice b para a esquerda, 
+fizemos apenas:
+
+while (v[b] > x)
+
+O teste adicional no deslocamento para a direita é 
+necessário porque o pivô pode ser o elemento de maior 
+valor, nunca ocorrendo a situação v[a]<=x, o que nos 
+faria acessar posições além dos limites do vetor.
+
+No deslocamento para a esquerda, um teste adicional 
+tipo b>=0 não é necessário, pois, na nossa implementação, 
+v[0] é o pivô, impedindo que b assuma valores negativos
+(teremos, pelo menos, x>=v[0])
+
+	-W. Celes e J. L. Rangel
+

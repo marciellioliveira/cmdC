@@ -1,0 +1,16 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+6 - CONCEITOS FUNDAMENTAIS: Expressões
+
+
+Em C, uma expressão é uma combinação de variáveis, 
+constantes e operadores que pode ser avaliada 
+computacionalmente, resultando em um valor. 
+O valor resultante é chamado de valor da expressão.
+
+		- W. Celes e J. L. Rangel

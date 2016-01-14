@@ -1,0 +1,19 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+45 - CONCEITOS FUNDAMENTAIS: Tipos abstratos de dados
+
+Neste capítulo, discutiremos uma importante técnica de 
+programação baseada na definição de Tipos Abstratos de Dados
+(TAD).
+
+Veremos também como a linguagem C pode nos ajudar na
+implementação de um TAD, através de alguns de seus 
+mecanismos básicos de modularização (divisão de um programa
+em vários arquivos fontes).
+
+		- W. Celes e J. L. Rangel

@@ -1,0 +1,91 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+13 - CONCEITOS FUNDAMENTAIS: Seleção
+
+Além da construção else-if, C provê um comando (switch) para
+selecionar um dentre um conjunto de possíveis casos. Sua 
+forma geral é:
+
+switch ( expr )
+{
+
+ case op1:
+ 	... /* comandos executados se expr == op1 */
+ break;
+
+ case op2:
+ 	... /* comandos executados se expr == op2 */
+ break;
+
+ case op3:
+ 	... /* comandos executados se expr == op3 */
+ break;
+
+ default:
+ 	... /* executados se expr for diferente de todos */
+ break;
+
+}
+
+opi deve ser um número inteiro ou uma constante caractere. 
+Se expr resultar no valor opi, os comandos que se seguem 
+ao caso opi são executados, até que se encontre um break. 
+
+Se o comando break for omitido, a execução do caso 
+continua com os comandos do caso seguinte. O caso default 
+(nenhum dos outros) pode aparecer em qualquer posição, mas
+normalmente é colocado por último.
+
+Para exemplificar, mostramos a seguir um programa que
+implementa uma calculadora convencional que efetua as 
+quatro operações básicas. Este programa usa constantes
+caracteres, que serão discutidas em detalhe quando 
+apresentarmos cadeias de caracteres em C. 
+
+O importante aqui é entender conceitualmente a construção
+switch.
+
+/* calculadora de quatro operações */
+#include <stdio.h>
+int main (void)
+{
+ float num1, num2;
+ char op;
+
+ 	printf("Digite: numero op numero\n");
+ 	scanf ("%f %c %f", &num1, &op, &num2);
+
+ 	switch (op)
+ {
+ 
+case '+':
+ 	printf(" = %f\n", num1+num2);
+ break;
+
+ case '-':
+ 	printf(" = %f\n", num1-num2);
+ break;
+
+ case '*':
+ 	printf(" = %f\n", num1*num2);
+ break;
+
+ case '/':
+ 	printf(" = %f\n", num1/num2);
+ break;
+
+ default:
+ 	printf("Operador invalido!\n");
+ break;
+
+ }
+ return 0;
+} 
+
+		- W. Celes e J. L. Rangel
+

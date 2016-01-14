@@ -1,0 +1,328 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+86 - CONCEITOS FUNDAMENTAIS: Tratamento de colisão
+
+
+Existem diversas estratégias para tratarmos as eventuais 
+colisões que surgem quando duas ou mais chaves de busca são
+mapeadas para um mesmo índice da tabela de hash.
+
+Vamos apresentar algumas dessas estratégias comumente usadas.
+Para cada uma das estratégias, vamos apresentar as duas 
+principais funções de manipulação de tabelas de dispersão:
+a função que busca um elemento na tabela e a função que
+insere ou modifica um elemento.
+
+Nessas implementações, vamos considerar a existência da 
+função de dispersão que mapeia o número de matrícula num
+índice da tabela, vista na seção anterior.
+
+Em todas as estratégias, a tabela de dispersão em si é
+representada por um vetor de ponteiros para a estrutura
+que representa a informação a ser armazenada, no caso
+Aluno. Podemos definir um tipo que representa a tabela por:
+
+#define N 100
+
+typedef Aluno* Hash[N];
+
+************************************************************
+	USO DA POSIÇÃO CONSECUTIVA LIVRE
+************************************************************
+
+Nas duas primeiras estratégias que discutiremos, os 
+elementos que colidem são armazenados em outros índices,
+ainda não ocupados, da própria tabela. A escolha da
+posição ainda não ocupada para armazenar um elemento que
+colide diferencia as estratégias que iremos discutir. 
+
+Numa primeira estratégia, se a função de dispersão mapeia
+para um índice já ocupado, procuramos o próximo (usando 
+incremento circular) índice livre da tabela para armazenar
+o novo elemento. 
+
+Vale lembrar que uma tabela de dispersão nunca terá todos
+os elementos preenchidos (já mencionamos que uma ocupação
+acima de 75% eleva o número de colisões, descaracterizando
+a idéia central da estrutura). Portanto, podemos garantir
+que sempre existirá uma posição livre na tabela.
+
+Na operação de busca, considerando a existência de uma
+tabela já construída, se uma chave x for mapeada pela 
+função de dispersão (função de hash – h) para um 
+determinado índice h(x), procuramos a ocorrência do 
+elemento a partir desse índice, até que o elemento seja
+encontrado ou que uma posição vazia seja encontrada. Uma
+possível implementação é mostrada a seguir. 
+
+Essa função de busca recebe, além databela, a chave de 
+busca do elemento que se busca, e tem como valor de retorno
+o ponteiro do elemento, se encontrado, ou NULL no caso do
+elemento não estar presente na tabela.
+
+Aluno* busca (Hash tab, int mat)
+{
+
+ int h = hash(mat);
+
+ while (tab[h] != NULL) {
+
+ if (tab[h]->mat == mat)
+
+ return tab[h];
+
+ h = (h+1) % N;
+
+ }
+
+ return NULL;
+
+}
+
+Devemos notar que a existência de algum elemento mapeado 
+para o mesmo índice não garante que o elemento que 
+buscamos esteja presente. 
+
+A partir do índice mapeado, temos que buscar o elemento utilizando,
+como chave de comparação, a real chave de busca, isto é, o número de
+matrícula completo.
+
+A função que insere ou modifica um determinado elemento 
+também é simples. Fazemos o mapeamento da chave de busca 
+(no caso, número de matrícula) através da função de
+dispersão e verificamos se o elemento já existe na tabela. 
+
+Se o elemento existir, modificamos o seu conteúdo; se não
+existir, inserimos um novo na primeira posição que 
+encontrarmos na tabela, a partir do índice mapeado. 
+
+Uma possível implementação dessa função é mostrada a seguir. 
+
+Essa função recebe como parâmetros a tabela e os dados do
+elemento sendo inserido (ou os novos dados de um elemento 
+já existente). 
+
+A função tem como valor de retorno o ponteiro do aluno 
+modificado ou do novo aluno inserido.
+
+
+Aluno* insere (Hash tab, int mat, char* nome, 
+char* email, char turma)
+{
+
+ int h = hash(mat);
+
+ while (tab[h] != NULL) {
+
+ if (tab[h]->mat == mat)
+
+ break;
+
+ h = (h+1) % N;
+
+ }
+ if (tab[h]==NULL) { /* não encontrou o elemento */
+
+ tab[h] = (Aluno*) malloc(sizeof(Aluno));
+
+ tab[h]->mat = mat;
+
+ }
+ /* atribui informação */
+
+ strcpy(tab[h]->nome,nome);
+
+ strcpy(tab[h]->email,email);
+
+ tab[h]->turma = turma;
+
+ return tab[h];
+
+}
+
+Apesar de bastante simples, essa estratégia tende a 
+concentrar os lugares ocupados na tabela, enquanto 
+que o ideal seria dispersar. Uma estratégia que visa
+melhorar essa concentração é conhecida como “dispersão
+dupla” (double hash) e será apresentada a seguir.
+
+
+************************************************************
+	USO DE UMA SEGUNDA FUNÇÃO DE DISPERSÃO
+************************************************************
+
+
+Para evitar a concentração de posições ocupadas na tabela, 
+essa segunda estratégia faz uma variação na forma de 
+procurar uma posição livre a fim armazenar o elemento que
+colidiu. Aqui, usamos uma segunda função de dispersão, h’.
+
+Para chaves de busca dadas por números inteiros, uma possível
+segunda função de dispersão é definida por:
+
+h'(x) = N - 2 - x%(N - 2)
+
+Nesta fórmula, x representa a chave de busca e N a 
+dimensão da tabela. De posse dessa segunda função, 
+procuramos uma posição livre na tabela com incrementos,
+ainda circulares, dados por h’(x).
+
+Isto é, em vez de tentarmos (h(x)+1)%N, tentamos 
+(h(x)+h’(x))%N. Dois cuidados devem ser tomados na escolha
+dessa segunda função de dispersão: primeiro, ela nunca pode
+retornar zero, pois isso não varia com que o índice fosse
+incrementado; segundo, de preferência, ela não pode retornar
+um número divisor da dimensão da tabela, pois isso nos 
+limitaria a procurar uma posição livre num subconjunto 
+restrito dos índices da tabela.
+
+A implementação da função de busca com essa estratégia é 
+uma pequena variação da função de busca apresentada para
+a estratégia anterior.
+
+int hash2 (int mat)
+{
+
+ return N - 2 - mat%(N-2);
+
+}
+
+Aluno* busca (Hash tab, int mat)
+{
+
+ int h = hash(mat);
+
+ int h2 = hash2(mat);
+
+ while (tab[h] != NULL) {
+
+ if (tab[h]->mat == mat)
+
+ return tab[h];
+
+ h = (h+h2) % N;
+
+ }
+
+ return NULL;
+
+}
+
+************************************************************
+	USO DE LISTAS ENCADEADAS
+************************************************************
+
+Uma estratégia diferente, mas ainda simples, consiste em 
+fazer com que cada elemento da tabela hash represente um 
+ponteiro para uma lista encadeada. 
+
+Todos os elementos mapeados para um mesmo índice seriam 
+armazenados na lista encadeada. 
+
+Com essa estratégia, cada elemento armazenado na tabela será
+um elemento de uma lista encadeada. Portanto, devemos prever,
+na estrutura da informação, um ponteiro adicional para o
+próximo elemento da lista. Nossa estrutura de aluno passa a
+ser dada por:
+
+struct aluno {
+
+ int mat;
+
+ char nome[81];
+
+ char turma;
+
+ char email[41];
+
+ struct aluno* prox; /*encadeamento na lista de colisão*/
+
+};
+
+typedef struct aluno Aluno;
+
+Na operação de busca, procuramos a ocorrência do elemento na
+lista representada no índice mapeado pela função de dispersão.
+Uma possível implementação é mostrada a seguir.
+
+Aluno* busca (Hash tab, int mat)
+{
+
+ int h = hash(mat);
+
+ Aluno* a = tab[h];
+
+ while (a != NULL) {
+
+ if (a->mat == mat)
+
+ return a;
+
+ a = a->prox;
+
+ }
+
+ return NULL;
+
+}
+
+A função que insere ou modifica um determinado elemento também
+é simples e pode ser dada por:
+
+Aluno* insere (Hash tab, int mat, char* nome, char turma)
+{
+
+ int h = hash(mat);
+
+ Aluno* p = NULL; /* ponteiro para anterior */
+
+ Aluno* a = tab[h];
+
+ while (a != NULL) {
+
+ if (a->mat == mat)
+
+ break;
+
+ p = a;
+
+ a = a->prox;
+
+ }
+
+ if (a==NULL) { /* não encontrou o elemento */
+
+ a = (Aluno*) malloc(sizeof(Aluno));
+
+ a->mat = mat;
+
+ a->prox = NULL;
+
+ if (p==NULL)
+
+ tab[h] = a;
+
+ else
+
+ p->prox = a;
+
+ }
+
+ /* atribui informação */
+
+ strcpy(a->nome,nome);
+
+ a->turma = turma;
+
+ return a;
+
+}
+
+
+	-W. Celes e J. L. Rangel
+

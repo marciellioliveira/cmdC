@@ -1,0 +1,46 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+71 - CONCEITOS FUNDAMENTAIS: EXERCICIOS
+
+1) Faça um programa que utilize listas encadeadas.
+
+2) Implemente a função para inserir (ou modificar) um 
+elemento usando a estratégia de uma segunda função de 
+dispersão no código abaixo.
+
+int hash2 (int mat)
+{
+
+ return N - 2 - mat%(N-2);
+
+}
+
+Aluno* busca (Hash tab, int mat)
+{
+
+ int h = hash(mat);
+
+ int h2 = hash2(mat);
+
+ while (tab[h] != NULL) {
+
+ if (tab[h]->mat == mat)
+
+ return tab[h];
+
+ h = (h+h2) % N;
+
+ }
+
+ return NULL;
+
+}
+
+3)  Escreva um programa que utilize as funções de árvore 
+binária de busca.
+

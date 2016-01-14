@@ -1,0 +1,113 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+21 - CONCEITOS FUNDAMENTAIS: Pré-processador e macros
+
+Um código C, antes de ser compilado, passa por um 
+pré-processador. O pré-processador de C reconhece 
+determinadas diretivas e altera o código para, então, 
+enviá-lo ao compilador.
+
+Uma das diretivas reconhecidas pelo pré-processador, e já 
+utilizada nos nossos exemplos, é #include. Ela é seguida por
+um nome de arquivo e o pré-processador a substitui pelo
+corpo do arquivo especificado. É como se o texto do arquivo
+incluído fizesse parte do código fonte.
+
+Uma observação: quando o nome do arquivo a ser incluído é 
+envolto por aspas ("arquivo"), o pré-processador procura 
+primeiro o arquivo no diretório atual e, caso não o 
+encontre, o procura nos diretórios de include especificados
+para compilação. Se o arquivo é colocado entre os sinais de
+menor e maior (<arquivo>), o pré-processador não procura o
+arquivo no diretório atual.
+
+Outra diretiva de pré-processamento que é muito utilizada 
+e que será agora discutida é a diretiva de definição. Por 
+exemplo, uma função para calcular a área de um círculo pode 
+ser escrita da seguinte forma:
+
+#define PI 3.14159
+float area (float r)
+{
+
+ float a = PI * r * r;
+ return a;
+
+}
+
+Neste caso, antes da compilação, toda ocorrência da palavra 
+PI (desde que não envolvida por aspas) será trocada pelo 
+número 3.14159. O uso de diretivas de definição para 
+representarmos constantes simbólicas é fortemente 
+recomendável, pois facilita a manutenção e acrescenta 
+clareza ao código. C permite ainda a utilização da diretiva
+de definição com parâmetros. É válido escrever, por exemplo:
+
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+
+assim, se após esta definição existir uma linha de código 
+com o trecho:
+
+v = 4.5;
+c = MAX ( v, 3.0 );
+o compilador verá:
+v = 4.5;
+c = ((v) > (4.5) ? (v) : (4.5));
+
+Estas definições com parâmetros recebem o nome de macros. 
+Devemos ter muito cuidado na definição de macros. Mesmo um 
+erro de sintaxe pode ser difícil de ser detectado, pois o 
+compilador indicará um erro na linha em que se utiliza a 
+macro e não na linha de definição da macro (onde 
+efetivamente encontra-se o erro). 
+
+Outros efeitos colaterais de macros maldefinidas podem ser
+ainda piores.
+
+Por exemplo, no código abaixo:
+
+#include <stdio.h>
+#define DIF(a,b) a - b
+int main (void)
+{
+
+ printf(" %d ", 4 * DIF(5,3));
+ return 0;
+
+}
+
+o resultado impresso é 17 e não 8, como poderia ser 
+esperado. A razão é simples, pois para o compilador 
+(fazendo a substituição da macro) está escrito:
+
+ printf(" %d ", 4 * 5 - 3);
+
+e a multiplicação tem precedência sobre a subtração. 
+Neste caso, parênteses envolvendo a macro resolveriam o 
+problema. Porém, neste outro exemplo que envolve a macro
+com parênteses:
+
+#include <stdio.h>
+#define PROD(a,b) (a * b)
+int main (void)
+{
+ printf(" %d ", PROD(3+4, 2));
+ return 0;
+}
+
+o resultado é 11 e não 14. A macro corretamente definida
+seria:
+
+#define PROD(a,b) ((a) * (b))
+
+Concluímos, portanto, que, como regra básica para a 
+definição de macros, devemos envolver cada parâmetro, e a
+macro como um todo, com parênteses. 
+
+		- W. Celes e J. L. Rangel
+

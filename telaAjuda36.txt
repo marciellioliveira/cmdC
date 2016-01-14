@@ -1,0 +1,18 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+36 - CONCEITOS FUNDAMENTAIS: Tipos Estruturados
+
+Na linguagem C, existem os tipos básicos (char, int, float,
+etc.) e seus respectivos ponteiros que podem ser usados na
+declaração de variáveis.
+
+Para estruturar dados complexos, nos quais as informações 
+são compostas por diversos campos, necessitamos de mecanismos
+que nos permitam agrupar tipos distintos. 
+
+		- W. Celes e J. L. Rangel

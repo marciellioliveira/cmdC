@@ -1,0 +1,101 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                       ORDENAÇÃO E BUSCA                  !
+!                                                          !
+------------------------------------------------------------
+
+73 - CONCEITOS FUNDAMENTAIS: Funções para abrir e fechar 
+arquivos
+
+
+A função básica para abrir um arquivo é fopen:
+
+FILE* fopen (char* nome_arquivo, char* modo);
+
+FILE é um tipo definido pela biblioteca padrão que 
+representa uma abstração do arquivo.
+
+Quando abrimos um arquivo, a função tem como valor de 
+retorno um ponteiro para o tipo FILE, e todas as operações
+subseqüentes nesse arquivo receberão este endereço como 
+parâmetro de entrada.
+
+Se o arquivo não puder ser aberto, a função tem como retorno
+o valor NULL.
+
+Devemos passar o nome do arquivo a ser aberto. O nome do 
+arquivo pode ser relativo, e o sistema procura o arquivo a
+partir do diretório corrente (diretório de trabalho do 
+programa), ou pode ser absoluto, onde especificamos o nome
+completo do arquivo, incluindo os diretórios, desde o 
+diretório raiz.
+
+Existem diferentes modos de abertura de um arquivo. Podemos
+abrir um arquivo para leitura ou para escrita, e devemos 
+especificar se o arquivo será aberto em modo texto ou
+em modo binário.
+
+O parâmetro modo da função fopen é uma cadeia de caracteres
+onde espera-se a ocorrência de caracteres que identificam 
+o modo de abertura. 
+
+Os caracteres interpretados no modo são:
+
+r read-only Indica modo apenas para leitura, não pode ser
+alterado.
+
+w write Indica modo para escrita.
+
+a append Indica modo para escrita ao final do existente.
+
+t text Indica modo texto.
+
+Se o arquivo já existe e solicitamos a sua abertura para 
+escrita com modo w, o arquivo é apagado e um novo, 
+inicialmente vazio, é criado. 
+
+Quando solicitamos com modo a, o mesmo é preservado e 
+novos conteúdos podem ser escritos no seu fim. 
+
+Com ambos os modos, se o arquivo não existe, um novo
+é criado.
+
+Os modos b e t podem ser combinados com os demais. Maiores 
+detalhes e outros modos de abertura de arquivos podem ser 
+encontrados nos manuais da linguagem C.
+
+Em geral, quando abrimos um arquivo, testamos o sucesso da
+abertura antes de qualquer outra operação, por exemplo:
+
+...
+
+FILE* fp;
+
+fp = fopen("entrada.txt","rt");
+
+if (fp == NULL) {
+
+ printf("Erro na abertura do arquivo!\n");
+
+ exit(1);
+
+}
+
+...
+
+Após ler/escrever as informações de um arquivo, devemos 
+fechá-lo. Para fechar um arquivo, devemos usar a função 
+fclose, que espera como parâmetro o ponteiro do arquivo 
+que se deseja fechar. 
+
+O protótipo da função é:
+
+int fclose (FILE* fp);
+
+O valor de retorno dessa função é zero, se o arquivo for
+fechado com sucesso, ou a constante EOF (definida pela 
+biblioteca), que indica a ocorrência de um erro.
+
+		W. Celes e J. L. Rangel
+

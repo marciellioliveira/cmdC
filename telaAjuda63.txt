@@ -1,0 +1,61 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+63 - CONCEITOS FUNDAMENTAIS: Fila Dupla
+
+A estrutura de dados que chamamos de fila dupla consiste 
+numa fila na qual é possível inserir novos elementos em 
+ambas as extremidades, no início e no fim.
+
+Conseqüentemente, permite-se também retirar elementos de 
+ambos os extremos. É como se, dentro de uma mesma estrutura
+de fila, tivéssemos duas filas, com os elementos dispostos
+em ordem inversa uma da outra.
+
+A interface do tipo abstrato que representa uma fila dupla 
+acrescenta novas funções para inserir e retirar elementos. 
+Podemos enumerar as seguintes operações:
+
+	• criar uma estrutura de fila dupla;
+
+	• inserir um elemento no início;
+
+	• inserir um elemento no fim;
+
+	• retirar o elemento do início;
+
+	• retirar o elemento do fim;
+
+	• verificar se a fila está vazia;
+
+	• liberar a fila.
+
+O arquivo fila2.h, que representa a interface do tipo, pode
+conter o seguinte código:
+
+typedef struct fila2 Fila2;
+
+Fila2* cria (void);
+
+void insere_ini (Fila2* f, float v);
+
+void insere_fim (Fila2* f, float v);
+
+float retira_ini (Fila2* f);
+
+float retira_fim (Fila2* f);
+
+int vazia (Fila2* f);
+
+void libera (Fila2* f);
+
+A implementação dessa estrutura usando um vetor para armazenar
+os elementos não traz grandes dificuldades, pois o vetor 
+permite acesso randômico aos elementos.
+
+		- W. Celes e J. L. Rangel
+

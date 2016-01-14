@@ -1,0 +1,48 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+28 - CONCEITOS FUNDAMENTAIS: Vetores Bidimencionais - matrizes
+
+A linguagem C permite a criação de vetores bidimensionais, 
+declarados estaticamente. Por exemplo, para declararmos uma
+matriz de valores reais com 4 linhas e 3 colunas, fazemos:
+
+float mat[4][3];
+
+Esta declaração reserva um espaço de memória necessário para
+armazenar os 12 elementos da matriz, que são armazenados de 
+maneira contínua, organizados linha a linha.
+
+Os elementos da matriz são acessados com indexação dupla: 
+
+mat[i][j]. O primeiro índice, i, acessa a linha e o segundo,
+j, acessa a coluna. Como em C a indexação começa em zero, o
+elemento da primeira linha e primeira coluna é acessado por 
+mat[0][0]. Após a declaração estática de uma matriz, a 
+variável que representa a matriz, mat no exemplo acima, 
+representa um ponteiro para o primeiro “vetor-linha”, 
+composto por 3 elementos.
+
+Com isto, mat[1] aponta para o primeiro elemento do segundo
+“vetor-linha”, e assim por diante.
+
+As matrizes também podem ser inicializadas na declaração:
+
+float mat[4][3] = {{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
+
+Ou podemos inicializar seqüencialmente:
+
+float mat[4][3] = {1,2,3,4,5,6,7,8,9,10,11,12};
+
+O número de elementos por linha pode ser omitido numa 
+inicialização, mas o número de colunas deve, 
+obrigatoriamente, ser fornecido:
+
+float mat[][3] = {1,2,3,4,5,6,7,8,9,10,11,12};  
+
+		- W. Celes e J. L. Rangel
+

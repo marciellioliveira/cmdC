@@ -1,0 +1,229 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+8 - CONCEITOS FUNDAMENTAIS: Operadores
+
+
+A linguagem C oferece uma gama variada de operadores, entre 
+binários e unários.
+
+
+*************************************************************
+		OPERADORES ARITMETICOS
+*************************************************************
+
+
+Os operadores aritméticos binários são: +, -, *, / e o 
+operador módulo %. Há ainda o operador unário -. A operação 
+é feita na precisão dos operandos. Assim, a expressão 5/2
+resulta no valor 2, pois a operação de divisão é feita em 
+precisão inteira, já que os dois operandos (5 e 2) são 
+constantes inteiras. A divisão de inteiros trunca a parte 
+fracionária, pois o valor resultante é sempre do mesmo tipo 
+da expressão. Conseqüentemente, a expressão 5.0/2.0 resulta 
+no valor real 2.5 pois a operação é feita na precisão real
+(double, no caso).
+
+O operador módulo, %, não se aplica a valores reais, seus 
+operandos devem ser do tipo inteiro. Este operador produz 
+o resto da divisão do primeiro pelo segundo operando. Como
+exemplo de aplicação deste operador, podemos citar o 
+caso em que desejamos saber se o valor armazenado numa 
+determinada variável inteira x é par ou ímpar. Para tanto, 
+basta analisar o resultado da aplicação do operador %, 
+aplicado à variável e ao valor dois.
+
+Os operadores *, / e % têm precedência maior que os 
+operadores + e -. O operador unário tem precedência maior 
+que *, / e %. Operadores com mesma precedência são
+avaliados da esquerda para a direita. Assim, na expressão:
+
+a + b * c /d
+
+executa-se primeiro a multiplicação, seguida da divisão,
+seguida da soma. Podemos utilizar parênteses para alterar 
+a ordem de avaliação de uma expressão. Assim, se quisermos
+avaliar a soma primeiro, podemos escrever:
+
+(a + b) * c /d
+
+
+*************************************************************
+		OPERADORES DE ATRIBUICAO
+*************************************************************
+
+Na linguagem C, uma atribuição é uma expressão cujo valor 
+resultante corresponde ao valor atribuído. 
+Assim, da mesma forma que a expressão:
+
+5 + 3
+
+resulta no valor 8, a atribuição:
+
+a = 5
+
+resulta no valor 5 (além, é claro, de armazenar o valor 5 
+na variável a). 
+Este tratamento das atribuições nos permite escrever
+comandos do tipo:
+
+y = x = 5;
+
+Neste caso, a ordem de avaliação é da direita para a 
+esquerda. Assim, o computador avalia x = 5, armazenando 5 
+em x, e em seguida armazena em y o valor produzido por 
+x = 5, que é 5. Portanto, ambos, x e y, recebem o valor 5.
+A linguagem também permite utilizar os chamados operadores 
+de atribuição compostos.
+Comandos do tipo:
+
+i = i + 2;
+
+em que a variável à esquerda do sinal de atribuição também 
+aparece à direita, podem ser escritas de forma mais 
+compacta:
+
+i += 2;
+
+usando o operador de atribuição composto +=. Analogamente, 
+existem, entre outros, os operadores de atribuição: 
+-=, *=, /=, %=. De forma geral, comandos do tipo:
+
+var op= expr;
+são equivalentes a:
+var = var op (expr);
+
+Salientamos a presença dos parênteses em torno de expr. Assim:
+
+x *= y + 1;
+equivale a
+x = x * (y + 1)
+e não a
+x = x * y + 1;
+
+*************************************************************
+	OPERADORES DE INCREMENTO E DECREMENTO
+*************************************************************
+
+A linguagem C apresenta ainda dois operadores não 
+convencionais. São os operadores de incremento e decremento, 
+que possuem precedência comparada ao - unário e servem para
+incrementar e decrementar uma unidade nos valores 
+armazenados nas variáveis. Assim, se n é uma variável que 
+armazena um valor, o comando:
+
+n++;
+
+incrementa de uma unidade o valor de n (análogo para o 
+decremento em n--). O aspecto não usual é que ++ e -- podem 
+ser usados tanto como operadores pré-fixados (antes da
+variável, como em ++n) ou pós-fixados (após a variável, 
+como em n++). Em ambos os casos, a variável n é 
+incrementada. Porém, a expressão ++n incrementa n antes de 
+usar seu valor, enquanto n++ incrementa n após seu valor 
+ser usado. Isto significa que, num contexto onde o valor de 
+n é usado, ++n e n++ são diferentes. Se n armazena o valor 
+5, então:
+
+x = n++;
+atribui 5 a x, mas:
+x = ++n;
+
+atribuiria 6 a x. Em ambos os casos, n passa a valer 6, 
+pois seu valor foi incrementado em uma unidade. Os 
+operadores de incremento e decremento podem ser aplicados 
+somente em variáveis; uma expressão do tipo x = (i + 1)++ 
+é ilegal.
+
+A linguagem C oferece diversas formas compactas para 
+escrevermos um determinado comando. Neste curso, 
+procuraremos evitar as formas compactas pois elas tendem a
+dificultar a compreensão do código. Mesmo para 
+programadores experientes, o uso das formas compactas deve 
+ser feito com critério. Por exemplo, os comandos:
+
+a = a + 1;
+a += 1;
+a++;
+++a;
+
+são todos equivalentes e o programador deve escolher o que 
+achar mais adequado e simples. Em termos de desempenho, 
+qualquer compilador razoável é capaz de otimizar
+todos estes comandos da mesma forma.
+
+*************************************************************
+		OPERADORES RELACIONAIS E LOGICOS
+*************************************************************
+
+Os operadores relacionais em C são:
+
+	< menor que
+	> maior que
+	<= menor ou igual que
+	>= maior ou igual que
+	== igual a
+	!= diferente de
+
+Estes operadores comparam dois valores. O resultado 
+produzido por um operador relacional é zero ou um. 
+
+Em C, não existe o tipo booleano (true ou false). 
+O valor zero é interpretado como falso e qualquer 
+valor diferente de zero é considerado verdadeiro. 
+
+Assim, se o resultado de uma comparação for falso, 
+produz-se o valor 0, caso contrário, produz-se o valor 1.
+
+Os operadores lógicos combinam expressões booleanas. 
+A linguagem oferece os seguintes operadores lógicos:
+
+	&& operador binário E (AND)
+	|| operador binário OU (OR)
+	! operador unário de NEGAÇÃO (NOT)
+
+Expressões conectadas por && ou ||  são avaliadas da 
+esquerda para a direita, e a avaliação pára assim que a 
+veracidade ou falsidade do resultado for conhecida. 
+Recomendamos o uso de parênteses em expressões que 
+combinam operadores lógicos e relacionais.
+
+Os operadores relacionais e lógicos são normalmente 
+utilizados para tomada de decisões.
+
+No entanto, podemos utilizá-los para atribuir valores a 
+variáveis. Por exemplo, o trecho de
+código abaixo é válido e armazena o valor 1 em a e 0 
+em b.
+
+	int a, b;
+	int c = 23;
+	int d = c + 4;
+	a = (c < 20) || (d > c); /* verdadeiro */
+	b = (c < 20) && (d > c); /* falso */
+
+Devemos salientar que, na avaliação da expressão atribuída
+à variável b, a operação (d>c) não chega a ser avaliada, 
+pois independente do seu resultado a expressão como um 
+todo terá como resultado 0 (falso), uma vez que a operação
+ (c<20)  tem valor falso.
+
+*************************************************************
+		OPERADOR SIZEOF
+*************************************************************
+
+Outro operador fornecido por C, sizeof, resulta no número 
+de bytes de um determinado tipo. Por exemplo:
+
+int a = sizeof(float);
+
+armazena o valor 4 na variável a, pois um float ocupa 
+4 bytes de memória. Este operador pode também ser aplicado 
+a uma variável, retornando o número de bytes do tipo 
+associado à variável.
+
+		- W. Celes e J. L. Rangel

@@ -1,0 +1,70 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS DINAMICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+48 - CONCEITOS FUNDAMENTAIS: Listas encadeadas
+
+Para representarmos um grupo de dados, já vimos que podemos 
+usar um vetor em C. O vetor é a forma mais primitiva de 
+representar diversos elementos agrupados.
+
+Para simplificar a discussão dos conceitos que serão 
+apresentados agora, vamos supor que temos que desenvolver 
+uma aplicação que deve representar um grupo de valores 
+inteiros. 
+
+Para tanto, podemos declarar um vetor escolhendo um número 
+máximo de elementos.
+
+#define MAX 1000
+
+int vet[MAX];
+
+Ao declararmos um vetor, reservamos um espaço contíguo de 
+memória para armazenar seus elementos.
+
+O fato de o vetor ocupar um espaço contíguo na memória nos
+permite acessar qualquer um de seus elementos a partir do 
+ponteiro para o primeiro elemento. 
+
+De fato, o símbolo vet, após a declaração acima, como já 
+vimos, representa um ponteiro para o primeiro elemento 
+do vetor, isto é, o valor de vet é o endereço da memória
+onde o primeiro elemento do vetor está armazenado. 
+
+De posse do ponteiro para o primeiro elemento, podemos
+acessar qualquer elemento do vetor através do operador
+de indexação vet[i].
+
+Dizemos que o vetor é uma estrutura que possibilita acesso 
+randômico aos elementos, pois podemos acessar qualquer 
+elemento aleatoriamente.
+
+No entanto, o vetor não é uma estrutura de dados muito 
+flexível, pois precisamos dimensioná-lo com um número 
+máximo de elementos. 
+
+Se o número de elementos que precisarmos armazenar exceder
+a dimensão do vetor, teremos um problema, pois não existe 
+uma maneira simples e barata (computacionalmente) para 
+alterarmos a dimensão do vetor em tempo de execução. 
+
+Por outro lado, se o número de elementos que precisarmos 
+armazenar no vetor for muito inferior à sua dimensão, 
+estaremos subutilizando o espaço de memória reservado.
+
+A solução para esses problemas é utilizar estruturas de 
+dados que cresçam à medida que precisarmos armazenar novos 
+elementos (e diminuam à medida que precisarmos retirar
+elementos armazenados anteriormente). 
+
+Tais estruturas são chamadas dinâmicas e armazenam cada
+um dos seus elementos usando alocação dinâmica. 
+
+As listas encadeadas são amplamente usadas para implementar
+diversas outras estruturas de dados com semânticas próprias.
+
+		- W. Celes e J. L. Rangel

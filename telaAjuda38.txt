@@ -1,0 +1,109 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+38 - CONCEITOS FUNDAMENTAIS: Definição de "novos" tipos
+
+A linguagem C permite criar nomes de tipos. Por exemplo, se 
+escrevermos:
+
+typedef float Real;
+
+podemos usar o nome Real como um mnemônico para o tipo float.
+
+O uso de typedef é muito útil para abreviarmos nomes de 
+tipos e para tratarmos tipos complexos. 
+
+Alguns exemplos válidos de typedef:
+
+typedef unsigned char UChar;
+
+typedef int* PInt;
+
+typedef float Vetor[4]; 
+
+Neste fragmento de código, definimos UChar como sendo o tipo 
+char sem sinal, PInt como um tipo ponteiro para int, e Vetor
+como um tipo que representa um vetor de quatro elementos. 
+A partir dessas definições, podemos declarar variáveis 
+usando estes mnemônicos:
+
+Vetor v;
+
+...
+
+v[0] = 3;
+
+...
+
+Em geral, definimos nomes de tipos para as estruturas com as 
+quais nossos programas trabalham. 
+
+Por exemplo, podemos escrever:
+
+struct ponto {
+
+ float x;
+
+ float y;
+
+};
+
+typedef struct ponto Ponto;
+
+Neste caso, Ponto passa a representar nossa estrutura de 
+ponto. Também podemos definir um nome para o tipo ponteiro
+para a estrutura.
+
+typedef struct ponto *PPonto;
+
+Podemos ainda definir mais de um nome num mesmo typedef.
+
+Os dois typedef anteriores poderiam ser escritos por:
+
+typedef struct ponto Ponto, *PPonto;
+
+A sintaxe de um typedef pode parecer confusa, mas é 
+equivalente à da declaração de variáveis.
+
+Por exemplo, na definição abaixo:
+
+typedef float Vector[4];
+
+se omitíssemos a palavra typedef, estaríamos declarando a 
+variável Vector como sendo um vetor de 4 elementos do tipo 
+float.
+
+Com typedef, estamos definindo um nome que representa
+o tipo vetor de 4 elementos float. 
+
+De maneira análoga, na definição:
+
+typedef struct ponto Ponto, *PPonto;
+
+se omitíssemos a palavra typedef, estaríamos declarando a 
+variável Ponto como sendo do tipo struct ponto e a variável
+PPonto como sendo do tipo ponteiro para struct ponto.
+
+Por fim, vale salientar que podemos definir a estrutura e 
+associar mnemônicos para elas em um mesmo comando:
+
+typedef struct ponto {
+
+ float x;
+
+ float y;
+
+} Ponto, *PPonto; 
+
+
+É comum os programadores de C usarem nomes com as primeiras
+letras maiúsculas na definição de tipos. 
+
+Isso não é uma obrigatoriedade, apenas um estilo de codificação. 
+
+		- W. Celes e J. L. Rangel
+

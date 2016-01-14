@@ -1,0 +1,205 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+41 - CONCEITOS FUNDAMENTAIS: Vetores de Ponteiros para 
+estruturas
+
+Da mesma forma que podemos declarar vetores de estruturas, 
+podemos também declarar vetores de ponteiros estruturas.
+
+O uso de vetores de ponteiros é útil quando temos que tratar
+um conjunto elementos complexos.
+
+Para ilustrar o uso de estruturas complexas, consideremos um 
+exemplo em que desejamos armazenar uma tabela com dados de 
+alunos.
+
+Podemos organizar os dados dos alunos em um vetor. Para 
+cada aluno, vamos supor que sejam necessárias as seguintes
+informações:
+
+• nome: cadeia com até 80 caracteres
+• matricula: número inteiro
+• endereço: cadeia com até 120 caracteres
+• telefone: cadeia com até 20 caracteres
+
+Para estruturar esses dados, podemos definir um tipo que 
+representa os dados de um aluno:
+
+struct aluno {
+
+ char nome[81];
+
+ int mat;
+
+ char end[121];
+
+ char tel[21];
+
+};
+
+typedef struct aluno Aluno;
+
+Vamos montar a tabela de alunos usando um vetor global com 
+um número máximo de alunos. Uma primeira opção é declarar 
+um vetor de estruturas:
+
+#define MAX 100
+
+Aluno tab[MAX];
+
+Desta forma, podemos armazenar nos elementos do vetor os 
+dados dos alunos que queremos organizar. 
+
+Seria válido, por exemplo, uma atribuição do tipo:
+
+...
+
+tab[i].mat = 9912222;
+
+... 
+
+No entanto, o uso de vetores de estruturas tem, neste caso,
+uma grande desvantagem. O tipo Aluno definido acima ocupa
+pelo menos 227 (=81+4+121+21) bytes
+
+A declaração de um vetor desta estrutura representa um 
+desperdício significativo de memória, pois provavelmente 
+estaremos armazenando de fato um número de alunos bem 
+inferior ao máximo estimado.
+
+Para contornar este problema, podemos trabalhar com um
+vetor de ponteiros.
+
+typedef struct aluno *PAluno;
+
+#define MAX 100
+
+PAluno tab[MAX];
+
+Assim, cada elemento do vetor ocupa apenas o espaço 
+necessário para armazenar um ponteiro. 
+
+Quando precisarmos alocar os dados de um aluno numa 
+determinada posição do vetor, alocamos dinamicamente
+a estrutura Aluno e guardamos seu endereço no vetor
+de ponteiros.
+
+Considerando o vetor de ponteiros declarado acima como uma
+variável global, podemos ilustrar a implementação de algumas
+funcionalidades para manipular nossa tabela de alunos. 
+
+Inicialmente, vamos considerar uma função de inicialização.
+
+Uma posição do vetor estará vazia, isto é, disponível para
+armazenar informações de um novo aluno, se o valor do seu 
+elemento for o ponteiro nulo. Portanto, numa função de 
+inicialização, podemos atribuir NULL a todos os elementos da
+tabela, significando que temos, a princípio, uma tabela 
+vazia.
+
+void inicializa (void)
+{
+
+ int i;
+
+ for (i=0; i<MAX; i++)
+
+ tab[i] = NULL;
+
+}
+
+Uma segunda funcionalidade que podemos prever armazena os 
+dados de um novo aluno numa posição do vetor.
+
+Vamos considerar que os dados serão fornecidos via teclado 
+e que uma posição onde os dados serão armazenados será passada 
+para a função. Se a posição da tabela estiver vazia, devemos 
+alocar uma nova estrutura; caso contrário, atualizamos a
+estrutura já apontada pelo ponteiro.
+
+void preenche (int i)
+{
+
+ if (tab[i]==NULL)
+
+ tab[i] = (PAluno)malloc(sizeof(Aluno));
+
+ printf("Entre com o nome:");
+
+ scanf(" %80[^\n]", tab[i]->nome);
+
+ printf("Entre com a matricula:");
+
+ scanf("%d", &tab[i]->mat);
+
+ printf("Entre com o endereco:");
+
+ scanf(" %120[^\n]", tab[i]->end);
+
+ printf("Entre com o telefone:");
+
+ scanf(" %20[^\n]", tab[i]->tel);
+
+} 
+Podemos também prever uma função para remover os dados de 
+um aluno da tabela. Vamos considerar que a posição da 
+tabela a ser liberada será passada para a função:
+
+void remove (int i)
+{
+
+ if (tab[i] != NULL)
+
+ {
+
+ free(tab[i]);
+
+ tab[i] = NULL;
+
+ }
+
+}
+
+Para consultarmos os dados, vamos considerar uma função 
+que imprime os dados armazenados numa determinada posição
+do vetor:
+
+void imprime (int i)
+{
+
+ if (tab[i] != NULL)
+ {
+
+ printf("Nome: %s\n”, tab[i]->nome);
+
+ printf("Matrícula: %d\n”, tab[i]->mat);
+
+ printf("Endereço: %s\n”, tab[i]->end);
+
+ printf("Telefone: %s\n”, tab[i]->tel);
+
+ }
+
+}
+
+Por fim, podemos implementar uma função que imprima os dados 
+de todos os alunos da tabela:
+
+void imprime_tudo (void)
+{
+
+ int i;
+
+ for (i=0; i<MAX; i++)
+
+ imprime(i);
+
+} 
+
+		- W. Celes e J. L. Rangel
+

@@ -1,0 +1,113 @@
+﻿
+------------------------------------------------------------
+!                                                          !
+!                    ESTRUTURAS ESTATICAS                  !
+!                                                          !
+------------------------------------------------------------
+
+37 - CONCEITOS FUNDAMENTAIS: Tipo Estrutura
+
+Em C, podemos definir um tipo de dado cujos campos são 
+compostos de vários valores de tipos mais simples. 
+
+Para ilustrar, vamos considerar o desenvolvimento de 
+programas que manipulam pontos no plano cartesiano. 
+
+Cada ponto pode ser representado por suas coordenadas x
+e y, ambas dadas por valores reais. Sem um mecanismo para
+agrupar as duas componentes, teríamos que representar 
+cada ponto por duas variáveis independentes.
+
+float x;
+
+float y;
+
+No entanto, deste modo, os dois valores ficam dissociados e,
+no caso do programa manipular vários pontos, cabe ao 
+programador não misturar a coordenada x de um ponto
+com a coordenada y de outro. 
+
+Para facilitar este trabalho, a linguagem C oferece recursos
+para agruparmos dados. 
+
+Uma estrutura, em C, serve basicamente para agrupar diversas
+variáveis dentro de um único contexto. No nosso exemplo, 
+podemos definir uma estrutura ponto que contenha as duas 
+variáveis. 
+
+A sintaxe para a definição de uma estrutura é mostrada abaixo:
+
+struct ponto {
+
+ float x;
+
+ float y;
+
+};
+
+Desta forma, a estrutura ponto passa a ser um tipo e podemos
+então declarar variáveis deste tipo.
+
+struct ponto p;
+
+Esta linha de código declara p como sendo uma variável do 
+tipo struct ponto. Os elementos de uma estrutura podem ser 
+acessados através do operador de acesso “ponto” (.). 
+
+Assim, é válido escrever:
+
+ponto.x = 10.0;
+
+ponto.y = 5.0;
+
+Manipulamos os elementos de uma estrutura da mesma forma 
+que variáveis simples.
+
+Podemos acessar seus valores, atribuir-lhes novos valores, 
+acessar seus endereços, etc.
+
+Exemplo: Capturar e imprimir as coordenadas de um ponto.
+Para exemplificar o uso de estruturas em programas, vamos 
+considerar um exemplo simples em que capturamos e imprimimos
+as coordenadas de um ponto qualquer.
+
+/* Captura e imprime as coordenadas de um ponto qualquer */
+#include <stdio.h>
+
+struct ponto {
+
+ float x;
+
+ float y;
+
+};
+
+int main (void)
+{
+
+ struct ponto p;
+
+ printf("Digite as coordenadas do ponto(x y): ");
+ scanf("%f %f", &p.x, &p.y);
+
+ printf("O ponto fornecido foi: (%.2f,%.2f)\n", p.x, p.y);
+
+ return 0;
+
+}
+
+A variável p, definida dentro de main, é uma variável local 
+como outra qualquer. 
+
+Quando a declaração é encontrada, aloca-se, na pilha de 
+execução, um espaço para seu armazenamento, isto é, um
+espaço suficiente para armazenar todos os campos da 
+estrutura (no caso, dois números reais). 
+
+Notamos que o acesso ao endereço de um campo da estrutura é
+feito da mesma forma que com variáveis simples: basta 
+escrever &(p.x), ou simplesmente &p.x, pois o operador de 
+acesso ao campo da estrutura  tem precedência
+sobre o operador “endereço de”. 
+
+		- W. Celes e J. L. Rangel
